@@ -13,6 +13,7 @@
 
 import React, { ReactElement } from "react";
 import { BlockAttributes } from "widget-sdk";
+import { WeatherCard } from './components/WeatherCard'
 
 /**
  * React Component
@@ -22,6 +23,17 @@ export interface WeatherForecastProps extends BlockAttributes {
 }
 
 export const WeatherForecast = ({ message, contentLanguage }: WeatherForecastProps): ReactElement => {
-  return <div>Hello {message} {contentLanguage}</div>;
+  return (
+    <WeatherCard
+      temperature="28° C"
+      alternateTemperature="86° F"
+      location="Chemnitz, SA"
+      color="#24B5E1"
+      date="Samstag, 22.05.2021"
+      time="11:00 UTC"
+      weather="cloudy"
+      >
+    </WeatherCard>
+  );
 };
 
