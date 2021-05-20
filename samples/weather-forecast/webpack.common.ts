@@ -12,6 +12,7 @@
  */
 
 import * as webpack from "webpack";
+import { supportedLocales } from "./src/date"
 
 const config: webpack.Configuration = {
   entry: {

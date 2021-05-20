@@ -12,23 +12,15 @@
  */
 
 import { format } from 'date-fns';
-import * as locale from 'date-fns/locale';
+import { enUS, de } from 'date-fns/locale';
 
 /**
  *
  * @param {date} dateinput
  * @param {Locale} userlocale
  */
-function getlocale () {
-    const userLocale = () => {
-        locale. === navigator.language;
-    }
-    return userLocale
-}
-
-export function dateformat (dateinput, userLocal = getlocale()) {
-    console.log(userLocal)
-    return format(dateinput, 'Pp', {
-        locale: userLocal
+export function dateformat (dateInput, userLocale) {
+    return format(dateInput, 'Pp', {
+        locale: userLocale
     })
 }
