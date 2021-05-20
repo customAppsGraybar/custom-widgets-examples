@@ -14,7 +14,7 @@
 import { BaseBlock } from "@staffbase/widget-sdk";
 import WidgetApiMock from "./widget-api-mock";
 import { fromDataUri, prepareAttributes } from "./utils/DataUtil";
-import { baseAttributes } from './constants';
+import { baseAttributes } from "./constants";
 
 /**
  * Simulated hosting class to run the widget
@@ -51,7 +51,9 @@ class FakeBaseClass extends window.HTMLElement implements BaseBlock {
       }, {} as T);
   }
 
-  public parseConfig<T extends Record<string, unknown>>(attributes: T): Record<string, string>{
+  public parseConfig<T extends Record<string, unknown>>(
+    attributes: T
+  ): Record<string, string> {
     return prepareAttributes(attributes);
   }
 

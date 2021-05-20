@@ -2,7 +2,7 @@ import { useQuery } from "react-query";
 
 import dayjs from "dayjs";
 import axios from "axios";
-import { getIcon } from "./iconsMap";
+import { getIcon } from "./weatherIcon";
 import { currentWeather, dayReport, weatherReport } from "./openWeatherMapApi";
 
 const formatDate = (dte: number, lang: string) => {
@@ -15,29 +15,31 @@ const formatDate = (dte: number, lang: string) => {
   return "";
 };
 
-
 type commonData = {
-    date: string,
-    description:string | null,
-    icon: string,
-    wind: string,
-    humidity: number
-}
+  date: string;
+  description: string | null;
+  icon: string;
+  wind: string;
+  humidity: number;
+};
 
 type currentReport = commonData & {
-    temperature:{
-        current: string,
-    }
-}
+  temperature: {
+    current: string;
+  };
+};
 
 type foreCastReport = commonData & {
-    temperature:{
-        min: string,
-        max:string
-    }
-}
+  temperature: {
+    min: string;
+    max: string;
+  };
+};
 
-const mapCurrent = ({ weather: [w], ...day }: currentWeather, lang: string): currentReport => {
+const mapCurrent = (
+  { weather: [w], ...day }: currentWeather,
+  lang: string
+): currentReport => {
   return {
     date: formatDate(day.dt, lang),
     description: w.description,
@@ -50,32 +52,33 @@ const mapCurrent = ({ weather: [w], ...day }: currentWeather, lang: string): cur
   };
 };
 
-const mapForecast = (lang: string) => ({ weather: [w], ...forecast }: dayReport): foreCastReport => ( {
+const mapForecast =
+  (lang: string) =>
+  ({ weather: [w], ...forecast }: dayReport): foreCastReport => ({
     date: formatDate(forecast.dt, lang),
     description: w.description,
     icon: getIcon(w.icon),
     temperature: {
-        min: forecast.temp.min.toFixed(0),
-        max: forecast.temp.max.toFixed(0),
+      min: forecast.temp.min.toFixed(0),
+      max: forecast.temp.max.toFixed(0),
     },
     wind: forecast.wind_speed.toFixed(0),
     humidity: forecast.humidity,
-});
+  });
 
 type mappedWeatherReport = {
-    current: currentReport,
-    forecast: foreCastReport[]
-}
+  current: currentReport;
+  forecast: foreCastReport[];
+};
 
 const mapData = (
   daysData: dayReport[],
   todayData: currentWeather,
   lang: string
-): mappedWeatherReport => ( {
-    current : mapCurrent(todayData, lang),
-    forecast : daysData.map(mapForecast(lang))
-  }
- );
+): mappedWeatherReport => ({
+  current: mapCurrent(todayData, lang),
+  forecast: daysData.map(mapForecast(lang)),
+});
 
 type Options = {
   unit?: "standard" | "metric" | "imperial";
@@ -96,12 +99,14 @@ const getWeather = async (options: Options) => {
     lon,
   };
 
-        const { data } = await axios.get<weatherReport>(endpoint, { params })
-        return mapData(data.daily, data.current, lang);
-
+  const { data } = await axios.get<weatherReport>(endpoint, { params });
+  return mapData(data.daily, data.current, lang);
 };
 
 export default function useWeather(options: Options) {
   const { lat, lon, lang } = options;
-  return useQuery<mappedWeatherReport, Error>(["post", { lat, lon, lang }], () => getWeather(options));
+  return useQuery<mappedWeatherReport, Error>(
+    ["post", { lat, lon, lang }],
+    () => getWeather(options)
+  );
 }

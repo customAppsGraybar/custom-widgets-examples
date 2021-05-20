@@ -49,11 +49,11 @@ export type currentWeather = {
   wind_deg: number;
   wind_gust?: number;
   rain?: {
-    '1h': number;
+    "1h": number;
   };
   snow?: {
-    '1h': number;
-  }
+    "1h": number;
+  };
   weather: [weatherDescription];
 };
 
@@ -70,4 +70,3 @@ export type weatherReport = location & {
   hourly: hourReport[];
   daily: dayReport[];
 };
-

@@ -21,7 +21,13 @@ export interface WeatherForecastProps extends BlockAttributes {
   message: string;
 }
 
-export const WeatherForecast = ({ message, contentLanguage }: WeatherForecastProps): ReactElement => {
-  return <div>Hello {message} {contentLanguage}</div>;
+export const WeatherForecast = ({
+  message,
+  contentLanguage,
+}: WeatherForecastProps): ReactElement => {
+  return (
+    <div>
+      Hello {message} {contentLanguage}
+    </div>
+  );
 };
-
