@@ -17,8 +17,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "0.21.1",
+    "dayjs": "1.10.4",
+    "openweather-apis": "4.4.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-query": "3.16.0",
     "regenerator-runtime": "0.13.7"
   },
   "devDependencies": {
