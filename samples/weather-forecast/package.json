@@ -41,6 +41,7 @@
     "@testing-library/dom": "7.30.4",
     "@testing-library/jest-dom": "5.12.0",
     "@testing-library/react": "11.2.6",
+    "@testing-library/react-hooks": "6.0.0",
     "@types/node": "15.0.2",
     "@types/react": "^16.9.32",
     "@types/react-dom": "^16.9.6",
