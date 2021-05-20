@@ -86,7 +86,7 @@ export const WeatherCard: React.FC<WeatherCardProperties> = (props) => {
 		filter: 'drop-shadow(0px 10px 10px rgba(0, 0, 0, 0.2))'
 	}
 
-	const weatherIcon = './' + props.weather + '.svg'
+	const weatherIcon = './weather-icons/' + props.weather + '.svg'
 
 	const infoButtonStyle: CSS.Properties = {
 		position: 'absolute',
