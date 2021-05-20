@@ -2,7 +2,7 @@ import { useQuery } from "react-query";
 
 import dayjs from "dayjs";
 import axios from "axios";
-import { getIcon } from "./iconsMap";
+import { getIcon } from "./weatherIcon";
 import { currentWeather, dayReport, weatherReport } from "./data";
 
 export const formatDate = (dte: number, lang: string) => {
