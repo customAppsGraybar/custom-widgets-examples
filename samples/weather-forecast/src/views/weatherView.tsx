@@ -1,46 +1,48 @@
 import React, { FunctionComponent } from "react";
 import { BlockAttributes } from "widget-sdk";
 import useCity from "../api/useCity";
-import useWeather from "../api/useWeather";
+import useWeather, { MappedWeatherReport } from "../api/useWeather";
 import { WeatherCard } from "../components/WeatherCard";
+import { weather as mockedWeather } from "../api/mockData"
 
 /**
  * React Component
  */
 export interface WeatherForecastProps extends BlockAttributes {
   apiKey: string;
-  date: number;
-  city: string;
+  date: string;
+  location: string;
 }
 
 export const WeatherView: FunctionComponent<WeatherForecastProps> = ({
   apiKey: key,
-  date,
-  city: location,
+  date: eventDate,
+  location,
   contentLanguage: lang,
 }: WeatherForecastProps) => {
   // geo api => lat,lon
   // weather api
-  const { data: coordinates } = useCity({ key, location, contentLanguage: lang });
-  const { data: weather } = useWeather({ key, lang, ...coordinates });
 
-  console.log(weather);
+  // Fallback if location in configuration form was not filled out
+  const locationQuery = location ?? "Chemnitz,DE"
 
-  if (typeof weather !== "undefined") {
-    const {
-      current: { date, temperature, icon },
-    } = weather;
-    return (
-      <WeatherCard
-        temperature={temperature.current}
-        location={coordinates?.name ?? location}
-        color="#24B5E1"
-        date={date}
-        time="11:00 UTC"
-        weather={icon}
-      ></WeatherCard>
-    );
-  } else {
-    return <div>Loading...</div>;
-  }
+  const { data: coordinates } = useCity({ key, location: locationQuery, contentLanguage: lang });
+  const { data: weather, isLoading } = useWeather({ key, lang, ...coordinates });
+
+  const {
+    current: { date = "", temperature = { current: 273.15 }, icon = "sunny" } = {}
+  } = {...weather}
+
+  return (
+    <WeatherCard
+      loading={isLoading}
+      temperature={temperature.current}
+      location={coordinates?.name ?? location}
+      color="#24B5E1"
+      date={date}
+      time="11:00 UTC"
+      icon={icon}
+    ></WeatherCard>
+  );
+
 };

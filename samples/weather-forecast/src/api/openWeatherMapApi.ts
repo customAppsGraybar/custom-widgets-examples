@@ -1,28 +1,28 @@
-import { iconCodes } from "./weatherIcon";
+import { IconCodes } from "./weatherIcon";
 
-type minuteReport = { dt: number; precipitation: number };
-type hourReport = Omit<currentWeather, "sunrise" | "sunset"> & {
+type MinuteReport = { dt: number; precipitation: number };
+type HourReport = Omit<CurrentWeather, "sunrise" | "sunset"> & {
   pop: number;
 };
-type temperatureDetailSet = temperatureMinimalSet & {
+type TemperatureDetailSet = TemperatureMinimalSet & {
   min: number;
   max: number;
 };
 
-type temperatureMinimalSet = {
+type TemperatureMinimalSet = {
   day: number;
   night: number;
   eve: number;
   morn: number;
 };
 
-export type dayReport = Omit<
-  currentWeather,
+export type DayReport = Omit<
+  CurrentWeather,
   "visibility" | "rain" | "snow" | "temp" | "feels_like"
 > & {
   pop: number;
-  temp: temperatureDetailSet;
-  feels_like: temperatureMinimalSet;
+  temp: TemperatureDetailSet;
+  feels_like: TemperatureMinimalSet;
   moonrise: number;
   moonset: number;
   moon_phase: number;
@@ -30,14 +30,14 @@ export type dayReport = Omit<
   snow?: number;
 };
 
-type weatherDescription = {
+type WeatherDescription = {
   id: number;
   main: string;
   description: string;
-  icon: iconCodes;
+  icon: IconCodes;
 };
 
-export type currentWeather = {
+export type CurrentWeather = {
   dt: number;
   sunrise: number;
   sunset: number;
@@ -58,19 +58,19 @@ export type currentWeather = {
   snow?: {
     "1h": number;
   };
-  weather: [weatherDescription];
+  weather: [WeatherDescription];
 };
 
-type location = {
+type Location = {
   lat: number;
   lon: number;
   timezone: string;
   timezone_offset: number;
 };
 
-export type weatherReport = location & {
-  current: currentWeather;
-  minutely: minuteReport[];
-  hourly: hourReport[];
-  daily: dayReport[];
+export type WeatherReport = Location & {
+  current: CurrentWeather;
+  minutely: MinuteReport[];
+  hourly: HourReport[];
+  daily: DayReport[];
 };
