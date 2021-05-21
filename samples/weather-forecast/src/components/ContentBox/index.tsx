@@ -21,6 +21,7 @@ export const ContentBox: React.FC<ContentBoxProperties> = (props) => {
         display: "flex",
         flexDirection: "column",
         padding: "2rem",
+        height: "100%",
     };
     
     const temperatureValueStyle: CSS.Properties = {
