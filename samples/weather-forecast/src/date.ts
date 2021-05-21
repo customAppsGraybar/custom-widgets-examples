@@ -15,14 +15,29 @@ import { enUS, de } from 'date-fns/locale';
 
 const supportedLocales = [enUS, de]
 /**
+ * Formatting the time to a localized format.
  *
- * @param {date} dateinput
- * @param {Locale} userlocale
+ * @param {Date} dateInput
+ * @param {Locale} userLocale
  */
-export function dateformat (dateInput, userLocale = enUS) {
+export function dateFormat (dateInput : Date, userLocale = enUS) {
     if (supportedLocales.includes(userLocale)) {
-        return format(dateInput, 'Pp', { locale: userLocale })
+        return format(dateInput, 'P', { locale: userLocale })
     } else {
-        return format(dateInput, 'Pp', { locale: enUS })
+        return format(dateInput, 'P', { locale: enUS })
+    }
+}
+
+/**
+ * Formatting the time to a localized format.
+ *
+ * @param {Date} dateInput
+ * @param {Locale} userLocale
+ */
+export function timeFormat (dateInput: Date, userLocale = enUS) {
+    if (supportedLocales.includes(userLocale)) {
+        return format(dateInput, 'p', { locale: userLocale })
+    } else {
+        return format(dateInput, 'p', { locale: enUS })
     }
 }
