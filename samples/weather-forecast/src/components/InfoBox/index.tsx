@@ -1,5 +1,6 @@
 import React from "react"
 import CSS from "csstype"
+import Cross from "../Icons/cross.svg"
 
 export interface InfoBoxProperties {
     onCloseClick: (e: React.SyntheticEvent) => void
@@ -54,7 +55,7 @@ export const InfoBox: React.FC<InfoBoxProperties> = (props) => {
 				here under the Open Database License (ODbL).
 			</div>
 			<div style={infoButtonStyle} onClick={props.onCloseClick}>
-				<img src="./cross.svg" />
+				<Cross/>
 			</div>
 		</div>
 	)

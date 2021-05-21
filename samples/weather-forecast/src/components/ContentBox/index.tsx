@@ -1,8 +1,10 @@
 
 import React from "react"
 import CSS from "csstype"
+import Info from "../Icons/info.svg"
 
 import { WeatherIcon } from "api/weatherIcon";
+import { WeatherGraphic } from "../Icons/weather-icons/WeatherGraphic"
 
 
 export interface ContentBoxProperties {
@@ -65,13 +67,6 @@ export const ContentBox: React.FC<ContentBoxProperties> = (props) => {
         alignItems: "center",
     };
 
-    const weatherIconStyle: CSS.Properties = {
-        marginLeft: "auto",
-        height: "6rem",
-        filter: "drop-shadow(0px 10px 10px rgba(0, 0, 0, 0.2))",
-    };
-
-
     const infoButtonStyle: CSS.Properties = {
         position: "absolute",
         right: "0",
@@ -82,12 +77,10 @@ export const ContentBox: React.FC<ContentBoxProperties> = (props) => {
         cursor: "pointer",
     };
 
-    const weatherIcon = props.icon ? "./weather-icons/" + props.icon + ".svg" : null
-
     return 	(		
     <>
         <div style={infoButtonStyle} onClick={props.onInfoButtonClick}>
-            <img src="./info.svg" />
+            <Info/>
         </div>
         <div style={contentStyle}>
             <div style={topLineStyle}>
@@ -97,7 +90,7 @@ export const ContentBox: React.FC<ContentBoxProperties> = (props) => {
                     {props.alternateTemperature}
                     </h2>
                 </div>
-                {weatherIcon && <img style={weatherIconStyle} src={weatherIcon} />}
+                <WeatherGraphic icon={props.icon} />
             </div>
             <div style={bottomInfoStyle}>
                 <div>

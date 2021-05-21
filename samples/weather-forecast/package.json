@@ -17,13 +17,15 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "date-fns": "^2.21.3",
     "axios": "0.21.1",
+    "date-fns": "^2.21.3",
     "dayjs": "1.10.4",
+    "file-loader": "^6.2.0",
     "openweather-apis": "4.4.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-query": "3.16.0",
+    "react-svg-loader": "^3.0.3",
     "regenerator-runtime": "0.13.7"
   },
   "devDependencies": {
