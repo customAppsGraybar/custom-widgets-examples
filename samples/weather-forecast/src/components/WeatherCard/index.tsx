@@ -113,6 +113,12 @@ export const WeatherCard: React.FC<WeatherCardProperties> = (props) => {
     lineHeight: "1.2rem",
   };
 
+  const infoBoxContentLink: CSS.Properties = {
+    color: "black",
+	cursor: "pointer",
+	textDecoration: "underline",
+  };
+
   const [displayInfo, setDisplayInfo] = useState(false);
 
   const onInfoBtnClick = (e: React.SyntheticEvent) => {
@@ -120,8 +126,8 @@ export const WeatherCard: React.FC<WeatherCardProperties> = (props) => {
     setDisplayInfo(!displayInfo);
   }
 
-  let alternateTemperature = Math.round(((parseInt(props.temperature) - 273.15) * (9 / 5) + 32) * 10) / 10
-  let temperature = Math.round((parseInt(props.temperature) - 273.15) * 10) / 10
+  let alternateTemperature = Math.round((parseInt(props.temperature) - 273.15) * (9 / 5) + 32)
+  let temperature = Math.round(parseInt(props.temperature) - 273.15)
 
   return (
     <div style={cardStyle}>
@@ -152,11 +158,11 @@ export const WeatherCard: React.FC<WeatherCardProperties> = (props) => {
       {displayInfo && (
         <div style={infoBoxStyle}>
           <div style={infoBoxContent}>
-            Weather Icon Set by Osman Talha (Licensed under CC BY 4.0) and
+            <a href="https://www.figma.com/community/file/823259031807888076/Component-Based-Weather-Icon-Sets" style={infoBoxContentLink}>Weather Icon Set</a> by Osman Talha (Licensed under CC BY 4.0) and
             adapted by Staffbase.
             <br />
             <br />
-            Contains information from DATABASE NAME, which is made available
+            Contains information from openweathermap.org, which is made available
             here under the Open Database License (ODbL).
           </div>
           <div style={infoButtonStyle} onClick={onInfoBtnClick}>

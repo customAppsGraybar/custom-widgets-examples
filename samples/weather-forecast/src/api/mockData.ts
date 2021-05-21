@@ -1,4 +1,4 @@
-import { cityReport } from "./openGeoApi";
+import { CityReport } from "./openGeoApi";
 import { weatherReport } from "./openWeatherMapApi";
 
 export const weather: weatherReport = {
@@ -1379,7 +1379,7 @@ export const weather: weatherReport = {
   ],
 };
 
-export const city: cityReport[] = [
+export const city: CityReport[] = [
   {
     name: "Direktionsbezirk Chemnitz",
     local_names: {
@@ -1392,5 +1392,5 @@ export const city: cityReport[] = [
     lat: 50.6667,
     lon: 12.75,
     country: "DE",
-  } as cityReport,
+  } as CityReport,
 ];

@@ -54,7 +54,7 @@ const factory: BlockFactory = (BaseBlockClass, _widgetApi) => {
           {...{
             ...this.props,
             apiKey: "d23e3a76aafeab7260e4e16cd91c73ad",
-            city: "Berlin",
+            city: "Leipzig,DE",
           }}
         />,
         container

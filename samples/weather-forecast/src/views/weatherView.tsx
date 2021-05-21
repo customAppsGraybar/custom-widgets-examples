@@ -21,7 +21,7 @@ export const WeatherView: FunctionComponent<WeatherForecastProps> = ({
 }: WeatherForecastProps) => {
   // geo api => lat,lon
   // weather api
-  const { data: coordinates } = useCity({ key, location });
+  const { data: coordinates } = useCity({ key, location, contentLanguage: lang });
   const { data: weather } = useWeather({ key, lang, ...coordinates });
 
   console.log(weather);
@@ -33,7 +33,7 @@ export const WeatherView: FunctionComponent<WeatherForecastProps> = ({
     return (
       <WeatherCard
         temperature={temperature.current}
-        location={location}
+        location={coordinates?.name ?? location}
         color="#24B5E1"
         date={date}
         time="11:00 UTC"
