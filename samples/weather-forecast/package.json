@@ -17,6 +17,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "date-fns": "^2.21.3",
     "axios": "0.21.1",
     "dayjs": "1.10.4",
     "openweather-apis": "4.4.1",
