@@ -1,7 +1,7 @@
-import { iconCodes } from "./iconsMap";
+import { iconCodes } from "./weatherIcon";
 
 type minuteReport = { dt: number; precipitation: number };
-type hourReport = currentWeather & {
+type hourReport = Omit<currentWeather, "sunrise" | "sunset"> & {
   pop: number;
 };
 type temperatureDetailSet = temperatureMinimalSet & {
@@ -16,7 +16,11 @@ type temperatureMinimalSet = {
   morn: number;
 };
 
-export type dayReport = Omit<hourReport, "visibility"> & {
+export type dayReport = Omit<
+  currentWeather,
+  "visibility" | "rain" | "snow" | "temp" | "feels_like"
+> & {
+  pop: number;
   temp: temperatureDetailSet;
   feels_like: temperatureMinimalSet;
   moonrise: number;

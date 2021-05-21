@@ -1,9 +1,9 @@
-import { useQuery } from "react-query";
-
-import dayjs from "dayjs";
 import axios from "axios";
-import { getIcon } from "./weatherIcon";
+import dayjs from "dayjs";
+import { QueryFunctionContext, useQuery, UseQueryResult } from "react-query";
 import { currentWeather, dayReport, weatherReport } from "./openWeatherMapApi";
+import { getIcon } from "./weatherIcon";
+
 
 const formatDate = (dte: number, lang: string) => {
   if (lang && lang !== "en") {
@@ -71,42 +71,42 @@ type mappedWeatherReport = {
   forecast: foreCastReport[];
 };
 
-const mapData = (
-  daysData: dayReport[],
-  todayData: currentWeather,
-  lang: string
-): mappedWeatherReport => ({
-  current: mapCurrent(todayData, lang),
-  forecast: daysData.map(mapForecast(lang)),
-});
+const mapData =
+  (lang: string) =>
+  ({ daily, current }: weatherReport): mappedWeatherReport => ({
+    current: mapCurrent(current, lang),
+    forecast: daily.map(mapForecast(lang)),
+  });
 
-type Options = {
-  unit?: "standard" | "metric" | "imperial";
+type ForecastOptions = {
+  units?: "standard" | "metric" | "imperial";
   key: string;
   lang?: string;
-  lon: number;
-  lat: number;
+  lon?: number;
+  lat?: number;
 };
 
-const getWeather = async (options: Options) => {
+const getWeather = async ({
+  queryKey: [, options],
+}: QueryFunctionContext<[string, ForecastOptions]>) => {
   const endpoint = "//api.openweathermap.org/data/2.5/onecall";
-  const { unit = "standard", lang = "en", key, lon, lat } = options;
-  const params = {
-    appid: key,
-    lang,
-    units: unit,
-    lat,
-    lon,
-  };
+  const { units = "standard", lang = "en", key: appid, lon, lat } = options;
+  const params = { appid, lang, units, lat, lon };
 
-  const { data } = await axios.get<weatherReport>(endpoint, { params });
-  return mapData(data.daily, data.current, lang);
+  return typeof lat === undefined || typeof lon === undefined
+    ? Promise.reject(new Error("Missing coordinates."))
+    : axios
+        .get<weatherReport>(endpoint, { params })
+        .then(({ data }) => data)
+        .then(mapData(lang));
 };
 
-export default function useWeather(options: Options) {
-  const { lat, lon, lang } = options;
-  return useQuery<mappedWeatherReport, Error>(
-    ["post", { lat, lon, lang }],
-    () => getWeather(options)
-  );
+export default function useWeather(
+  options: ForecastOptions
+): UseQueryResult<mappedWeatherReport, Error> {
+  const { lang, lat, lon, key } = options;
+
+  return useQuery(["weather", { key, lat, lon, lang }], getWeather, {
+    enabled: !!(lat && lon),
+  });
 }

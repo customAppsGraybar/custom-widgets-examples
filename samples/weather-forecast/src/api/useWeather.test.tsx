@@ -5,7 +5,7 @@ import { QueryClient, QueryClientProvider, setLogger } from "react-query";
 import { renderHook } from "@testing-library/react-hooks";
 
 import useWeather from "./useWeather";
-import { data } from "./mockData";
+import { weather } from "./mockData";
 
 const queryClient = new QueryClient({
   defaultOptions: { queries: { retry: false } },
@@ -25,12 +25,13 @@ setLogger({
 });
 
 describe("useWeather", () => {
+  const endpoint = "//api.openweathermap.org/data/2.5/onecall";
   afterEach(() => {
     queryClient.clear();
   });
 
   it("should return weather data", async () => {
-    mockAxios.mockResolvedValueOnce({ data });
+    mockAxios.mockResolvedValueOnce({ data: weather });
     const { result, waitFor } = renderHook(
       () => useWeather({ key: "foo", lat: 44, lon: 42 }),
       { wrapper }
@@ -40,18 +41,15 @@ describe("useWeather", () => {
       return result.current.isSuccess;
     });
 
-    expect(mockAxios).toHaveBeenCalledWith(
-      "//api.openweathermap.org/data/2.5/onecall",
-      {
-        params: {
-          appid: "foo",
-          lat: 44,
-          lon: 42,
-          lang: "en",
-          units: "standard",
-        },
-      }
-    );
+    expect(mockAxios).toHaveBeenCalledWith(endpoint, {
+      params: {
+        appid: "foo",
+        lat: 44,
+        lon: 42,
+        lang: "en",
+        units: "standard",
+      },
+    });
     expect(result.current.data?.current).toMatchObject({
       date: "Thu 20 May",
       description: "scattered clouds",
@@ -81,7 +79,7 @@ describe("useWeather", () => {
   });
 
   it("should return an error, when the data processing goes wrong", async () => {
-    const { daily, ...rest } = data; // eslint-disable-line  @typescript-eslint/no-unused-vars
+    const { daily, ...rest } = weather; // eslint-disable-line  @typescript-eslint/no-unused-vars
     mockAxios.mockResolvedValueOnce({ data: rest });
     const { result, waitFor } = renderHook(
       () => useWeather({ key: "foo", lat: 44, lon: 42 }),

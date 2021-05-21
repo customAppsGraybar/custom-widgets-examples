@@ -1,6 +1,7 @@
+import { cityReport } from "./openGeoApi";
 import { weatherReport } from "./openWeatherMapApi";
 
-export const data: weatherReport = {
+export const weather: weatherReport = {
   lat: 50.8333,
   lon: 12.9167,
   timezone: "Europe/Berlin",
@@ -1377,3 +1378,19 @@ export const data: weatherReport = {
     },
   ],
 };
+
+export const city: cityReport[] = [
+  {
+    name: "Direktionsbezirk Chemnitz",
+    local_names: {
+      ascii: "Direktionsbezirk Chemnitz",
+      de: "Direktionsbezirk Chemnitz",
+      feature_name: "Direktionsbezirk Chemnitz",
+      fr: "District de Chemnitz",
+      it: "Chemnitz",
+    },
+    lat: 50.6667,
+    lon: 12.75,
+    country: "DE",
+  } as cityReport,
+];
