@@ -4,7 +4,6 @@ import { QueryFunctionContext, useQuery, UseQueryResult } from "react-query";
 import { currentWeather, dayReport, weatherReport } from "./openWeatherMapApi";
 import { getIcon } from "./weatherIcon";
 
-
 const formatDate = (dte: number, lang: string) => {
   if (lang && lang !== "en") {
     dayjs.locale(lang.replace("_", "-"));

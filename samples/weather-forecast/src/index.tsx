@@ -49,7 +49,16 @@ const factory: BlockFactory = (BaseBlockClass, _widgetApi) => {
     }
 
     public renderBlock(container: HTMLElement): void {
-      ReactDOM.render(<WeatherForecast {...this.props} />, container);
+      ReactDOM.render(
+        <WeatherForecast
+          {...{
+            ...this.props,
+            apiKey: "d23e3a76aafeab7260e4e16cd91c73ad",
+            city: "Berlin",
+          }}
+        />,
+        container
+      );
     }
 
     /**
