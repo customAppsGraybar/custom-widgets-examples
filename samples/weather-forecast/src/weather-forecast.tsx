@@ -12,28 +12,34 @@
  */
 
 import React, { ReactElement } from "react";
+import { QueryClient, QueryClientProvider } from "react-query";
+import { ReactQueryDevtools } from "react-query/devtools";
+import { WeatherView } from "./views/weatherView";
 import { BlockAttributes } from "widget-sdk";
-import { WeatherCard } from './components/WeatherCard'
+
+const queryClient = new QueryClient();
 
 /**
  * React Component
  */
 export interface WeatherForecastProps extends BlockAttributes {
-  message: string;
+  apiKey: string;
+  date: number;
+  city: string;
 }
 
-export const WeatherForecast = ({ message, contentLanguage }: WeatherForecastProps): ReactElement => {
+export const WeatherForecast = ({
+  apiKey,
+  date,
+  city,
+  contentLanguage,
+}: WeatherForecastProps): ReactElement => {
+  // geo api => lat,lon
+  // weather api
   return (
-    <WeatherCard
-      temperature="28° C"
-      alternateTemperature="86° F"
-      location="Chemnitz, SA"
-      color="#24B5E1"
-      date="Samstag, 22.05.2021"
-      time="11:00 UTC"
-      weather="cloudy"
-      >
-    </WeatherCard>
+    <QueryClientProvider client={queryClient}>
+      <WeatherView {...{ apiKey, date, city, contentLanguage }} />
+      <ReactQueryDevtools initialIsOpen />
+    </QueryClientProvider>
   );
 };
-
