@@ -11,7 +11,6 @@ export interface WeatherCardProperties {
   date?: string;
   time?: string;
   temperature: string;
-  alternateTemperature?: string;
   weather: WeatherIcon;
 }
 
@@ -82,7 +81,7 @@ export const WeatherCard: React.FC<WeatherCardProperties> = (props) => {
     filter: "drop-shadow(0px 10px 10px rgba(0, 0, 0, 0.2))",
   };
 
-  const weatherIcon = "./" + props.weather + ".svg";
+  const weatherIcon = "./weather-icons/" + props.weather + ".svg";
 
   const infoButtonStyle: CSS.Properties = {
     position: "absolute",
@@ -117,9 +116,12 @@ export const WeatherCard: React.FC<WeatherCardProperties> = (props) => {
   const [displayInfo, setDisplayInfo] = useState(false);
 
   const onInfoBtnClick = (e: React.SyntheticEvent) => {
-    e.preventDefault();
+	e.preventDefault()
     setDisplayInfo(!displayInfo);
-  };
+  }
+
+  let alternateTemperature = Math.round(((parseInt(props.temperature) - 273.15) * (9 / 5) + 32) * 10) / 10
+  let temperature = Math.round((parseInt(props.temperature) - 273.15) * 10) / 10
 
   return (
     <div style={cardStyle}>
@@ -129,9 +131,9 @@ export const WeatherCard: React.FC<WeatherCardProperties> = (props) => {
       <div style={contentStyle}>
         <div style={topLineStyle}>
           <div style={temperatureStyle}>
-            <h1 style={temperatureValueStyle}>{props.temperature}</h1>
+            <h1 style={temperatureValueStyle}>{temperature}° C</h1>
             <h2 style={alternateDateValueStyle}>
-              {props.alternateTemperature}
+              {alternateTemperature}° F
             </h2>
           </div>
           <img style={weatherIconStyle} src={weatherIcon} />

@@ -33,7 +33,6 @@ export const WeatherView: FunctionComponent<WeatherForecastProps> = ({
     return (
       <WeatherCard
         temperature={temperature.current}
-        alternateTemperature={temperature.current}
         location={location}
         color="#24B5E1"
         date={date}

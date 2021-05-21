@@ -2,7 +2,7 @@ import axios from "axios";
 import dayjs from "dayjs";
 import { QueryFunctionContext, useQuery, UseQueryResult } from "react-query";
 import { currentWeather, dayReport, weatherReport } from "./openWeatherMapApi";
-import { getIcon } from "./weatherIcon";
+import { getIcon, WeatherIcon } from "./weatherIcon";
 
 const formatDate = (dte: number, lang: string) => {
   if (lang && lang !== "en") {
@@ -17,7 +17,7 @@ const formatDate = (dte: number, lang: string) => {
 type commonData = {
   date: string;
   description: string | null;
-  icon: string;
+  icon: WeatherIcon;
   wind: string;
   humidity: number;
 };
