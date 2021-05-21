@@ -30,7 +30,7 @@ export const WeatherView: FunctionComponent<WeatherForecastProps> = ({
   const { data: weather, isLoading } = useWeather({ key, lang, ...coordinates });
 
   const {
-    current: { date = "", temperature = { current: 273.15 }, icon = "sunny" } = {}
+    current: { date = "", temperature = { current: 273.15 }, icon = undefined } = {}
   } = {...weather}
 
   return (

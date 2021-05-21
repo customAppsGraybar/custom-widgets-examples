@@ -22,8 +22,9 @@ const getCoordinates = async (options: Options) => {
   const result: CityReport[] = data.length >= 1 ? data : city
 
   const [{ lat, lon, name, local_names }] = result;
+  const cityName = local_names ? (local_names[options.contentLanguage.substring(0, 2)] ?? name) : name
 
-  return { lat, lon, name: local_names[options.contentLanguage.substring(0, 2)] ?? name };
+  return { lat, lon, name: cityName };
 };
 
 export default function useCity(options: Options) {

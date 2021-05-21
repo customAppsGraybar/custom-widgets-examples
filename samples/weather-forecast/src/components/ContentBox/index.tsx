@@ -81,7 +81,7 @@ export const ContentBox: React.FC<ContentBoxProperties> = (props) => {
         cursor: "pointer",
     };
 
-    const weatherIcon = "./weather-icons/" + props.icon + ".svg";
+    const weatherIcon = props.icon ? "./weather-icons/" + props.icon + ".svg" : null
 
     return 	(		
     <>
@@ -96,7 +96,7 @@ export const ContentBox: React.FC<ContentBoxProperties> = (props) => {
                     {props.alternateTemperature}
                     </h2>
                 </div>
-                <img style={weatherIconStyle} src={weatherIcon} />
+                {weatherIcon && <img style={weatherIconStyle} src={weatherIcon} />}
             </div>
             <div style={bottomInfoStyle}>
                 <div>
