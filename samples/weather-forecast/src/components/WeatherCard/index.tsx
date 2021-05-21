@@ -121,7 +121,7 @@ export const WeatherCard: React.FC<WeatherCardProperties> = (props) => {
 	const [displayInfo, setDisplayInfo] = useState(false)
 	
 	const onInfoBtnClick = (e: React.SyntheticEvent) => {
-		e.preventDefault();
+		e.preventDefault()
 		setDisplayInfo(!displayInfo)
 	  };
 
