@@ -10,17 +10,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 import { format } from 'date-fns';
 import { enUS, de } from 'date-fns/locale';
 
+const supportedLocales = [enUS, de]
 /**
  *
  * @param {date} dateinput
  * @param {Locale} userlocale
  */
-export function dateformat (dateInput, userLocale) {
-    return format(dateInput, 'Pp', {
-        locale: userLocale
-    })
+export function dateformat (dateInput, userLocale = enUS) {
+    if (supportedLocales.includes(userLocale)) {
+        return format(dateInput, 'Pp', { locale: userLocale })
+    } else {
+        return format(dateInput, 'Pp', { locale: enUS })
+    }
 }

@@ -1,8 +1,9 @@
 import {dateformat } from "./date";
-import { de, enUS } from 'date-fns/locale'
+import { de, enUS, fr } from 'date-fns/locale'
 
 describe ('dateformat()', () => {
     const deLocale = de
+    const frLocale = fr
     const enLocale = enUS
     const date = new Date(2021,3,22, 0,0)
 
@@ -12,8 +13,8 @@ describe ('dateformat()', () => {
         );
     });
 
-    it('should format the date for US', () => {
-        expect(dateformat(date, enLocale)).toBe(
+    it('should format the date for US when the lang is not supported', () => {
+        expect(dateformat(date, frLocale)).toBe(
             '04/22/2021, 12:00 AM'
         );
     });
