@@ -1,7 +1,7 @@
 import { CityReport } from "./openGeoApi";
-import { weatherReport } from "./openWeatherMapApi";
+import { WeatherReport } from "./openWeatherMapApi";
 
-export const weather: weatherReport = {
+export const weather: WeatherReport = {
   lat: 50.8333,
   lon: 12.9167,
   timezone: "Europe/Berlin",

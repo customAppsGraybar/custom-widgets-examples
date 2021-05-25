@@ -30,9 +30,9 @@ const iconsMap: { [key: string]: WeatherIcon } = {
   "50n": "fog",
 } as const;
 
-export type iconCodes = keyof typeof iconsMap;
+export type IconCodes = keyof typeof iconsMap;
 
-export const getIcon = (name: iconCodes): WeatherIcon => {
+export const getIcon = (name: IconCodes): WeatherIcon => {
   if (iconsMap[name]) {
     return iconsMap[name];
   }
