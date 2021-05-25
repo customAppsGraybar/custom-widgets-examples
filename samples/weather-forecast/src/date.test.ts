@@ -1,8 +1,7 @@
 import { dateFormat, timeFormat } from "./date";
-import { de, fr } from "date-fns/locale";
 
-const deLocale = de;
-const frLocale = fr;
+const deLocale = "de";
+const frLocale = "fr";
 const date = new Date(2021, 3, 22, 0, 0);
 
 describe("dateFormat()", () => {
@@ -21,14 +20,14 @@ describe("dateFormat()", () => {
 
 describe("timeFormat()", () => {
   it("should format the time for DE", () => {
-    expect(timeFormat(date, deLocale)).toBe("00:00");
+    expect(timeFormat("00:00", deLocale)).toBe("00:00");
   });
 
   it("should format the time for US when the lang is not supported", () => {
-    expect(timeFormat(date, frLocale)).toBe("12:00 AM");
+    expect(timeFormat("00:00", frLocale)).toBe("12:00 AM");
   });
 
   it("should format the time for fallback as US", () => {
-    expect(timeFormat(date)).toBe("12:00 AM");
+    expect(timeFormat("00:00")).toBe("12:00 AM");
   });
 });

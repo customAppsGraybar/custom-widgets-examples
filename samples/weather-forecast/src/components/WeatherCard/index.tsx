@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import CSS from "csstype";
 import { WeatherIcon } from "api/weatherIcon";
-import { LoadingBox } from "../LoadingBox";
 import { InfoBox } from "../InfoBox";
 import { ContentBox } from "../ContentBox";
 
@@ -15,7 +14,6 @@ export interface WeatherCardProperties {
   time?: string;
   temperature?: number;
   icon?: WeatherIcon;
-  loading: boolean;
 }
 
 export const WeatherCard: React.FC<WeatherCardProperties> = (props) => {
@@ -53,10 +51,7 @@ export const WeatherCard: React.FC<WeatherCardProperties> = (props) => {
         temperature={temperature}
         alternateTemperature={alternateTemperature}
       />
-      {props.loading && <LoadingBox />}
-      {!props.loading && displayInfo && (
-        <InfoBox onCloseClick={onInfoBtnClick} />
-      )}
+      {displayInfo && <InfoBox onCloseClick={onInfoBtnClick} />}
     </div>
   );
 };

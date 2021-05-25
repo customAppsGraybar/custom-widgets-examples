@@ -8,7 +8,7 @@ type Coordinates = { lat: number; lon: number; name: string };
 type Options = {
   key: string;
   location: string;
-  contentLanguage: string;
+  lang: string;
 };
 
 const getCoordinates = async (options: Options) => {
@@ -23,7 +23,7 @@ const getCoordinates = async (options: Options) => {
 
   const [{ lat, lon, name, local_names }] = result;
   const cityName = local_names
-    ? local_names[options.contentLanguage.substring(0, 2)] ?? name
+    ? local_names[options.lang.substring(0, 2)] ?? name
     : name;
 
   return { lat, lon, name: cityName };
@@ -31,7 +31,9 @@ const getCoordinates = async (options: Options) => {
 
 export default function useCity(options: Options) {
   const { location } = options;
-  return useQuery<Coordinates, Error>(["coordinates", location], () =>
-    getCoordinates(options)
+  return useQuery<Coordinates, Error>(
+    ["coordinates", location],
+    () => getCoordinates(options),
+    { enabled: !!location }
   );
 }
