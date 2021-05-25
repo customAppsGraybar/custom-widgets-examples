@@ -39,9 +39,10 @@ export const WeatherCard: React.FC<WeatherCardProperties> = (props) => {
     setDisplayInfo(!displayInfo);
   }
 
-  const temp = props.temperature ?? 273.15
-  const alternateTemperature = ((temp - 273.15) * (9 / 5) + 32).toFixed(0) + '° F'
-  const temperature = (temp - 273.15).toFixed(0) + '° C'
+  const kelvin = 273.15
+  const temp = props.temperature ?? kelvin
+  const alternateTemperature = ((temp - kelvin) * (9 / 5) + 32).toFixed(0) + '° F'
+  const temperature = (temp - kelvin).toFixed(0) + '° C'
 
   return (
     <div style={cardStyle}>
