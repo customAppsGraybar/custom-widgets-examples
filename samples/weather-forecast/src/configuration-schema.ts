@@ -26,7 +26,11 @@ export const configurationSchema: JSONSchema7 = {
     },
     date: {
       type: 'string',
-      title: 'Event'
+      title: 'Event date'
+    },
+    time: {
+      type: 'string',
+      title: 'Event time'
     },
     apikey: {
       type: 'string',
@@ -46,6 +50,9 @@ export const uiSchema: UiSchema = {
   date: {
     "ui:help": "Please enter the date of the event",
     "ui:widget": "date",
+  },
+  time: {
+    "ui:help": "Please enter the time of the event",
   },
   apikey: {
     "ui:help": "Enter a valid openweathermap.org API key. The key is used to retrieve data from the service.",

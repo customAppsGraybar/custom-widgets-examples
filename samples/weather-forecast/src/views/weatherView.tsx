@@ -22,12 +22,14 @@ const formatDate = (dte: number, lang: string) => {
 export interface WeatherForecastProps extends BlockAttributes {
   apikey: string;
   date: string;
+  time: string;
   location: string;
 }
 
 export const WeatherView: FunctionComponent<WeatherForecastProps> = ({
   apikey: key,
   date: eventDate,
+  time,
   location,
   contentLanguage: lang,
 }: WeatherForecastProps) => {
@@ -45,6 +47,7 @@ export const WeatherView: FunctionComponent<WeatherForecastProps> = ({
     current: { date = 0, temperature = { current: 273.15 }, icon = undefined } = {}
   } = {...weather}
 
+  // Try to find a forecast if event date was specified
   if (eventDate) {
     const forecast = weather?.forecast.find(weather => dayjs.unix(weather.date).startOf("day").isSame(eventDate))
     if (forecast) {
@@ -61,7 +64,7 @@ export const WeatherView: FunctionComponent<WeatherForecastProps> = ({
       location={coordinates?.name ?? location}
       color="#24B5E1"
       date={formatDate(date, lang)}
-      time="11:00 UTC"
+      time={time}
       icon={icon}
     ></WeatherCard>
   );

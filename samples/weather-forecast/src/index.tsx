@@ -65,7 +65,7 @@ const factory: BlockFactory = (BaseBlockClass, _widgetApi) => {
      */
     public static get observedAttributes(): string[] {
       const defaults = ["content-language", "widget-title", "on-card"];
-      return [...defaults, "location", "date", "apikey"];
+      return [...defaults, "location", "date", "time", "apikey"];
     }
 
     /**
@@ -86,7 +86,7 @@ const factory: BlockFactory = (BaseBlockClass, _widgetApi) => {
 const blockDefinition: BlockDefinition = {
   name: "weather-forecast",
   factory: factory,
-  attributes: ["location", "date", "apikey"],
+  attributes: ["location", "date", "time", "apikey"],
   blockLevel: "block",
   configurationSchema: configurationSchema,
   uiSchema: uiSchema,
