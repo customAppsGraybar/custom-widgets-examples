@@ -23,13 +23,13 @@ const queryClient = new QueryClient();
  * React Component
  */
 export interface WeatherForecastProps extends BlockAttributes {
-  apiKey: string;
+  apikey: string;
   date: string;
   location: string;
 }
 
 export const WeatherForecast = ({
-  apiKey,
+  apikey,
   date,
   location,
   contentLanguage,
@@ -38,7 +38,7 @@ export const WeatherForecast = ({
   // weather api
   return (
     <QueryClientProvider client={queryClient}>
-      <WeatherView {...{ apiKey, date, location, contentLanguage }} />
+      <WeatherView {...{ apikey, date, location, contentLanguage }} />
       <ReactQueryDevtools initialIsOpen />
     </QueryClientProvider>
   );

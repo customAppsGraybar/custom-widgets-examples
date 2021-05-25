@@ -9,13 +9,13 @@ import { weather as mockedWeather } from "../api/mockData"
  * React Component
  */
 export interface WeatherForecastProps extends BlockAttributes {
-  apiKey: string;
+  apikey: string;
   date: string;
   location: string;
 }
 
 export const WeatherView: FunctionComponent<WeatherForecastProps> = ({
-  apiKey: key,
+  apikey: key,
   date: eventDate,
   location,
   contentLanguage: lang,
@@ -23,11 +23,12 @@ export const WeatherView: FunctionComponent<WeatherForecastProps> = ({
   // geo api => lat,lon
   // weather api
 
-  // Fallback if location in configuration form was not filled out
+  // Fallback if apikey or location in configuration form was not filled out
   const locationQuery = location ?? "Chemnitz,DE"
+  const apiKey = key ?? "d23e3a76aafeab7260e4e16cd91c73ad"
 
-  const { data: coordinates } = useCity({ key, location: locationQuery, contentLanguage: lang });
-  const { data: weather, isLoading } = useWeather({ key, lang, ...coordinates });
+  const { data: coordinates } = useCity({ key: apiKey, location: locationQuery, contentLanguage: lang });
+  const { data: weather, isLoading } = useWeather({ key: apiKey, lang, ...coordinates });
 
   const {
     current: { date = "", temperature = { current: 273.15 }, icon = undefined } = {}

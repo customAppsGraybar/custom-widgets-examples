@@ -21,12 +21,16 @@ import { JSONSchema7 } from "json-schema";
 export const configurationSchema: JSONSchema7 = {
   properties: {
     location: {
-      type: "string",
-      title: "Location",
+      type: 'string',
+      title: 'Location',
     },
     date: {
       type: 'string',
       title: 'Event'
+    },
+    apikey: {
+      type: 'string',
+      title: 'openweathermap.org API Key'
     }
   },
 };
@@ -43,4 +47,7 @@ export const uiSchema: UiSchema = {
     "ui:help": "Please enter the date of the event",
     "ui:widget": "date",
   },
+  apikey: {
+    "ui:help": "Enter a valid openweathermap.org API key. The key is used to retrieve data from the service.",
+  }
 };

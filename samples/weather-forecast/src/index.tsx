@@ -53,7 +53,6 @@ const factory: BlockFactory = (BaseBlockClass, _widgetApi) => {
         <WeatherForecast
           {...{
             ...this.props,
-            apiKey: "d23e3a76aafeab7260e4e16cd91c73ad",
           }}
         />,
         container
@@ -66,7 +65,7 @@ const factory: BlockFactory = (BaseBlockClass, _widgetApi) => {
      */
     public static get observedAttributes(): string[] {
       const defaults = ["content-language", "widget-title", "on-card"];
-      return [...defaults, "location", "date"];
+      return [...defaults, "location", "date", "apikey"];
     }
 
     /**
@@ -87,7 +86,7 @@ const factory: BlockFactory = (BaseBlockClass, _widgetApi) => {
 const blockDefinition: BlockDefinition = {
   name: "weather-forecast",
   factory: factory,
-  attributes: ["location", "date"],
+  attributes: ["location", "date", "apikey"],
   blockLevel: "block",
   configurationSchema: configurationSchema,
   uiSchema: uiSchema,
