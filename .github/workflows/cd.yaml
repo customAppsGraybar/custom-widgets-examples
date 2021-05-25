@@ -21,10 +21,10 @@ jobs:
           node-version: ${{ env.NODE_VERSION }}
 
       - name: Install Yarn Dependencies
-        run: yarn install --frozen-lockfile
+        run: yarn install --cwd samples/weather-forecast --frozen-lockfile
 
       - name: Build widget
-        run: yarn build
+        run: yarn --cwd samples/weather-forecast build
 
       - name: Publish
         uses: netlify/actions/cli@master
