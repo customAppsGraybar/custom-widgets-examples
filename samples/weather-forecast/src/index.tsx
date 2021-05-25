@@ -14,10 +14,15 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-import { BlockFactory, BlockDefinition, ExternalBlockDefinition, BaseBlock } from "widget-sdk";
+import {
+  BlockFactory,
+  BlockDefinition,
+  ExternalBlockDefinition,
+  BaseBlock,
+} from "widget-sdk";
 import { WeatherForecastProps, WeatherForecast } from "./weather-forecast";
 import { configurationSchema, uiSchema } from "./configuration-schema";
-import pkg from '../package.json'
+import pkg from "../package.json";
 
 /**
  * This factory creates the class which is registered with the tagname in the `custom element registry`
@@ -27,7 +32,10 @@ const factory: BlockFactory = (BaseBlockClass, _widgetApi) => {
   /**
    *  <weather-forecast message="world!"></weather-forecast>
    */
-  return class WeatherForecastBlock extends BaseBlockClass implements BaseBlock {
+  return class WeatherForecastBlock
+    extends BaseBlockClass
+    implements BaseBlock
+  {
     public constructor() {
       super();
     }
@@ -41,7 +49,14 @@ const factory: BlockFactory = (BaseBlockClass, _widgetApi) => {
     }
 
     public renderBlock(container: HTMLElement): void {
-      ReactDOM.render(<WeatherForecast {...this.props} />, container);
+      ReactDOM.render(
+        <WeatherForecast
+          {...{
+            ...this.props,
+          }}
+        />,
+        container
+      );
     }
 
     /**
@@ -50,14 +65,16 @@ const factory: BlockFactory = (BaseBlockClass, _widgetApi) => {
      */
     public static get observedAttributes(): string[] {
       const defaults = ["content-language", "widget-title", "on-card"];
-      return [...defaults, "message"];
+      return [...defaults, "location", "date", "time", "apikey"];
     }
 
     /**
      * Callback invoked on every change of an observed attribute. Call the parental method before
      * applying own logic.
      */
-    public attributeChangedCallback(...args: [string, string | undefined, string | undefined]): void {
+    public attributeChangedCallback(
+      ...args: [string, string | undefined, string | undefined]
+    ): void {
       super.attributeChangedCallback.apply(this, args);
     }
   };
@@ -67,13 +84,13 @@ const factory: BlockFactory = (BaseBlockClass, _widgetApi) => {
  * The definition of the block, to let it successful register to the hosting application
  */
 const blockDefinition: BlockDefinition = {
-    name: "weather-forecast",
-    factory: factory,
-    attributes: ['message'],
-    blockLevel: 'block',
-    configurationSchema: configurationSchema,
-    uiSchema: uiSchema,
-    label: 'Weather Forecast'
+  name: "weather-forecast",
+  factory: factory,
+  attributes: ["location", "date", "time", "apikey"],
+  blockLevel: "block",
+  configurationSchema: configurationSchema,
+  uiSchema: uiSchema,
+  label: "Weather Forecast",
 };
 
 /**
@@ -82,7 +99,7 @@ const blockDefinition: BlockDefinition = {
 const externalBlockDefinition: ExternalBlockDefinition = {
   blockDefinition,
   author: pkg.author,
-  version: pkg.version
+  version: pkg.version,
 };
 
 /**

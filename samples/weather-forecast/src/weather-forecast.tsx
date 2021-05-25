@@ -12,16 +12,36 @@
  */
 
 import React, { ReactElement } from "react";
+import { QueryClient, QueryClientProvider } from "react-query";
+import { ReactQueryDevtools } from "react-query/devtools";
+import { WeatherView } from "./views/weatherView";
 import { BlockAttributes } from "widget-sdk";
+
+const queryClient = new QueryClient();
 
 /**
  * React Component
  */
 export interface WeatherForecastProps extends BlockAttributes {
-  message: string;
+  apikey: string;
+  date: string;
+  time: string;
+  location: string;
 }
 
-export const WeatherForecast = ({ message, contentLanguage }: WeatherForecastProps): ReactElement => {
-  return <div>Hello {message} {contentLanguage}</div>;
+export const WeatherForecast = ({
+  apikey,
+  date,
+  time,
+  location,
+  contentLanguage,
+}: WeatherForecastProps): ReactElement => {
+  // geo api => lat,lon
+  // weather api
+  return (
+    <QueryClientProvider client={queryClient}>
+      <WeatherView {...{ apikey, date, time, location, contentLanguage }} />
+      <ReactQueryDevtools initialIsOpen />
+    </QueryClientProvider>
+  );
 };
-

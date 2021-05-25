@@ -1,26 +1,50 @@
-import {dateformat } from "./date";
-import { de, enUS } from 'date-fns/locale'
+import { dateFormat, timeFormat } from "./date";
+import { de, fr } from 'date-fns/locale'
 
-describe ('dateformat()', () => {
-    const deLocale = de
-    const enLocale = enUS
-    const date = new Date(2021,3,22, 0,0)
+const deLocale = de
+const frLocale = fr
+const date = new Date(2021,3,22, 0,0)
+
+describe ('dateFormat()', () => {
 
     it('should format the date for DE', () => {
-        expect(dateformat(date, deLocale)).toBe(
-            '22.04.2021 00:00'
-        );
-    });
-
-    it('should format the date for US', () => {
-        expect(dateformat(date, enLocale)).toBe(
-            '04/22/2021, 12:00 AM'
+        expect(dateFormat(date, deLocale)).toBe(
+            '22.04.2021'
         );
     });
 
     it('should format the date for fallback as US', () => {
-        expect(dateformat(date)).toBe(
-            '04/22/2021, 12:00 AM'
+        expect(dateFormat(date)).toBe(
+            '04/22/2021'
         );
     });
+
+    it('should format the date for US when the lang is not supported', () => {
+        expect(dateFormat(date, frLocale)).toBe(
+            '04/22/2021'
+        );
+    });
+
+});
+
+describe('timeFormat()', () => {
+
+    it('should format the time for DE', () => {
+        expect(timeFormat(date, deLocale)).toBe(
+            '00:00'
+        );
+    });
+
+    it('should format the time for US when the lang is not supported', () => {
+        expect(timeFormat(date, frLocale)).toBe(
+            '12:00 AM'
+        );
+    });
+
+    it('should format the time for fallback as US', () => {
+        expect(timeFormat(date)).toBe(
+            '12:00 AM'
+        );
+    });
+
 });

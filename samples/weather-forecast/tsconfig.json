@@ -16,8 +16,12 @@
     "rootDir": ".",
     "paths": {
       "widget-sdk": ["../node_modules/@staffbase/widget-sdk"]
-    }
+    },
+    "typeRoots": [
+      "./typings",
+      "node_modules/@types"
+    ]
   },
-  "include": ["src/*"],
+  "include": ["src/**/*", "src/custom.d.ts"],
   "exclude": ["node_modules", "dist"]
 }
