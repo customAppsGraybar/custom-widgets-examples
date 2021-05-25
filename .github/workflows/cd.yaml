@@ -4,10 +4,10 @@ env:
 on:
   push:
     branches:
-      - '**'
-#   pull_request:
-#    paths:
-#      - samples/weatherforecast/
+      - main
+  pull_request:
+    paths:
+      - samples/weatherforecast/
 
 jobs:
   build-and-deploy:
@@ -33,7 +33,6 @@ jobs:
           mkdir samples/deploy
           cp samples/netlify.toml samples/deploy/
           cp samples/weather-forecast/dist/* samples/deploy/
-
 
       - name: Publish
         uses: netlify/actions/cli@master
