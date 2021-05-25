@@ -54,7 +54,7 @@ export const InfoBox: React.FC<InfoBoxProperties> = (props) => {
 				Contains information from openweathermap.org, which is made available
 				here under the Open Database License (ODbL).
 			</div>
-			<div style={infoButtonStyle} onClick={props.onCloseClick}>
+			<div role="button" style={infoButtonStyle} onClick={props.onCloseClick}>
 				<Cross/>
 			</div>
 		</div>

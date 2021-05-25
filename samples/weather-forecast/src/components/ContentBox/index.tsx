@@ -79,7 +79,7 @@ export const ContentBox: React.FC<ContentBoxProperties> = (props) => {
 
     return 	(		
     <>
-        <div style={infoButtonStyle} onClick={props.onInfoButtonClick}>
+        <div role="button" style={infoButtonStyle} onClick={props.onInfoButtonClick}>
             <Info/>
         </div>
         <div style={contentStyle}>
