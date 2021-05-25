@@ -28,10 +28,17 @@ jobs:
       - name: Build widget
         run: yarn --cwd samples/weather-forecast build
 
+      - name: Prepare Deployment
+        run: |
+          mkdir samples/deploy
+          cp samples/netlify.toml samples/deploy/
+          cp samples/weather-forecast/dist/* samples/deploy/
+
+
       - name: Publish
         uses: netlify/actions/cli@master
         with:
-          args: deploy --dir=samples/weather-forecast/dist
+          args: deploy --dir=samples/deploy
         env:
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}

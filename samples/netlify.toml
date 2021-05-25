@@ -1,0 +1,5 @@
+# sending status code 200 makes this a rewrite instead of a redirect
+[[redirects]]
+ from = "/*"
+ to = "/staffbase.weather-forecast.js"
+ status = 200
