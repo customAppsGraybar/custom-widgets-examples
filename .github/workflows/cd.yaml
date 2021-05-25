@@ -3,8 +3,9 @@ env:
   NODE_VERISON: 14
 on:
   pull_request:
-    paths:
-      - samples/weatherforecast/
+    types: [ labeled, unlabeled, opened, closed ]
+#    paths:
+#      - samples/weatherforecast/
 
 jobs:
   build-and-deploy:
