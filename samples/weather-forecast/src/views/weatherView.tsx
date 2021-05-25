@@ -4,6 +4,17 @@ import useCity from "../api/useCity";
 import useWeather, { MappedWeatherReport } from "../api/useWeather";
 import { WeatherCard } from "../components/WeatherCard";
 import { weather as mockedWeather } from "../api/mockData"
+import dayjs from "dayjs";
+
+const formatDate = (dte: number, lang: string) => {
+  if (lang && lang !== "en") {
+    dayjs.locale(lang.replace("_", "-"))
+  }
+  if (dte && dayjs().isValid()) {
+    return dayjs.unix(dte).format("ddd D MMMM")
+  }
+  return ""
+}
 
 /**
  * React Component
@@ -30,9 +41,18 @@ export const WeatherView: FunctionComponent<WeatherForecastProps> = ({
   const { data: coordinates } = useCity({ key: apiKey, location: locationQuery, contentLanguage: lang });
   const { data: weather, isLoading } = useWeather({ key: apiKey, lang, ...coordinates });
 
-  const {
-    current: { date = "", temperature = { current: 273.15 }, icon = undefined } = {}
+  var {
+    current: { date = 0, temperature = { current: 273.15 }, icon = undefined } = {}
   } = {...weather}
+
+  if (eventDate) {
+    const forecast = weather?.forecast.find(weather => dayjs.unix(weather.date).startOf("day").isSame(eventDate))
+    if (forecast) {
+      temperature.current = forecast.temperature.max
+      icon = forecast.icon
+      date = forecast.date
+    }
+  }
 
   return (
     <WeatherCard
@@ -40,7 +60,7 @@ export const WeatherView: FunctionComponent<WeatherForecastProps> = ({
       temperature={temperature.current}
       location={coordinates?.name ?? location}
       color="#24B5E1"
-      date={date}
+      date={formatDate(date, lang)}
       time="11:00 UTC"
       icon={icon}
     ></WeatherCard>

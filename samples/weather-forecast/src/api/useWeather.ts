@@ -1,21 +1,10 @@
 import axios from "axios";
-import dayjs from "dayjs";
 import { QueryFunctionContext, useQuery, UseQueryResult } from "react-query";
 import { CurrentWeather, DayReport, WeatherReport } from "./openWeatherMapApi";
 import { getIcon, WeatherIcon } from "./weatherIcon";
 
-const formatDate = (dte: number, lang: string) => {
-  if (lang && lang !== "en") {
-    dayjs.locale(lang.replace("_", "-"));
-  }
-  if (dte && dayjs().isValid()) {
-    return dayjs.unix(dte).format("ddd D MMMM");
-  }
-  return "";
-};
-
 type CommonData = {
-  date: string;
+  date: number;
   description: string | null;
   icon: WeatherIcon;
   wind: number;
@@ -40,7 +29,7 @@ const mapCurrent = (
   lang: string
 ): CurrentReport => {
   return {
-    date: formatDate(day.dt, lang),
+    date: day.dt,
     description: w.description,
     icon: getIcon(w.icon),
     temperature: {
@@ -54,7 +43,7 @@ const mapCurrent = (
 const mapForecast =
   (lang: string) =>
   ({ weather: [w], ...forecast }: DayReport): ForeCastReport => ({
-    date: formatDate(forecast.dt, lang),
+    date: forecast.dt,
     description: w.description,
     icon: getIcon(w.icon),
     temperature: {
