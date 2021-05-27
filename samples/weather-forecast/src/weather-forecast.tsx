@@ -13,7 +13,6 @@
 
 import React, { ReactElement } from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
-import { ReactQueryDevtools } from "react-query/devtools";
 import { WeatherView } from "./views/weatherView";
 import { BlockAttributes } from "widget-sdk";
 
@@ -36,12 +35,9 @@ export const WeatherForecast = ({
   location,
   contentLanguage,
 }: WeatherForecastProps): ReactElement => {
-  // geo api => lat,lon
-  // weather api
   return (
     <QueryClientProvider client={queryClient}>
       <WeatherView {...{ apikey, date, time, location, contentLanguage }} />
-      <ReactQueryDevtools initialIsOpen />
     </QueryClientProvider>
   );
 };
