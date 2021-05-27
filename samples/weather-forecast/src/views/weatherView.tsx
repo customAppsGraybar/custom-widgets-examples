@@ -48,13 +48,11 @@ export const WeatherView: FunctionComponent<WeatherForecastProps> = ({
   } = {...weather}
 
   // Try to find a forecast if event date was specified
-  if (eventDate) {
-    const forecast = weather?.forecast.find(weather => dayjs.unix(weather.date).startOf("day").isSame(eventDate))
-    if (forecast) {
-      temperature.current = forecast.temperature.max
-      icon = forecast.icon
-      date = forecast.date
-    }
+  const forecast = eventDate && weather?.forecast.find(weather => dayjs.unix(weather.date).startOf("day").isSame(eventDate))
+  if (forecast) {
+    temperature.current = forecast.temperature.max
+    icon = forecast.icon
+    date = forecast.date
   }
 
   return (
