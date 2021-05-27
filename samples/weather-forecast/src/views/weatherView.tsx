@@ -40,17 +40,14 @@ export const WeatherView: FunctionComponent<WeatherForecastProps> = ({
     ...coordinates,
   });
 
-console.log('weather?.current?.date', weather?.current?.date)
-console.log('new Date(eventDate)', new Date(eventDate))
-
   // Try to find a forecast if event date was specified
   const forecast = weather?.forecast.find((weather) =>
-    isSameDay(weather.date, new Date(eventDate).getTime() / 1000)
+    isSameDay(new Date(weather.date * 1000), new Date(eventDate))
   );
 
-  const date = forecast?.date ?? weather?.current?.date;
+  const date = new Date((forecast?.date ?? weather?.current?.date)! * 1000);
   const icon = forecast?.icon ?? weather?.current?.icon;
-  const temperature =
+  const temperature = 
     forecast?.temperature?.max ?? weather?.current?.temperature?.current;
 
   const bgColor = "#24B5E1";
@@ -62,7 +59,7 @@ console.log('new Date(eventDate)', new Date(eventDate))
       temperature={temperature || 0}
       location={coordinates?.name ?? location}
       color={bgColor}
-      date={dateFormat(new Date(date! * 1000), lang)}
+      date={dateFormat(date, lang)}
       time={time}
       icon={icon}
     ></WeatherCard>

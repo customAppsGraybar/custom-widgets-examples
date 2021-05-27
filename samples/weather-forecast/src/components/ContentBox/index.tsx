@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FunctionComponent } from "react";
 import CSS from "csstype";
 import Info from "../Icons/info.svg";
 
@@ -15,7 +15,7 @@ export interface ContentBoxProperties {
   location?: string;
 }
 
-export const ContentBox: React.FC<ContentBoxProperties> = (props) => {
+export const ContentBox: FunctionComponent<ContentBoxProperties> = (props) => {
   const contentStyle: CSS.Properties = {
     display: "flex",
     flexDirection: "column",
@@ -92,7 +92,7 @@ export const ContentBox: React.FC<ContentBoxProperties> = (props) => {
         <div style={bottomInfoStyle}>
           <div>
             <p style={infoLineValueStyle}>
-              {props.time} · {props.location}
+              {props.time && props.time + " · "}{props.location}
             </p>
           </div>
           <div>

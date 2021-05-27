@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import CSS from "csstype";
+import React, { useState, FunctionComponent } from "react";
 import { WeatherIcon } from "api/weatherIcon";
 import { InfoBox } from "../InfoBox";
 import { ContentBox } from "../ContentBox";
@@ -17,7 +16,7 @@ export interface WeatherCardProperties {
   icon?: WeatherIcon;
 }
 
-export const WeatherCard: React.FC<WeatherCardProperties> = (props) => {
+export const WeatherCard: FunctionComponent<WeatherCardProperties> = (props) => {
 
   const [displayInfo, setDisplayInfo] = useState(false);
 
@@ -30,8 +29,6 @@ export const WeatherCard: React.FC<WeatherCardProperties> = (props) => {
   const temp = props.temperature ?? offsetToKelvin
   const alternateTemperature = ((temp - offsetToKelvin) * (9 / 5) + 32).toFixed(0) + '° F'
   const temperature = (temp - offsetToKelvin).toFixed(0) + '° C'
-
-console.log(props)
 
   return (
     <Card color={props.color}>

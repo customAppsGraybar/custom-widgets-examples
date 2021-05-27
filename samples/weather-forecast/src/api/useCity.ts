@@ -30,7 +30,11 @@ const getCoordinates = async (options: Options) => {
 };
 
 export default function useCity(options: Options) {
+  
+  // Fallback if no location was specified
+  options.location = options.location ?? city[0].name
   const { location } = options;
+  
   return useQuery<Coordinates, Error>(
     ["coordinates", location],
     () => getCoordinates(options),
