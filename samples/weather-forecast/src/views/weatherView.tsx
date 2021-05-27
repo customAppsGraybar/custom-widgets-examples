@@ -24,8 +24,6 @@ export const WeatherView: FunctionComponent<WeatherForecastProps> = ({
   location,
   contentLanguage: lang,
 }: WeatherForecastProps) => {
-  // geo api => lat,lon
-  // weather api
 
   // Fallback if apikey or location in configuration form was not filled out
   const apiKey = key ?? "d23e3a76aafeab7260e4e16cd91c73ad";
@@ -42,9 +40,12 @@ export const WeatherView: FunctionComponent<WeatherForecastProps> = ({
     ...coordinates,
   });
 
+console.log('weather?.current?.date', weather?.current?.date)
+console.log('new Date(eventDate)', new Date(eventDate))
+
   // Try to find a forecast if event date was specified
   const forecast = weather?.forecast.find((weather) =>
-    isSameDay(weather.date, new Date(eventDate))
+    isSameDay(weather.date, new Date(eventDate).getTime() / 1000)
   );
 
   const date = forecast?.date ?? weather?.current?.date;
@@ -61,8 +62,8 @@ export const WeatherView: FunctionComponent<WeatherForecastProps> = ({
       temperature={temperature || 0}
       location={coordinates?.name ?? location}
       color={bgColor}
-      date={dateFormat(date!, lang)}
-      time={timeFormat(time, lang)}
+      date={dateFormat(new Date(date! * 1000), lang)}
+      time={time}
       icon={icon}
     ></WeatherCard>
   );

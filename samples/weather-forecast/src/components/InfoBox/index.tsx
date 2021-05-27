@@ -43,30 +43,19 @@ export const InfoBox: React.FC<InfoBoxProperties> = (props) => {
     cursor: "pointer",
   };
 
-    const infoButtonStyle: CSS.Properties = {
-        position: "absolute",
-        right: "0",
-        bottom: "0",
-        marginRight: "0.8rem",
-        marginBottom: "0.8rem",
-        height: "1rem",
-        cursor: "pointer",
-    };
-
-    return (
-		<div style={infoBoxStyle}>
-			<div style={infoBoxContent}>
-				<a href="https://www.figma.com/community/file/823259031807888076/Component-Based-Weather-Icon-Sets" style={infoBoxContentLink}>Weather Icon Set</a> by Osman Talha (Licensed under CC BY 4.0) and
-				adapted by Staffbase.
-				<br />
-				<br />
-				Contains information from openweathermap.org, which is made available
-				here under the Open Database License (ODbL).
-			</div>
-			<div role="button" style={infoButtonStyle} onClick={props.onCloseClick}>
-				<Cross/>
-			</div>
-		</div>
-	)
-}
+  return (
+    <div style={infoBoxStyle}>
+      <div style={infoBoxContent}>
+        <a href="https://www.figma.com/community/file/823259031807888076/Component-Based-Weather-Icon-Sets" style={infoBoxContentLink}>Weather Icon Set</a> by Osman Talha (Licensed under CC BY 4.0) and
+        adapted by Staffbase.
+        <br />
+        <br />
+        Contains information from openweathermap.org, which is made available
+        here under the Open Database License (ODbL).
+      </div>
+      <div role="button" style={infoButtonStyle} onClick={props.onCloseClick}>
+        <Cross/>
+      </div>
+    </div>
+  )
 }

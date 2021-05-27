@@ -3,6 +3,7 @@ import CSS from "csstype";
 import { WeatherIcon } from "api/weatherIcon";
 import { InfoBox } from "../InfoBox";
 import { ContentBox } from "../ContentBox";
+import { Card } from '../Card'
 
 /**
  * React Component
@@ -17,18 +18,6 @@ export interface WeatherCardProperties {
 }
 
 export const WeatherCard: React.FC<WeatherCardProperties> = (props) => {
-  const cardStyle: CSS.Properties = {
-    display: "block",
-    color: "white",
-    boxShadow: "0 0 8px 0 rgba(0, 0, 0, 0.15)",
-    borderRadius: "0.5rem",
-    height: "14rem",
-    minWidth: "25rem",
-    fontFamily: "Open Sans",
-    fontStyle: "normal",
-    position: "relative",
-    backgroundColor: props.color,
-  };
 
   const [displayInfo, setDisplayInfo] = useState(false);
 
@@ -42,11 +31,12 @@ export const WeatherCard: React.FC<WeatherCardProperties> = (props) => {
   const alternateTemperature = ((temp - offsetToKelvin) * (9 / 5) + 32).toFixed(0) + '° F'
   const temperature = (temp - offsetToKelvin).toFixed(0) + '° C'
 
+console.log(props)
+
   return (
-    <div style={cardStyle}>
+    <Card color={props.color}>
       <ContentBox {...props} onInfoButtonClick={onInfoBtnClick} temperature={temperature} alternateTemperature={alternateTemperature}/> 
-      {props.loading && <LoadingBox/>}
-      {!props.loading && displayInfo && <InfoBox onCloseClick={onInfoBtnClick}/>}
-    </div>
+      {displayInfo && <InfoBox onCloseClick={onInfoBtnClick}/>}
+    </Card>
   );
 };

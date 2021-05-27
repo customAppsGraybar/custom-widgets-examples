@@ -1,23 +1,13 @@
 import React from "react";
 import CSS from "csstype";
 
+import { Card } from '../Card'
+
 export interface LoadingCardProperties {
   color: string;
 }
 
 export const LoadingBox: React.FC<LoadingCardProperties> = (props) => {
-  const cardStyle: CSS.Properties = {
-    display: "block",
-    color: "white",
-    boxShadow: "0 0 8px 0 rgba(0, 0, 0, 0.15)",
-    borderRadius: "0.5rem",
-    height: "14rem",
-    minWidth: "25rem",
-    fontFamily: "Open Sans",
-    fontStyle: "normal",
-    position: "relative",
-    backgroundColor: props.color,
-  };
 
   const cardLoadingStyle: CSS.Properties = {
     display: "block",
@@ -41,10 +31,10 @@ export const LoadingBox: React.FC<LoadingCardProperties> = (props) => {
   };
 
   return (
-    <div style={cardStyle}>
+    <Card color={props.color}>
       <div style={cardLoadingStyle}>
         <div style={cardLoadingContentStyle}>Loading...</div>
       </div>
-    </div>
+    </Card>
   );
 };
