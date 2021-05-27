@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import CSS from "csstype";
 import { WeatherIcon } from "api/weatherIcon";
-import { LoadingBox } from "../LoadingBox"
-import { InfoBox } from "../InfoBox"
-import { ContentBox } from "../ContentBox"
+import { InfoBox } from "../InfoBox";
+import { ContentBox } from "../ContentBox";
 
 /**
  * React Component
@@ -15,7 +14,6 @@ export interface WeatherCardProperties {
   time?: string;
   temperature?: number;
   icon?: WeatherIcon;
-  loading: boolean;
 }
 
 export const WeatherCard: React.FC<WeatherCardProperties> = (props) => {
@@ -35,9 +33,9 @@ export const WeatherCard: React.FC<WeatherCardProperties> = (props) => {
   const [displayInfo, setDisplayInfo] = useState(false);
 
   const onInfoBtnClick = (e: React.SyntheticEvent) => {
-	e.preventDefault()
+    e.preventDefault();
     setDisplayInfo(!displayInfo);
-  }
+  };
 
   const offsetToKelvin = 273.15
   const temp = props.temperature ?? offsetToKelvin

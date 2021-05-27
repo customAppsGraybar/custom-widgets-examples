@@ -34,7 +34,7 @@ describe("useCity", () => {
   it("should return the coordinatse", async () => {
     mockAxios.mockResolvedValueOnce({ data: city });
     const { result, waitFor } = renderHook(
-      () => useCity({ key: "foo", location: "Berlin" }),
+      () => useCity({ key: "foo", location: "Berlin", lang: "de" }),
       { wrapper }
     );
 

@@ -1,20 +1,11 @@
+import { isSameDay } from "date-fns";
 import React, { FunctionComponent } from "react";
 import { BlockAttributes } from "widget-sdk";
 import useCity from "../api/useCity";
-import useWeather, { MappedWeatherReport } from "../api/useWeather";
+import useWeather from "../api/useWeather";
+import { LoadingBox } from "../components/LoadingBox";
 import { WeatherCard } from "../components/WeatherCard";
-import { weather as mockedWeather } from "../api/mockData"
-import dayjs from "dayjs";
-
-const formatDate = (dte: number, lang: string) => {
-  if (lang && lang !== "en") {
-    dayjs.locale(lang.replace("_", "-"))
-  }
-  if (dte && dayjs().isValid()) {
-    return dayjs.unix(dte).format("ddd D MMMM")
-  }
-  return ""
-}
+import { dateFormat, timeFormat } from "../date";
 
 /**
  * React Component
@@ -37,34 +28,42 @@ export const WeatherView: FunctionComponent<WeatherForecastProps> = ({
   // weather api
 
   // Fallback if apikey or location in configuration form was not filled out
-  const locationQuery = location ?? "Chemnitz,DE"
-  const apiKey = key ?? "d23e3a76aafeab7260e4e16cd91c73ad"
+  const apiKey = key ?? "d23e3a76aafeab7260e4e16cd91c73ad";
 
-  const { data: coordinates } = useCity({ key: apiKey, location: locationQuery, contentLanguage: lang });
-  const { data: weather, isLoading } = useWeather({ key: apiKey, lang, ...coordinates });
+  const { data: coordinates } = useCity({
+    key: apiKey,
+    location,
+    lang: lang,
+  });
 
-  var {
-    current: { date = 0, temperature = { current: 273.15 }, icon = undefined } = {}
-  } = {...weather}
+  const { data: weather, isLoading } = useWeather({
+    key: apiKey,
+    lang,
+    ...coordinates,
+  });
 
   // Try to find a forecast if event date was specified
-  const forecast = eventDate && weather?.forecast.find(weather => dayjs.unix(weather.date).startOf("day").isSame(eventDate))
-  if (forecast) {
-    temperature.current = forecast.temperature.max
-    icon = forecast.icon
-    date = forecast.date
-  }
+  const forecast = weather?.forecast.find((weather) =>
+    isSameDay(weather.date, new Date(eventDate))
+  );
 
-  return (
+  const date = forecast?.date ?? weather?.current?.date;
+  const icon = forecast?.icon ?? weather?.current?.icon;
+  const temperature =
+    forecast?.temperature?.max ?? weather?.current?.temperature?.current;
+
+  const bgColor = "#24B5E1";
+
+  return !weather || isLoading ? (
+    <LoadingBox color={bgColor} />
+  ) : (
     <WeatherCard
-      loading={isLoading}
-      temperature={temperature.current}
+      temperature={temperature || 0}
       location={coordinates?.name ?? location}
-      color="#24B5E1"
-      date={formatDate(date, lang)}
-      time={time}
+      color={bgColor}
+      date={dateFormat(date!, lang)}
+      time={timeFormat(time, lang)}
       icon={icon}
     ></WeatherCard>
   );
-
 };

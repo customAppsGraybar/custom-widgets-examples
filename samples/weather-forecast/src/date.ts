@@ -10,34 +10,33 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { format } from 'date-fns';
-import { enUS, de } from 'date-fns/locale';
+import { format, parse } from "date-fns";
+import { enUS, de } from "date-fns/locale";
 
-const supportedLocales = [enUS, de]
+const supportedLocales = [enUS, de];
+
+const findLocale = (code?: string) => (locale: Locale) => code === locale.code;
+const getLocale = (code?: string): Locale =>
+  supportedLocales.find(findLocale(code)) || enUS;
+
 /**
  * Formatting the time to a localized format.
  *
- * @param {Date} dateInput
+ * @param {number|Date} dateInput
  * @param {Locale} userLocale
  */
-export function dateFormat (dateInput : Date, userLocale = enUS) {
-    if (supportedLocales.includes(userLocale)) {
-        return format(dateInput, 'P', { locale: userLocale })
-    } else {
-        return format(dateInput, 'P', { locale: enUS })
-    }
+export function dateFormat(dateInput: number | Date, userLocale?: string) {
+  return format(dateInput, "P", { locale: getLocale(userLocale) });
 }
 
 /**
  * Formatting the time to a localized format.
  *
- * @param {Date} dateInput
+ * @param {number} dateInput
  * @param {Locale} userLocale
  */
-export function timeFormat (dateInput: Date, userLocale = enUS) {
-    if (supportedLocales.includes(userLocale)) {
-        return format(dateInput, 'p', { locale: userLocale })
-    } else {
-        return format(dateInput, 'p', { locale: enUS })
-    }
+export function timeFormat(dateInput: string, userLocale?: string) {
+  return format(parse(dateInput, "HH:mm", 0), "p", {
+    locale: getLocale(userLocale),
+  });
 }

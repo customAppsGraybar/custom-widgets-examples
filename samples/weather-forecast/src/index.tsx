@@ -49,14 +49,7 @@ const factory: BlockFactory = (BaseBlockClass, _widgetApi) => {
     }
 
     public renderBlock(container: HTMLElement): void {
-      ReactDOM.render(
-        <WeatherForecast
-          {...{
-            ...this.props,
-          }}
-        />,
-        container
-      );
+      ReactDOM.render(<WeatherForecast {...this.props} />, container);
     }
 
     /**

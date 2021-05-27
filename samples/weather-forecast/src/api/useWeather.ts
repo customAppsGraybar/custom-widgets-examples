@@ -24,10 +24,10 @@ type ForeCastReport = CommonData & {
   };
 };
 
-const mapCurrent = (
-  { weather: [w], ...day }: CurrentWeather,
-  lang: string
-): CurrentReport => {
+const mapCurrent = ({
+  weather: [w],
+  ...day
+}: CurrentWeather): CurrentReport => {
   return {
     date: day.dt,
     description: w.description,
@@ -40,31 +40,30 @@ const mapCurrent = (
   };
 };
 
-const mapForecast =
-  (lang: string) =>
-  ({ weather: [w], ...forecast }: DayReport): ForeCastReport => ({
-    date: forecast.dt,
-    description: w.description,
-    icon: getIcon(w.icon),
-    temperature: {
-      min: forecast.temp.min,
-      max: forecast.temp.max,
-    },
-    wind: forecast.wind_speed,
-    humidity: forecast.humidity,
-  });
+const mapForecast = ({
+  weather: [w],
+  ...forecast
+}: DayReport): ForeCastReport => ({
+  date: forecast.dt,
+  description: w.description,
+  icon: getIcon(w.icon),
+  temperature: {
+    min: forecast.temp.min,
+    max: forecast.temp.max,
+  },
+  wind: forecast.wind_speed,
+  humidity: forecast.humidity,
+});
 
 export type MappedWeatherReport = {
   current: CurrentReport;
   forecast: ForeCastReport[];
 };
 
-const mapData =
-  (lang: string) =>
-  ({ daily, current }: WeatherReport): MappedWeatherReport => ({
-    current: mapCurrent(current, lang),
-    forecast: daily.map(mapForecast(lang)),
-  });
+const mapData = ({ daily, current }: WeatherReport): MappedWeatherReport => ({
+  current: mapCurrent(current),
+  forecast: daily.map(mapForecast),
+});
 
 type ForecastOptions = {
   units?: "standard" | "metric" | "imperial";
@@ -86,7 +85,7 @@ const getWeather = async ({
     : axios
         .get<WeatherReport>(endpoint, { params })
         .then(({ data }) => data)
-        .then(mapData(lang));
+        .then(mapData);
 };
 
 export default function useWeather(
