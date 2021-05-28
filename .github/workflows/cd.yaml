@@ -30,9 +30,10 @@ jobs:
 
       - name: Prepare Deployment
         run: |
-          mkdir samples/deploy
+          mkdir -p samples/deploy/icons
           cp samples/netlify.toml samples/deploy/
           cp samples/weather-forecast/dist/* samples/deploy/
+          cp samples/weather-forecast/resources/weather-forecast.svg samples/deploy/icons/
 
       - name: Publish
         uses: netlify/actions/cli@master
