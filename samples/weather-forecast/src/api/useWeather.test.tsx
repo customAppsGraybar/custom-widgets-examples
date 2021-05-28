@@ -64,13 +64,13 @@ describe("useWeather", () => {
       },
     });
     expect(result.current.data?.current).toMatchObject({
-      date: "Thu 20 May",
+      date: 1621490142,
       description: "scattered clouds",
       humidity: 90,
       temperature: {
-        current: "282",
+        current: 282.14,
       },
-      wind: "1",
+      wind: 0.89,
     });
 
     expect(result.current.data?.forecast).toHaveLength(8);

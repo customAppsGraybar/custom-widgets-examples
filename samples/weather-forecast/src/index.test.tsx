@@ -12,17 +12,34 @@
  */
 
 import { screen } from "@testing-library/dom";
+import axios, { AxiosRequestConfig } from "axios";
 
 import "../dev/bootstrap";
 import "./index";
 
+import { weather, city } from "./api/mockData";
+
+const mockAxios = jest.spyOn(axios, "get");
+
 describe("Widget test", () => {
-  it("should render the widget", () => {
+  it("should render the widget", async () => {
+
+    mockAxios.mockImplementation((url: string, config?: AxiosRequestConfig): Promise<unknown> => {
+      if (url.match("//api.openweathermap.org/geo/1.0/direct")) {
+        return Promise.resolve({ data: city })
+      } else {
+        return Promise.resolve({ data: weather })
+      }
+    })
+
     const widget = document.createElement("weather-forecast");
-    widget.setAttribute("message", "World");
+
+    widget.setAttribute("apikey", "123");
+    widget.setAttribute("date", "2001-01-01");
+    widget.setAttribute("time", "11:00");
+    widget.setAttribute("location", "Chemnitz");
     document.body.appendChild(widget);
 
-    expect(screen.getByText(/Hello World/)).toBeInTheDocument();
-    expect(screen.getByText(/en_US/)).toBeInTheDocument();
+    expect(await screen.findByText(/Chemnitz/)).toBeInTheDocument();
   });
 });
