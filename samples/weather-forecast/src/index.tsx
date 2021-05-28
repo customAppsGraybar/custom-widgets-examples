@@ -83,7 +83,7 @@ const blockDefinition: BlockDefinition = {
   blockLevel: "block",
   configurationSchema: configurationSchema,
   uiSchema: uiSchema,
-  label: "Weather Forecast",
+  label: "Weather",
   iconUrl: "https://example-widget.staffbase.com/icons/weather-forecast.png",
 };
 
