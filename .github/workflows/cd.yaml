@@ -37,10 +37,20 @@ jobs:
           cp samples/weather-forecast/dist/* samples/deploy/
           cp samples/weather-forecast/resources/weather-forecast.svg samples/deploy/icons/
 
-      - name: Publish
+      - name: Publish to Production
+        if: github.base_ref == 'main'
         uses: netlify/actions/cli@master
         with:
           args: deploy --prod --dir=samples/deploy
         env:
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+
+      - name: Publish to DevelopmentPreview
+        if: github.event.label.name == 'dev'
+        uses: netlify/actions/cli@master
+        with:
+          args: deploy --prod --dir=samples/deploy/
+        env:
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID_DEV }}
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN_DEV }}
