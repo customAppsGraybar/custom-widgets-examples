@@ -13,6 +13,7 @@
 
 import React, { FunctionComponent } from "react";
 import CSS from "csstype";
+import { useMediaQuery } from "../../hooks/MediaQueryHook";
 
 export interface CardProperties {
   color: string;
@@ -32,5 +33,28 @@ export const Card: FunctionComponent<CardProperties> = (props) => {
     backgroundColor: props.color,
   };
 
-  return <div style={cardStyle}>{props.children}</div>;
-};
+    const limitedDeviceSize = useMediaQuery('(max-width: 25rem)');
+
+    const cardStyle = (limitedDeviceSize: Boolean): CSS.Properties => {
+        return {
+            display: "block",
+            color: "white",
+            boxShadow: "0 0 8px 0 rgba(0, 0, 0, 0.15)",
+            borderRadius: "0.5rem",
+            height: "14rem",
+            minWidth: limitedDeviceSize ? "0" : "25rem",
+            maxWidth: "25rem",
+            fontFamily: "Open Sans",
+            fontStyle: "normal",
+            position: "relative",
+            backgroundColor: props.color,
+        } as CSS.Properties;
+    };
+
+    return (
+        <div style={cardStyle(limitedDeviceSize)}>
+            {props.children}
+        </div>
+    );
+}
+}

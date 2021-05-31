@@ -37,12 +37,16 @@ export const ContentBox: FunctionComponent<ContentBoxProperties> = (props) => {
   };
 
   const temperatureValueStyle: CSS.Properties = {
+    margin: "0",
+    padding: "0",    
     fontSize: "2.6rem",
     fontWeight: "bold",
     marginRight: "1rem",
   };
 
   const alternateDateValueStyle: CSS.Properties = {
+    margin: "0",
+    padding: "0",    
     fontSize: "1.5rem",
     fontWeight: "lighter",
   };
@@ -54,12 +58,18 @@ export const ContentBox: FunctionComponent<ContentBoxProperties> = (props) => {
   };
 
   const infoLineValueStyle: CSS.Properties = {
+    margin: "0",
+    padding: "0",    
+
     fontSize: "1.125rem",
     fontWeight: "normal",
     lineHeight: "1.7rem",
   };
 
   const infoLineValueBoldStyle: CSS.Properties = {
+    margin: "0",
+    padding: "0",    
+
     fontWeight: "bold",
     fontSize: "1.5rem",
     lineHeight: "2rem",
