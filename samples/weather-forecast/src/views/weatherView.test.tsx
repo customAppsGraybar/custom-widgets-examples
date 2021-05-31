@@ -11,9 +11,10 @@
  * limitations under the License.
  */
 
-export type CityReport = {
-  lat: number;
-  lon: number;
-  name: string;
-  local_names: { [key: string]: string };
-};
+/* import React from "react";
+ * import { render, screen } from "@testing-library/react";
+ * import { WeatherView } from "./weatherView";
+ *
+ * describe("WeatherView", () => {
+ *   it("", () => {});
+ * }); */

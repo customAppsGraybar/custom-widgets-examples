@@ -1,4 +1,17 @@
-import React from "react";
+/*!
+ * Copyright 2021, Staffbase GmbH and contributors.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+import React, { FunctionComponent } from "react";
 import CSS from "csstype";
 import Info from "../Icons/info.svg";
 
@@ -15,7 +28,7 @@ export interface ContentBoxProperties {
   location?: string;
 }
 
-export const ContentBox: React.FC<ContentBoxProperties> = (props) => {
+export const ContentBox: FunctionComponent<ContentBoxProperties> = (props) => {
   const contentStyle: CSS.Properties = {
     display: "flex",
     flexDirection: "column",
@@ -76,7 +89,11 @@ export const ContentBox: React.FC<ContentBoxProperties> = (props) => {
 
   return (
     <>
-      <div style={infoButtonStyle} onClick={props.onInfoButtonClick}>
+      <div
+        role="button"
+        style={infoButtonStyle}
+        onClick={props.onInfoButtonClick}
+      >
         <Info />
       </div>
       <div style={contentStyle}>
@@ -92,7 +109,8 @@ export const ContentBox: React.FC<ContentBoxProperties> = (props) => {
         <div style={bottomInfoStyle}>
           <div>
             <p style={infoLineValueStyle}>
-              {props.time} · {props.location}
+              {props.time && props.time + " · "}
+              {props.location}
             </p>
           </div>
           <div>

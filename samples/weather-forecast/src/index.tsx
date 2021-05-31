@@ -1,5 +1,5 @@
 /*!
- * Copyright 2020, Staffbase GmbH and contributors.
+ * Copyright 2021, Staffbase GmbH and contributors.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -83,7 +83,8 @@ const blockDefinition: BlockDefinition = {
   blockLevel: "block",
   configurationSchema: configurationSchema,
   uiSchema: uiSchema,
-  label: "Weather Forecast",
+  label: "Weather",
+  iconUrl: "https://example-widget.staffbase.com/icons/weather-forecast.svg",
 };
 
 /**

@@ -1,8 +1,21 @@
-import React, { useState } from "react";
-import CSS from "csstype";
+/*!
+ * Copyright 2021, Staffbase GmbH and contributors.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+import React, { useState, FunctionComponent } from "react";
 import { WeatherIcon } from "api/weatherIcon";
 import { InfoBox } from "../InfoBox";
 import { ContentBox } from "../ContentBox";
+import { Card } from "../Card";
 
 /**
  * React Component
@@ -16,20 +29,9 @@ export interface WeatherCardProperties {
   icon?: WeatherIcon;
 }
 
-export const WeatherCard: React.FC<WeatherCardProperties> = (props) => {
-  const cardStyle: CSS.Properties = {
-    display: "block",
-    color: "white",
-    boxShadow: "0 0 8px 0 rgba(0, 0, 0, 0.15)",
-    borderRadius: "0.5rem",
-    height: "14rem",
-    minWidth: "25rem",
-    fontFamily: "Open Sans",
-    fontStyle: "normal",
-    position: "relative",
-    backgroundColor: props.color,
-  };
-
+export const WeatherCard: FunctionComponent<WeatherCardProperties> = (
+  props
+) => {
   const [displayInfo, setDisplayInfo] = useState(false);
 
   const onInfoBtnClick = (e: React.SyntheticEvent) => {
@@ -37,14 +39,14 @@ export const WeatherCard: React.FC<WeatherCardProperties> = (props) => {
     setDisplayInfo(!displayInfo);
   };
 
-  const kelvin = 273.15;
-  const temp = props.temperature ?? kelvin;
+  const offsetToKelvin = 273.15;
+  const temp = props.temperature ?? offsetToKelvin;
   const alternateTemperature =
-    ((temp - kelvin) * (9 / 5) + 32).toFixed(0) + "° F";
-  const temperature = (temp - kelvin).toFixed(0) + "° C";
+    ((temp - offsetToKelvin) * (9 / 5) + 32).toFixed(0) + "° F";
+  const temperature = (temp - offsetToKelvin).toFixed(0) + "° C";
 
   return (
-    <div style={cardStyle}>
+    <Card color={props.color}>
       <ContentBox
         {...props}
         onInfoButtonClick={onInfoBtnClick}
@@ -52,6 +54,6 @@ export const WeatherCard: React.FC<WeatherCardProperties> = (props) => {
         alternateTemperature={alternateTemperature}
       />
       {displayInfo && <InfoBox onCloseClick={onInfoBtnClick} />}
-    </div>
+    </Card>
   );
 };

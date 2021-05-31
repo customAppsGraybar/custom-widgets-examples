@@ -1,5 +1,5 @@
 # staffbase / weather-forecast
-
+[![Netlify Status](https://api.netlify.com/api/v1/badges/2b14f7fe-4301-48c6-8f53-94bc3b0254f8/deploy-status)](https://app.netlify.com/sites/example-widget-staffbase/deploys)
 ## Installation
 
 ```bash

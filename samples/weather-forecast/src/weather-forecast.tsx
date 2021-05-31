@@ -1,5 +1,5 @@
 /*!
- * Copyright 2020, Staffbase GmbH and contributors.
+ * Copyright 2021, Staffbase GmbH and contributors.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -13,7 +13,6 @@
 
 import React, { ReactElement } from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
-import { ReactQueryDevtools } from "react-query/devtools";
 import { WeatherView } from "./views/weatherView";
 import { BlockAttributes } from "widget-sdk";
 
@@ -36,12 +35,9 @@ export const WeatherForecast = ({
   location,
   contentLanguage,
 }: WeatherForecastProps): ReactElement => {
-  // geo api => lat,lon
-  // weather api
   return (
     <QueryClientProvider client={queryClient}>
       <WeatherView {...{ apikey, date, time, location, contentLanguage }} />
-      <ReactQueryDevtools initialIsOpen />
     </QueryClientProvider>
   );
 };
