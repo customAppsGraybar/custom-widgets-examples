@@ -18,7 +18,7 @@ import useCity from "../api/useCity";
 import useWeather from "../api/useWeather";
 import { LoadingBox } from "../components/LoadingBox";
 import { WeatherCard } from "../components/WeatherCard";
-import { dateFormat, timeFormat } from "../date";
+import { dateFormat } from "../date";
 
 /**
  * React Component
@@ -37,7 +37,6 @@ export const WeatherView: FunctionComponent<WeatherForecastProps> = ({
   location,
   contentLanguage: lang,
 }: WeatherForecastProps) => {
-
   // Fallback if apikey or location in configuration form was not filled out
   const apiKey = key ?? "d23e3a76aafeab7260e4e16cd91c73ad";
 
@@ -60,7 +59,7 @@ export const WeatherView: FunctionComponent<WeatherForecastProps> = ({
 
   const date = new Date((forecast?.date ?? weather?.current?.date)! * 1000);
   const icon = forecast?.icon ?? weather?.current?.icon;
-  const temperature = 
+  const temperature =
     forecast?.temperature?.max ?? weather?.current?.temperature?.current;
 
   const bgColor = "#24B5E1";

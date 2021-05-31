@@ -11,37 +11,31 @@
  * limitations under the License.
  */
 
-import React from 'react';
-import { render, screen } from '@testing-library/react'
-import { WeatherCard } from '.'
+import React from "react";
+import { render, screen } from "@testing-library/react";
+import { WeatherCard } from ".";
 
-describe('WeatherCard', () => {
-    it('Should convert the given temperature from Kelvin to Celsius and Fahrenheit', () => {
+describe("WeatherCard", () => {
+  it("Should convert the given temperature from Kelvin to Celsius and Fahrenheit", () => {
+    const givenTemperature = 282.58;
 
-        const givenTemperature = 282.58
+    render(<WeatherCard color="#FF" temperature={givenTemperature} />);
 
-        render(<WeatherCard
-            color="#FF"
-            temperature={givenTemperature}
-        />)
+    expect(screen.getByText("9° C")).toBeInTheDocument();
+    expect(screen.getByText("49° F")).toBeInTheDocument();
+  });
 
-        expect(screen.getByText("9° C")).toBeInTheDocument()
-        expect(screen.getByText("49° F")).toBeInTheDocument()
-    })
+  it("Should display the given information", () => {
+    render(
+      <WeatherCard
+        color="#FF"
+        date="Blue Monday"
+        time="After Dinner"
+        location="Chemnitz"
+      />
+    );
 
-    it('Should display the given information', () => {
-
-        const givenTemperature = 282.58
-
-        render(<WeatherCard
-            color="#FF"
-            date="Blue Monday"
-            time="After Dinner"
-            location="Chemnitz"
-        />)
-
-        expect(screen.getByText("After Dinner · Chemnitz")).toBeInTheDocument()
-        expect(screen.getByText("Blue Monday")).toBeInTheDocument()
-
-    })
-})
+    expect(screen.getByText("After Dinner · Chemnitz")).toBeInTheDocument();
+    expect(screen.getByText("Blue Monday")).toBeInTheDocument();
+  });
+});

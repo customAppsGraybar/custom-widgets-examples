@@ -23,14 +23,15 @@ const mockAxios = jest.spyOn(axios, "get");
 
 describe("WeatherForecast", () => {
   it("should render the component", async () => {
-    
-    mockAxios.mockImplementation((url: string, config?: AxiosRequestConfig): Promise<unknown> => {
-      if (url.match("//api.openweathermap.org/geo/1.0/direct")) {
-        return Promise.resolve({ data: city })
-      } else {
-        return Promise.resolve({ data: weather })
+    mockAxios.mockImplementation(
+      (url: string, _config?: AxiosRequestConfig): Promise<unknown> => {
+        if (url.match("//api.openweathermap.org/geo/1.0/direct")) {
+          return Promise.resolve({ data: city });
+        } else {
+          return Promise.resolve({ data: weather });
+        }
       }
-    })
+    );
 
     const date = "2020-01-01";
     const time = "01:00";

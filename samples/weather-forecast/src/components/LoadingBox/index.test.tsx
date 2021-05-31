@@ -11,15 +11,13 @@
  * limitations under the License.
  */
 
-import React from 'react';
-import { render, screen } from '@testing-library/react'
-import { LoadingBox } from '.'
+import React from "react";
+import { render, screen } from "@testing-library/react";
+import { LoadingBox } from ".";
 
-describe('LoadingBox', () => {
-    it('Should display loading label', () => {
-
-        render(<LoadingBox color="#FF" />)
-        expect(screen.getByText('Loading...')).toBeInTheDocument()
-        
-    })
-})
+describe("LoadingBox", () => {
+  it("Should display loading label", () => {
+    render(<LoadingBox color="#FF" />);
+    expect(screen.getByText("Loading...")).toBeInTheDocument();
+  });
+});

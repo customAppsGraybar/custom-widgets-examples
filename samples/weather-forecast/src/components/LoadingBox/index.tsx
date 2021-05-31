@@ -14,14 +14,13 @@
 import React from "react";
 import CSS from "csstype";
 
-import { Card } from '../Card'
+import { Card } from "../Card";
 
 export interface LoadingCardProperties {
   color: string;
 }
 
 export const LoadingBox: React.FC<LoadingCardProperties> = (props) => {
-
   const cardLoadingStyle: CSS.Properties = {
     display: "block",
     position: "absolute",

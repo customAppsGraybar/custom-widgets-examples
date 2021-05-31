@@ -11,25 +11,21 @@
  * limitations under the License.
  */
 
-import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react'
-import { InfoBox } from '.'
+import React from "react";
+import { render, screen, fireEvent } from "@testing-library/react";
+import { InfoBox } from ".";
 
-describe('InfoBox', () => {
-    it('Should display loading label and trigger close on click', () => {
+describe("InfoBox", () => {
+  it("Should display loading label and trigger close on click", () => {
+    const closeEvent = jest.fn();
 
-        const closeEvent = jest.fn()
+    render(<InfoBox onCloseClick={closeEvent} />);
 
-        render(<InfoBox 
-            onCloseClick={closeEvent}
-        />)
+    expect(screen.getByText("Weather Icon Set")).toBeInTheDocument();
 
-        expect(screen.getByText('Weather Icon Set')).toBeInTheDocument()
+    const closeBtn = screen.getByRole("button");
+    fireEvent.click(closeBtn);
 
-        const closeBtn = screen.getByRole('button')
-        fireEvent.click(closeBtn)
-
-        expect(closeEvent).toBeCalled()
-        
-    })
-})
+    expect(closeEvent).toBeCalled();
+  });
+});

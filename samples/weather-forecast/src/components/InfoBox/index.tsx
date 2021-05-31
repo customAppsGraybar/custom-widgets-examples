@@ -59,16 +59,21 @@ export const InfoBox: React.FC<InfoBoxProperties> = (props) => {
   return (
     <div style={infoBoxStyle}>
       <div style={infoBoxContent}>
-        <a href="https://www.figma.com/community/file/823259031807888076/Component-Based-Weather-Icon-Sets" style={infoBoxContentLink}>Weather Icon Set</a> by Osman Talha (Licensed under CC BY 4.0) and
-        adapted by Staffbase.
+        <a
+          href="https://www.figma.com/community/file/823259031807888076/Component-Based-Weather-Icon-Sets"
+          style={infoBoxContentLink}
+        >
+          Weather Icon Set
+        </a>{" "}
+        by Osman Talha (Licensed under CC BY 4.0) and adapted by Staffbase.
         <br />
         <br />
         Contains information from openweathermap.org, which is made available
         here under the Open Database License (ODbL).
       </div>
       <div role="button" style={infoButtonStyle} onClick={props.onCloseClick}>
-        <Cross/>
+        <Cross />
       </div>
     </div>
-  )
-}
+  );
+};

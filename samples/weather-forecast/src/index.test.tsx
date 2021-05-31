@@ -23,14 +23,15 @@ const mockAxios = jest.spyOn(axios, "get");
 
 describe("Widget test", () => {
   it("should render the widget", async () => {
-
-    mockAxios.mockImplementation((url: string, config?: AxiosRequestConfig): Promise<unknown> => {
-      if (url.match("//api.openweathermap.org/geo/1.0/direct")) {
-        return Promise.resolve({ data: city })
-      } else {
-        return Promise.resolve({ data: weather })
+    mockAxios.mockImplementation(
+      (url: string, _config?: AxiosRequestConfig): Promise<unknown> => {
+        if (url.match("//api.openweathermap.org/geo/1.0/direct")) {
+          return Promise.resolve({ data: city });
+        } else {
+          return Promise.resolve({ data: weather });
+        }
       }
-    })
+    );
 
     const widget = document.createElement("weather-forecast");
 

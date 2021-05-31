@@ -89,30 +89,35 @@ export const ContentBox: FunctionComponent<ContentBoxProperties> = (props) => {
 
   return (
     <>
-      <div role="button" style={infoButtonStyle} onClick={props.onInfoButtonClick}>
-          <Info/>
+      <div
+        role="button"
+        style={infoButtonStyle}
+        onClick={props.onInfoButtonClick}
+      >
+        <Info />
       </div>
       <div style={contentStyle}>
         <div style={topLineStyle}>
-            <div style={temperatureStyle}>
-                <h1 style={temperatureValueStyle}>{props.temperature}</h1>
-                <h2 style={alternateDateValueStyle}>
-                {props.alternateTemperature}
-                </h2>
-            </div>
-            <WeatherGraphic icon={props.icon} />
+          <div style={temperatureStyle}>
+            <h1 style={temperatureValueStyle}>{props.temperature}</h1>
+            <h2 style={alternateDateValueStyle}>
+              {props.alternateTemperature}
+            </h2>
+          </div>
+          <WeatherGraphic icon={props.icon} />
         </div>
         <div style={bottomInfoStyle}>
           <div>
             <p style={infoLineValueStyle}>
-              {props.time && props.time + " · "}{props.location}
+              {props.time && props.time + " · "}
+              {props.location}
             </p>
           </div>
           <div>
             <p style={infoLineValueBoldStyle}>{props.date}</p>
           </div>
         </div>
-      </div> 
+      </div>
     </>
   );
 };
