@@ -26,7 +26,7 @@ const getLocale = (code?: string): Locale =>
  * @param {Locale} userLocale
  */
 export function dateFormat(dateInput: number | Date, userLocale?: string) {
-  return format(dateInput, "P", { locale: getLocale(userLocale) });
+  return format(dateInput, "cccc, P", { locale: getLocale(userLocale) });
 }
 
 /**

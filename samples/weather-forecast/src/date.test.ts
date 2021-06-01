@@ -19,15 +19,15 @@ const date = new Date(2021, 3, 22, 0, 0);
 
 describe("dateFormat()", () => {
   it("should format the date for DE", () => {
-    expect(dateFormat(date, deLocale)).toBe("22.04.2021");
+    expect(dateFormat(date, deLocale)).toBe("Donnerstag, 22.04.2021");
   });
 
   it("should format the date for fallback as US", () => {
-    expect(dateFormat(date)).toBe("04/22/2021");
+    expect(dateFormat(date)).toBe("Thursday, 04/22/2021");
   });
 
   it("should format the date for US when the lang is not supported", () => {
-    expect(dateFormat(date, frLocale)).toBe("04/22/2021");
+    expect(dateFormat(date, frLocale)).toBe("Thursday, 04/22/2021");
   });
 });
 
