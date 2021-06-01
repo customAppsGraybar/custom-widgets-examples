@@ -15,6 +15,8 @@ import React, { FunctionComponent } from "react";
 import CSS from "csstype";
 import Info from "../Icons/info.svg";
 
+
+import { useMediaQuery } from "../../hooks/MediaQueryHook";
 import { WeatherIcon } from "api/weatherIcon";
 import { WeatherGraphic } from "../Icons/weather-icons/WeatherGraphic";
 
@@ -29,6 +31,9 @@ export interface ContentBoxProperties {
 }
 
 export const ContentBox: FunctionComponent<ContentBoxProperties> = (props) => {
+
+  const limitedDeviceSize = useMediaQuery('(max-width: 25rem)');
+
   const contentStyle: CSS.Properties = {
     display: "flex",
     flexDirection: "column",
@@ -47,7 +52,7 @@ export const ContentBox: FunctionComponent<ContentBoxProperties> = (props) => {
   const alternateDateValueStyle: CSS.Properties = {
     margin: "0",
     padding: "0",    
-    fontSize: "1.5rem",
+    fontSize: "1.25rem",
     fontWeight: "lighter",
   };
 
@@ -70,7 +75,7 @@ export const ContentBox: FunctionComponent<ContentBoxProperties> = (props) => {
     margin: "0",
     padding: "0",    
 
-    fontWeight: "bold",
+    fontWeight: "600",
     fontSize: "1.5rem",
     lineHeight: "2rem",
   };
@@ -97,6 +102,8 @@ export const ContentBox: FunctionComponent<ContentBoxProperties> = (props) => {
     cursor: "pointer",
   };
 
+  const iconSize = limitedDeviceSize ? 64 : 88;
+
   return (
     <>
       <div
@@ -114,7 +121,7 @@ export const ContentBox: FunctionComponent<ContentBoxProperties> = (props) => {
               {props.alternateTemperature}
             </h2>
           </div>
-          <WeatherGraphic icon={props.icon} />
+          <WeatherGraphic icon={props.icon} size={iconSize} />
         </div>
         <div style={bottomInfoStyle}>
           <div>

@@ -46,14 +46,14 @@ export const configurationSchema: JSONSchema7 = {
 export const uiSchema: UiSchema = {
   location: {
     "ui:help":
-      "Set the location of the event. You might use a country identifier to narrow down the result (i.E. Chemnitz,DE)",
+      "Set the location of the event. You might use a country identifier to narrow down the result (i.E. Chemnitz,DE).",
   },
   date: {
-    "ui:help": "Please enter the date of the event",
+    "ui:help": "Enter the date of the event. Leave empty to show the current weather information.",
     "ui:widget": "date",
   },
   time: {
-    "ui:help": "Please enter the time of the event",
+    "ui:help": "Enter the time of the event.",
   },
   apikey: {
     "ui:help":

@@ -62,6 +62,8 @@ export const InfoBox: React.FC<InfoBoxProperties> = (props) => {
         <a
           href="https://www.figma.com/community/file/823259031807888076/Component-Based-Weather-Icon-Sets"
           style={infoBoxContentLink}
+          target="_blank"
+          rel="noreferrer"
         >
           Weather Icon Set
         </a>{" "}

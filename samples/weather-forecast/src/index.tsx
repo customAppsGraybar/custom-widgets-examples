@@ -79,7 +79,7 @@ const factory: BlockFactory = (BaseBlockClass, _widgetApi) => {
 const blockDefinition: BlockDefinition = {
   name: "weather-forecast",
   factory: factory,
-  attributes: ["location", "date", "time", "apikey"],
+  attributes: ["content-language", "widget-title", "on-card", "location", "date", "time", "apikey"],
   blockLevel: "block",
   configurationSchema: configurationSchema,
   uiSchema: uiSchema,
