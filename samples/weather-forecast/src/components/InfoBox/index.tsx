@@ -32,6 +32,11 @@ export const InfoBox: React.FC<InfoBoxProperties> = (props) => {
     backdropFilter: "blur(10px)",
   };
 
+  const infoBoxWithBackdropFilter = {
+    "-webkit-backdrop-filter": "blur(10px)",
+    ...infoBoxStyle,
+  }
+
   const infoBoxContent: CSS.Properties = {
     color: "black",
     position: "relative",
@@ -57,7 +62,7 @@ export const InfoBox: React.FC<InfoBoxProperties> = (props) => {
   };
 
   return (
-    <div style={infoBoxStyle}>
+    <div style={infoBoxWithBackdropFilter}>
       <div style={infoBoxContent}>
         <a
           href="https://www.figma.com/community/file/823259031807888076/Component-Based-Weather-Icon-Sets"
