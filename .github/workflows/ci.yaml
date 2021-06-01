@@ -1,0 +1,26 @@
+name: CI Tests
+env:
+  NODE_VERISON: 14
+on:
+  push:
+    paths-ignore:
+      - '**.md'
+
+jobs:
+  executing-tests:
+    runs-on: ubuntu-20.04
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Use Node JS
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Install Yarn Dependencies
+        run: yarn install --cwd samples/weather-forecast --frozen-lockfile
+
+      - name: Run Tests
+        run: yarn --cwd samples/weather-forecast test
