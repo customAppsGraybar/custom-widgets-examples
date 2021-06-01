@@ -7,8 +7,7 @@ on:
       - '**.md'
 
 jobs:
-  build-and-deploy:
-    if: github.event.label.name == 'dev' || github.base_ref == 'main'
+  executing-tests:
     runs-on: ubuntu-20.04
 
     steps:
