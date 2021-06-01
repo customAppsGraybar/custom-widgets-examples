@@ -27,52 +27,62 @@ import Thunderstorms from "./icons/thunderstorms.svg";
 import { WeatherIcon } from "api/weatherIcon";
 
 export interface WeatherGraphicProperties {
+  size?: number;
   icon?: WeatherIcon;
 }
 
 export const WeatherGraphic: React.FC<WeatherGraphicProperties> = (props) => {
+
   const weatherIconStyle: CSS.Properties = {
     marginLeft: "auto",
     height: "6rem",
     filter: "drop-shadow(0px 10px 10px rgba(0, 0, 0, 0.2))",
   };
 
-  let icon: JSX.Element;
+  var icon: JSX.Element;
+  var size = `${props.size ? props.size : 48 }px`;
+
+  const iconProps = {
+    width: size,
+    height: size,
+    viewBox: "0 0 48 48",
+  }
+
   switch (props.icon) {
     case "rain":
-      icon = <Rain />;
+      icon = <Rain {...iconProps} />;
       break;
 
     case "fog":
-      icon = <Fog />;
+      icon = <Fog {...iconProps} />;
       break;
 
     case "thunderstorms":
-      icon = <Thunderstorms />;
+      icon = <Thunderstorms {...iconProps} />;
       break;
 
     case "partly-cloudy":
-      icon = <PartlyCloudy />;
+      icon = <PartlyCloudy {...iconProps} />;
       break;
 
     case "clear-cloudy":
-      icon = <ClearCloudy />;
+      icon = <ClearCloudy {...iconProps} />;
       break;
 
     case "snow":
-      icon = <Snow />;
+      icon = <Snow {...iconProps} />;
       break;
 
     case "cloudy":
-      icon = <Cloudy />;
+      icon = <Cloudy {...iconProps} />;
       break;
 
     case "showers":
-      icon = <Showers />;
+      icon = <Showers {...iconProps} />;
       break;
 
     default:
-      icon = <Sunny />;
+      icon = <Sunny {...iconProps} />;
       break;
   }
 
