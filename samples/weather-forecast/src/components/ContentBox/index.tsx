@@ -69,6 +69,10 @@ export const ContentBox: FunctionComponent<ContentBoxProperties> = (props) => {
     fontSize: "1.125rem",
     fontWeight: "normal",
     lineHeight: "1.7rem",
+
+    whiteSpace: "nowrap",
+    overflow: "hidden",
+    textOverflow: "ellipsis",
   };
 
   const infoLineValueBoldStyle: CSS.Properties = {

@@ -38,7 +38,11 @@ export const WeatherView: FunctionComponent<WeatherForecastProps> = ({
   contentLanguage: lang,
 }: WeatherForecastProps) => {
   // Fallback if apikey or location in configuration form was not filled out
-  const apiKey = key ?? "d23e3a76aafeab7260e4e16cd91c73ad";
+
+  var apiKey = "d23e3a76aafeab7260e4e16cd91c73ad";
+  if (key && key !== 'undefined' && key.trim() !== '') {
+    apiKey = key
+  }
 
   const { data: coordinates } = useCity({
     key: apiKey,
