@@ -13,8 +13,7 @@
 
 import React, { FunctionComponent, useState } from "react";
 import CSS from "csstype";
-import useDimensions from "react-cool-dimensions";
-import { ResizeObserver } from "@juggle/resize-observer";
+import useDimensions from "../../hooks";
 
 export interface CardProperties {
   color: string;
@@ -26,7 +25,6 @@ export const Card: FunctionComponent<CardProperties> = (props) => {
     const [smallWidth, setSmallWidth] = useState(true);
 
     const { observe } = useDimensions<HTMLDivElement>({
-        polyfill: ResizeObserver,
         shouldUpdate: ({ width }) => {
             const sizeChanged = (smallWidth && (width >= smallWidthBreakpoint)) || (!smallWidth && (width < smallWidthBreakpoint))
 
@@ -37,6 +35,8 @@ export const Card: FunctionComponent<CardProperties> = (props) => {
             return sizeChanged
         }
     });
+
+    window.addEventListener('error', function(e) { console.log(e); });
 
     const cardStyle: CSS.Properties = {
         display: "block",

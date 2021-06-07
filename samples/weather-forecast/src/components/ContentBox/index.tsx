@@ -14,8 +14,7 @@
 import React, { FunctionComponent, useState } from "react";
 import CSS from "csstype";
 import Info from "../Icons/info.svg";
-import useDimensions from "react-cool-dimensions";
-import { ResizeObserver } from "@juggle/resize-observer";
+import useDimensions from "../../hooks";
 
 import { WeatherIcon } from "api/weatherIcon";
 import { WeatherGraphic } from "../Icons/weather-icons/WeatherGraphic";
@@ -36,7 +35,6 @@ export const ContentBox: FunctionComponent<ContentBoxProperties> = (props) => {
   const [smallWidth, setSmallWidth] = useState(true);
 
   const { observe } = useDimensions<HTMLDivElement>({
-      polyfill: ResizeObserver,
       shouldUpdate: ({ width }) => {
           const sizeChanged = (smallWidth && (width >= smallWidthBreakpoint)) || (!smallWidth && (width < smallWidthBreakpoint))
 

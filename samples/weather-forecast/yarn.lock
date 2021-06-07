@@ -1207,11 +1207,6 @@
     "@types/yargs" "^15.0.0"
     chalk "^4.0.0"
 
-"@juggle/resize-observer@^3.3.1":
-  version "3.3.1"
-  resolved "https://registry.yarnpkg.com/@juggle/resize-observer/-/resize-observer-3.3.1.tgz#b50a781709c81e10701004214340f25475a171a0"
-  integrity sha512-zMM9Ds+SawiUkakS7y94Ymqx+S0ORzpG3frZirN3l+UlXUmSUR7hF4wxCVqW+ei94JzV5kt0uXBcoOEAuiydrw==
-
 "@material-ui/core@^4.11.3":
   version "4.11.4"
   resolved "https://registry.yarnpkg.com/@material-ui/core/-/core-4.11.4.tgz#4fb9fe5dec5dcf780b687e3a40cff78b2b9640a4"
@@ -6389,11 +6384,6 @@ react-app-polyfill@^1.0.4:
     raf "^3.4.1"
     regenerator-runtime "^0.13.3"
     whatwg-fetch "^3.0.0"
-
-react-cool-dimensions@^2.0.6:
-  version "2.0.6"
-  resolved "https://registry.yarnpkg.com/react-cool-dimensions/-/react-cool-dimensions-2.0.6.tgz#5ffbf39f2dfbfbcf65b7612d33f3739cbd56a723"
-  integrity sha512-Jn2l9Bb+GyrFKx4dmOeEX1yUjX3cAZohypjecGpp9Rq7ncOkpzkd0S88OHYr6yQQceG2ED8vEth5IjlnZPm7DA==
 
 react-dom@^16.13.1:
   version "16.14.0"
