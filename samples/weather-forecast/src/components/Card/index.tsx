@@ -11,9 +11,9 @@
  * limitations under the License.
  */
 
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, useState } from "react";
 import CSS from "csstype";
-import { useMediaQuery } from "../../hooks/MediaQueryHook";
+import useDimensions from "react-cool-dimensions";
 
 export interface CardProperties {
   color: string;
@@ -21,26 +21,35 @@ export interface CardProperties {
 
 export const Card: FunctionComponent<CardProperties> = (props) => {
 
-    const limitedDeviceSize = useMediaQuery('(max-width: 25rem)');
+    const smallWidthBreakpoint = 550;
+    const [smallWidth, setSmallWidth] = useState(true);
 
-    const cardStyle = (limitedDeviceSize: Boolean): CSS.Properties => {
-        return {
-            display: "block",
-            color: "white",
-            boxShadow: "0 0 8px 0 rgba(0, 0, 0, 0.15)",
-            borderRadius: "0.5rem",
-            height: "14rem",
-            minWidth: limitedDeviceSize ? "0" : "25rem",
-            maxWidth: "25rem",
-            fontFamily: "Open Sans",
-            fontStyle: "normal",
-            position: "relative",
-            backgroundColor: props.color,
-        } as CSS.Properties;
+    const { observe } = useDimensions<HTMLDivElement>({
+        shouldUpdate: ({ width }) => {
+            const sizeChanged = (smallWidth && (width >= smallWidthBreakpoint)) || (!smallWidth && (width < smallWidthBreakpoint))
+
+            if (sizeChanged) {
+                setSmallWidth(!smallWidth)
+            }
+
+            return sizeChanged
+        }
+    });
+
+    const cardStyle: CSS.Properties = {
+        display: "block",
+        color: "white",
+        boxShadow: "0 0 8px 0 rgba(0, 0, 0, 0.15)",
+        borderRadius: "0.5rem",
+        height: smallWidth ? "14rem" : "10rem",
+        fontFamily: "Open Sans",
+        fontStyle: "normal",
+        position: "relative",
+        backgroundColor: props.color,
     };
 
     return (
-        <div style={cardStyle(limitedDeviceSize)}>
+        <div style={cardStyle} ref={observe} >
             {props.children}
         </div>
     );

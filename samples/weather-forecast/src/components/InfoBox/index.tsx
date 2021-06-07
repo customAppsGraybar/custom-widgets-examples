@@ -29,11 +29,11 @@ export const InfoBox: React.FC<InfoBoxProperties> = (props) => {
     right: "0",
     borderRadius: "0.5rem",
     background: "rgba(255, 255, 255, 0.8)",
-    backdropFilter: "blur(10px)",
   };
 
   const infoBoxWithBackdropFilter = {
-    "-webkit-backdrop-filter": "blur(10px)",
+    backdropFilter: "blur(10px)",
+    WebkitBackdropFilter: "blur(10px)",
     ...infoBoxStyle,
   }
 

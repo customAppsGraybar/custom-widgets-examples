@@ -23,6 +23,7 @@
     "file-loader": "^6.2.0",
     "openweather-apis": "4.4.1",
     "react": "^16.13.1",
+    "react-cool-dimensions": "^2.0.6",
     "react-dom": "^16.13.1",
     "react-query": "3.16.0",
     "react-svg-loader": "^3.0.3",

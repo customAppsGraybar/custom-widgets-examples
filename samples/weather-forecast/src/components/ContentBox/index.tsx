@@ -11,12 +11,11 @@
  * limitations under the License.
  */
 
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, useState } from "react";
 import CSS from "csstype";
 import Info from "../Icons/info.svg";
+import useDimensions from "react-cool-dimensions";
 
-
-import { useMediaQuery } from "../../hooks/MediaQueryHook";
 import { WeatherIcon } from "api/weatherIcon";
 import { WeatherGraphic } from "../Icons/weather-icons/WeatherGraphic";
 
@@ -32,13 +31,28 @@ export interface ContentBoxProperties {
 
 export const ContentBox: FunctionComponent<ContentBoxProperties> = (props) => {
 
-  const limitedDeviceSize = useMediaQuery('(max-width: 25rem)');
+  const smallWidthBreakpoint = 495;
+  const [smallWidth, setSmallWidth] = useState(true);
+
+  const { observe } = useDimensions<HTMLDivElement>({
+      shouldUpdate: ({ width }) => {
+          const sizeChanged = (smallWidth && (width >= smallWidthBreakpoint)) || (!smallWidth && (width < smallWidthBreakpoint))
+
+          if (sizeChanged) {
+            setSmallWidth(!smallWidth)
+          }
+
+          return sizeChanged
+      }
+  });
+
 
   const contentStyle: CSS.Properties = {
     display: "flex",
-    flexDirection: "column",
+    flexDirection: smallWidth ? "column" : "row",
     padding: "2rem",
     height: "100%",
+    ...(!smallWidth && { justifyContent: "space-between"}),
   };
 
   const temperatureValueStyle: CSS.Properties = {
@@ -59,7 +73,8 @@ export const ContentBox: FunctionComponent<ContentBoxProperties> = (props) => {
   const bottomInfoStyle: CSS.Properties = {
     display: "flex",
     flexDirection: "column",
-    marginTop: "auto",
+    ...(!smallWidth && { justifyContent: "center"}),
+    ...(smallWidth && { marginTop: "auto" })
   };
 
   const infoLineValueStyle: CSS.Properties = {
@@ -73,6 +88,7 @@ export const ContentBox: FunctionComponent<ContentBoxProperties> = (props) => {
     whiteSpace: "nowrap",
     overflow: "hidden",
     textOverflow: "ellipsis",
+    maxWidth: "15rem",
   };
 
   const infoLineValueBoldStyle: CSS.Properties = {
@@ -82,12 +98,14 @@ export const ContentBox: FunctionComponent<ContentBoxProperties> = (props) => {
     fontWeight: "600",
     fontSize: "1.5rem",
     lineHeight: "2rem",
+    textOverflow: "ellipsis",
+    maxWidth: "15rem",
   };
 
   const topLineStyle: CSS.Properties = {
     display: "flex",
     flexDirection: "row",
-    alignItems: "flex-start",
+    alignItems: !smallWidth ? "center" : "flex-start",
   };
 
   const temperatureStyle: CSS.Properties = {
@@ -106,7 +124,7 @@ export const ContentBox: FunctionComponent<ContentBoxProperties> = (props) => {
     cursor: "pointer",
   };
 
-  const iconSize = limitedDeviceSize ? 64 : 88;
+  const iconSize = smallWidth ? 64 : 88;
 
   return (
     <>
@@ -117,7 +135,7 @@ export const ContentBox: FunctionComponent<ContentBoxProperties> = (props) => {
       >
         <Info />
       </div>
-      <div style={contentStyle}>
+      <div style={contentStyle} ref={observe}>
         <div style={topLineStyle}>
           <div style={temperatureStyle}>
             <h1 style={temperatureValueStyle}>{props.temperature}</h1>
@@ -125,7 +143,7 @@ export const ContentBox: FunctionComponent<ContentBoxProperties> = (props) => {
               {props.alternateTemperature}
             </h2>
           </div>
-          <WeatherGraphic icon={props.icon} size={iconSize} />
+          {smallWidth && (<WeatherGraphic icon={props.icon} size={iconSize} marginLeft="auto" />)}
         </div>
         <div style={bottomInfoStyle}>
           <div>
@@ -138,6 +156,8 @@ export const ContentBox: FunctionComponent<ContentBoxProperties> = (props) => {
             <p style={infoLineValueBoldStyle}>{props.date}</p>
           </div>
         </div>
+        {!smallWidth && (<WeatherGraphic icon={props.icon} size={iconSize} alignSelf="center" />)}
+
       </div>
     </>
   );
