@@ -55,7 +55,7 @@ export const WeatherView: FunctionComponent<WeatherForecastProps> = ({
     }
   });
 
-  var apiKey = undefined; // "d23e3a76aafeab7260e4e16cd91c73ad";
+  var apiKey = undefined;
   if (key && key !== 'undefined' && key.trim() !== '') {
     apiKey = key
   }
