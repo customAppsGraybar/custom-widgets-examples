@@ -12,13 +12,15 @@
  */
 
 import { isSameDay } from "date-fns";
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, useState } from "react";
 import { BlockAttributes } from "widget-sdk";
 import useCity from "../api/useCity";
 import useWeather from "../api/useWeather";
+import { ErrorBox } from "../components/ErrorBox";
 import { LoadingBox } from "../components/LoadingBox";
 import { WeatherCard } from "../components/WeatherCard";
 import { dateFormat } from "../date";
+import useDimensions from "../hooks";
 
 /**
  * React Component
@@ -37,47 +39,80 @@ export const WeatherView: FunctionComponent<WeatherForecastProps> = ({
   location,
   contentLanguage: lang,
 }: WeatherForecastProps) => {
-  // Fallback if apikey or location in configuration form was not filled out
 
-  var apiKey = "d23e3a76aafeab7260e4e16cd91c73ad";
+  const smallWidthBreakpoint = 616;
+  const [smallWidth, setSmallWidth] = useState(true);
+
+  const { observe } = useDimensions<HTMLDivElement>({
+    shouldUpdate: ({ width }) => {
+      const sizeChanged = (smallWidth && (width >= smallWidthBreakpoint)) || (!smallWidth && (width < smallWidthBreakpoint))
+
+      if (sizeChanged) {
+        setSmallWidth(!smallWidth)
+      }
+
+      return sizeChanged
+    }
+  });
+
+  var apiKey = undefined; // "d23e3a76aafeab7260e4e16cd91c73ad";
   if (key && key !== 'undefined' && key.trim() !== '') {
     apiKey = key
   }
 
-  const { data: coordinates } = useCity({
+  const { data: coordinates, isLoading: useCityLoading, error: useCityError, status: useCityStatus } = useCity({
     key: apiKey,
     location,
     lang: lang,
   });
 
-  const { data: weather, isLoading } = useWeather({
+  const { data: weather, isLoading: useWeatherLoading, error: useWeatherError, status: useWeatherStatus } = useWeather({
     key: apiKey,
     lang,
     ...coordinates,
   });
 
-  // Try to find a forecast if event date was specified
-  const forecast = weather?.forecast.find((weather) =>
-    isSameDay(new Date(weather.date * 1000), new Date(eventDate))
-  );
-
-  const date = new Date((forecast?.date ?? weather?.current?.date)! * 1000);
-  const icon = forecast?.icon ?? weather?.current?.icon;
-  const temperature =
-    forecast?.temperature?.max ?? weather?.current?.temperature?.current;
-
+  const errorColor = "#E14124";
   const bgColor = "#24B5E1";
 
-  return !weather || isLoading ? (
-    <LoadingBox color={bgColor} />
-  ) : (
-    <WeatherCard
-      temperature={temperature || 0}
-      location={coordinates?.name ?? location}
-      color={bgColor}
-      date={dateFormat(date, lang)}
-      time={time}
-      icon={icon}
-    ></WeatherCard>
-  );
+  let displayElement: JSX.Element | undefined = undefined
+
+  if (useCityLoading || useWeatherLoading) {
+    displayElement = <LoadingBox color={bgColor} smallWidth={smallWidth}/>
+  }
+
+  if (useCityError || useWeatherError || !weather) {
+    const error = useCityError ? useCityError : useWeatherError ?? new Error("API key missing")
+    displayElement = <ErrorBox color={errorColor} error={error} smallWidth={smallWidth}/>
+  }
+
+  if (!displayElement) {
+    // Try to find a forecast if event date was specified
+    const forecast = weather?.forecast.find((weather) =>
+      isSameDay(new Date(weather.date * 1000), new Date(eventDate))
+    );
+
+    const date = new Date((forecast?.date ?? weather?.current?.date)! * 1000);
+    const icon = forecast?.icon ?? weather?.current?.icon;
+    const temperature =
+      forecast?.temperature?.max ?? weather?.current?.temperature?.current;
+
+    displayElement = (
+      <WeatherCard
+        temperature={temperature || 0}
+        location={coordinates?.name ?? location}
+        color={bgColor}
+        date={dateFormat(date, lang)}
+        time={time}
+        icon={icon}
+        smallWidth={smallWidth}
+      ></WeatherCard>
+    )
+  }
+
+  return (
+    <div ref={observe}>
+      {displayElement}
+    </div>
+  )
 };

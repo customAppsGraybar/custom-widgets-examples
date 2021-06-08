@@ -19,14 +19,16 @@ import { city } from "./mockData";
 type Coordinates = { lat: number; lon: number; name: string };
 
 type Options = {
-  key: string;
+  key: string | undefined;
   location: string;
   lang: string;
 };
 
 const getCoordinates = async (options: Options) => {
   const endpoint = "//api.openweathermap.org/geo/1.0/direct";
+
   const { key: appid, location: q } = options;
+
   const { data } = await axios.get<[CityReport]>(endpoint, {
     params: { appid, q },
   });
@@ -43,12 +45,14 @@ const getCoordinates = async (options: Options) => {
 };
 
 export default function useCity(options: Options) {
+
   // Fallback if no location was specified
   options.location = options.location ?? city[0].name;
   const { location } = options;
+  
   return useQuery<Coordinates, Error>(
     ["coordinates", location],
     () => getCoordinates(options),
-    { enabled: !!location }
+    { enabled: !!location && !!options.key }
   );
 }

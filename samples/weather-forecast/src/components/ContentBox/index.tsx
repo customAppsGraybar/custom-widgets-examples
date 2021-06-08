@@ -11,10 +11,9 @@
  * limitations under the License.
  */
 
-import React, { FunctionComponent, useState } from "react";
+import React, { FunctionComponent } from "react";
 import CSS from "csstype";
 import Info from "../Icons/info.svg";
-import useDimensions from "../../hooks";
 
 import { WeatherIcon } from "api/weatherIcon";
 import { WeatherGraphic } from "../Icons/weather-icons/WeatherGraphic";
@@ -27,32 +26,21 @@ export interface ContentBoxProperties {
   date?: string;
   time?: string;
   location?: string;
+  smallWidth: boolean;
 }
 
 export const ContentBox: FunctionComponent<ContentBoxProperties> = (props) => {
 
-  const smallWidthBreakpoint = 495;
-  const [smallWidth, setSmallWidth] = useState(true);
-
-  const { observe } = useDimensions<HTMLDivElement>({
-      shouldUpdate: ({ width }) => {
-          const sizeChanged = (smallWidth && (width >= smallWidthBreakpoint)) || (!smallWidth && (width < smallWidthBreakpoint))
-
-          if (sizeChanged) {
-            setSmallWidth(!smallWidth)
-          }
-
-          return sizeChanged
-      }
-  });
-
-
   const contentStyle: CSS.Properties = {
     display: "flex",
-    flexDirection: smallWidth ? "column" : "row",
-    padding: "2rem",
+    flexDirection: props.smallWidth ? "column" : "row",
+    ...(props.smallWidth && { padding: "2rem" }),
     height: "100%",
-    ...(!smallWidth && { justifyContent: "space-between"}),
+    ...(!props.smallWidth && {
+      paddingLeft: '4rem',
+      paddingRight: '4rem',
+      justifyContent: "space-between",
+    }),
   };
 
   const temperatureValueStyle: CSS.Properties = {
@@ -73,8 +61,11 @@ export const ContentBox: FunctionComponent<ContentBoxProperties> = (props) => {
   const bottomInfoStyle: CSS.Properties = {
     display: "flex",
     flexDirection: "column",
-    ...(!smallWidth && { justifyContent: "center"}),
-    ...(smallWidth && { marginTop: "auto" })
+    ...(!props.smallWidth && {
+      justifyContent: "center",
+      alignItems: "center"
+    }),
+    ...(props.smallWidth && { marginTop: "auto" })
   };
 
   const infoLineValueStyle: CSS.Properties = {
@@ -105,7 +96,7 @@ export const ContentBox: FunctionComponent<ContentBoxProperties> = (props) => {
   const topLineStyle: CSS.Properties = {
     display: "flex",
     flexDirection: "row",
-    alignItems: !smallWidth ? "center" : "flex-start",
+    alignItems: !props.smallWidth ? "center" : "flex-start",
   };
 
   const temperatureStyle: CSS.Properties = {
@@ -124,7 +115,7 @@ export const ContentBox: FunctionComponent<ContentBoxProperties> = (props) => {
     cursor: "pointer",
   };
 
-  const iconSize = smallWidth ? 64 : 88;
+  const iconSize = props.smallWidth ? 64 : 88;
 
   return (
     <>
@@ -135,7 +126,7 @@ export const ContentBox: FunctionComponent<ContentBoxProperties> = (props) => {
       >
         <Info />
       </div>
-      <div style={contentStyle} ref={observe}>
+      <div style={contentStyle}>
         <div style={topLineStyle}>
           <div style={temperatureStyle}>
             <h1 style={temperatureValueStyle}>{props.temperature}</h1>
@@ -143,7 +134,7 @@ export const ContentBox: FunctionComponent<ContentBoxProperties> = (props) => {
               {props.alternateTemperature}
             </h2>
           </div>
-          {smallWidth && (<WeatherGraphic icon={props.icon} size={iconSize} marginLeft="auto" />)}
+          {props.smallWidth && (<WeatherGraphic icon={props.icon} size={iconSize} marginLeft="auto" />)}
         </div>
         <div style={bottomInfoStyle}>
           <div>
@@ -156,8 +147,7 @@ export const ContentBox: FunctionComponent<ContentBoxProperties> = (props) => {
             <p style={infoLineValueBoldStyle}>{props.date}</p>
           </div>
         </div>
-        {!smallWidth && (<WeatherGraphic icon={props.icon} size={iconSize} alignSelf="center" />)}
-
+        {!props.smallWidth && (<WeatherGraphic icon={props.icon} size={iconSize} alignSelf="center" />)}
       </div>
     </>
   );

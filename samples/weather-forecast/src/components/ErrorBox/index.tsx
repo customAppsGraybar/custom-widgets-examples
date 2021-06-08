@@ -16,13 +16,14 @@ import CSS from "csstype";
 
 import { Card } from "../Card";
 
-export interface LoadingCardProperties {
+export interface ErrorCardProperties {
+  error: Error
   color: string;
   smallWidth: boolean;
 }
 
-export const LoadingBox: React.FC<LoadingCardProperties> = (props) => {
-  const cardLoadingStyle: CSS.Properties = {
+export const ErrorBox: React.FC<ErrorCardProperties> = (props) => {
+  const cardErrorStyle: CSS.Properties = {
     display: "block",
     position: "absolute",
     left: "0",
@@ -34,7 +35,7 @@ export const LoadingBox: React.FC<LoadingCardProperties> = (props) => {
     backdropFilter: "blur(10px)",
   };
 
-  const cardLoadingContentStyle: CSS.Properties = {
+  const cardErrorContentStyle: CSS.Properties = {
     color: "white",
     position: "relative",
     padding: "2rem",
@@ -45,8 +46,8 @@ export const LoadingBox: React.FC<LoadingCardProperties> = (props) => {
 
   return (
     <Card color={props.color} smallWidth={props.smallWidth}>
-      <div style={cardLoadingStyle}>
-        <div style={cardLoadingContentStyle}>Loading...</div>
+      <div style={cardErrorStyle}>
+        <div style={cardErrorContentStyle}>{props.error.message}</div>
       </div>
     </Card>
   );

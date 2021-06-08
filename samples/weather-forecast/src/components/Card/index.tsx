@@ -11,39 +11,23 @@
  * limitations under the License.
  */
 
-import React, { FunctionComponent, useState } from "react";
+import React, { FunctionComponent } from "react";
 import CSS from "csstype";
-import useDimensions from "../../hooks";
 
 export interface CardProperties {
   color: string;
+  smallWidth: boolean
 }
 
 export const Card: FunctionComponent<CardProperties> = (props) => {
-
-    const smallWidthBreakpoint = 550;
-    const [smallWidth, setSmallWidth] = useState(true);
-
-    const { observe } = useDimensions<HTMLDivElement>({
-        shouldUpdate: ({ width }) => {
-            const sizeChanged = (smallWidth && (width >= smallWidthBreakpoint)) || (!smallWidth && (width < smallWidthBreakpoint))
-
-            if (sizeChanged) {
-                setSmallWidth(!smallWidth)
-            }
-
-            return sizeChanged
-        }
-    });
-
-    window.addEventListener('error', function(e) { console.log(e); });
 
     const cardStyle: CSS.Properties = {
         display: "block",
         color: "white",
         boxShadow: "0 0 8px 0 rgba(0, 0, 0, 0.15)",
         borderRadius: "0.5rem",
-        height: smallWidth ? "14rem" : "10rem",
+        overflow: "hidden",
+        height: props.smallWidth ? "14rem" : "8.75rem",
         fontFamily: "Open Sans",
         fontStyle: "normal",
         position: "relative",
@@ -51,7 +35,7 @@ export const Card: FunctionComponent<CardProperties> = (props) => {
     };
 
     return (
-        <div style={cardStyle} ref={observe} >
+        <div style={cardStyle} >
             {props.children}
         </div>
     );

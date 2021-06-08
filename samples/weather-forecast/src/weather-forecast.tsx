@@ -16,7 +16,13 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { WeatherView } from "./views/weatherView";
 import { BlockAttributes } from "widget-sdk";
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+        retry: false
+    }
+}
+});
 
 /**
  * React Component

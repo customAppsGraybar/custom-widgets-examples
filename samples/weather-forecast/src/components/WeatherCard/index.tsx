@@ -27,6 +27,7 @@ export interface WeatherCardProperties {
   time?: string;
   temperature?: number;
   icon?: WeatherIcon;
+  smallWidth: boolean;
 }
 
 export const WeatherCard: FunctionComponent<WeatherCardProperties> = (
@@ -46,7 +47,7 @@ export const WeatherCard: FunctionComponent<WeatherCardProperties> = (
   const temperature = (temp - offsetToKelvin).toFixed(0) + "° C";
 
   return (
-    <Card color={props.color}>
+    <Card color={props.color} smallWidth={props.smallWidth}>
       <ContentBox
         {...props}
         onInfoButtonClick={onInfoBtnClick}
