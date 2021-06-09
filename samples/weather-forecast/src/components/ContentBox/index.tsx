@@ -49,6 +49,9 @@ export const ContentBox: FunctionComponent<ContentBoxProperties> = (props) => {
     fontSize: "2.6rem",
     fontWeight: "bold",
     marginRight: "1rem",
+    whiteSpace: "nowrap",
+    overflow: "hidden",
+    textOverflow: "ellipsis",
   };
 
   const alternateDateValueStyle: CSS.Properties = {
@@ -56,6 +59,9 @@ export const ContentBox: FunctionComponent<ContentBoxProperties> = (props) => {
     padding: "0",    
     fontSize: "1.25rem",
     fontWeight: "lighter",
+    whiteSpace: "nowrap",
+    overflow: "hidden",
+    textOverflow: "ellipsis",
   };
 
   const bottomInfoStyle: CSS.Properties = {
