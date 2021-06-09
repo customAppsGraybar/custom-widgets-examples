@@ -79,7 +79,7 @@ export const ContentBox: FunctionComponent<ContentBoxProperties> = (props) => {
     whiteSpace: "nowrap",
     overflow: "hidden",
     textOverflow: "ellipsis",
-    maxWidth: "15rem",
+    maxWidth: "18rem",
   };
 
   const infoLineValueBoldStyle: CSS.Properties = {
@@ -90,7 +90,8 @@ export const ContentBox: FunctionComponent<ContentBoxProperties> = (props) => {
     fontSize: "1.5rem",
     lineHeight: "2rem",
     textOverflow: "ellipsis",
-    maxWidth: "15rem",
+    whiteSpace: "nowrap",
+    maxWidth: "18rem",
   };
 
   const topLineStyle: CSS.Properties = {

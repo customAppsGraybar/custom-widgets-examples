@@ -20,7 +20,7 @@ import { ErrorBox } from "../components/ErrorBox";
 import { LoadingBox } from "../components/LoadingBox";
 import { WeatherCard } from "../components/WeatherCard";
 import { dateFormat } from "../date";
-import useDimensions from "../hooks";
+import useDimensions from "react-cool-dimensions";
 
 /**
  * React Component
@@ -78,12 +78,16 @@ export const WeatherView: FunctionComponent<WeatherForecastProps> = ({
   let displayElement: JSX.Element | undefined = undefined
 
   if (useCityLoading || useWeatherLoading) {
+   
     displayElement = <LoadingBox color={bgColor} smallWidth={smallWidth}/>
-  }
 
-  if (useCityError || useWeatherError || !weather) {
-    const error = useCityError ? useCityError : useWeatherError ?? new Error("API key missing")
-    displayElement = <ErrorBox color={errorColor} error={error} smallWidth={smallWidth}/>
+  } else {
+   
+    if (useCityError || useWeatherError || !weather) {
+      const error = useCityError ? useCityError : useWeatherError ?? new Error("API key missing")
+      displayElement = <ErrorBox color={errorColor} error={error} smallWidth={smallWidth}/>
+    }
+    
   }
 
   if (!displayElement) {
