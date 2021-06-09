@@ -25,6 +25,7 @@ describe("ContentBox", () => {
         alternateTemperature=""
         temperature=""
         onInfoButtonClick={infoEvent}
+        smallWidth={true}
       />
     );
 
@@ -41,8 +42,9 @@ describe("ContentBox", () => {
         temperature="123° C"
         date="Today"
         location="Chemnitz"
-        time="Daytime"
+        text="Daytime"
         onInfoButtonClick={jest.fn()}
+        smallWidth={true}
       />
     );
 

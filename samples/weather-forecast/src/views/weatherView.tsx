@@ -28,14 +28,14 @@ import useDimensions from "react-cool-dimensions";
 export interface WeatherForecastProps extends BlockAttributes {
   apikey: string;
   date: string;
-  time: string;
+  text: string;
   location: string;
 }
 
 export const WeatherView: FunctionComponent<WeatherForecastProps> = ({
   apikey: key,
   date: eventDate,
-  time,
+  text,
   location,
   contentLanguage: lang,
 }: WeatherForecastProps) => {
@@ -107,7 +107,7 @@ export const WeatherView: FunctionComponent<WeatherForecastProps> = ({
         location={coordinates?.name ?? location}
         color={bgColor}
         date={dateFormat(date, lang)}
-        time={time}
+        text={text !== 'undefined' ? text : undefined}
         icon={icon}
         smallWidth={smallWidth}
       ></WeatherCard>

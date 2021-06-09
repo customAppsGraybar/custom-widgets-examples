@@ -26,11 +26,11 @@ export const configurationSchema: JSONSchema7 = {
     },
     date: {
       type: "string",
-      title: "Event date",
+      title: "Forecast Date",
     },
-    time: {
+    text: {
       type: "string",
-      title: "Event time",
+      title: "Additional text",
     },
     apikey: {
       type: "string",
@@ -46,14 +46,14 @@ export const configurationSchema: JSONSchema7 = {
 export const uiSchema: UiSchema = {
   location: {
     "ui:help":
-      "Set the location of the event. You might use a country identifier to narrow down the result (i.E. Chemnitz,DE).",
+      "Specify the displayed weather by city, state, or country. You might use a country identifier to narrow down the result (i.E. Chemnitz,DE).",
   },
   date: {
-    "ui:help": "Enter the date of the event. Leave empty to show the current weather information.",
+    "ui:help": "Enter a date to get a weather forecast. Leave empty to show the current weather information.",
     "ui:widget": "date",
   },
-  time: {
-    "ui:help": "Enter the time of the event.",
+  text: {
+    "ui:help": "Additional text to display on card.",
   },
   apikey: {
     "ui:help":

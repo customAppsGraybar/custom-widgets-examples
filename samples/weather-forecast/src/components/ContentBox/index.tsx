@@ -24,7 +24,7 @@ export interface ContentBoxProperties {
   temperature: string;
   alternateTemperature: string;
   date?: string;
-  time?: string;
+  text?: string;
   location?: string;
   smallWidth: boolean;
 }
@@ -140,7 +140,7 @@ export const ContentBox: FunctionComponent<ContentBoxProperties> = (props) => {
         <div style={bottomInfoStyle}>
           <div>
             <p style={infoLineValueStyle}>
-              {props.time && props.time + " · "}
+              {props.text && props.text + " · "}
               {props.location}
             </p>
           </div>

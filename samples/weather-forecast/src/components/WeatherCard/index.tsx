@@ -24,7 +24,7 @@ export interface WeatherCardProperties {
   color: string;
   location?: string;
   date?: string;
-  time?: string;
+  text?: string;
   temperature?: number;
   icon?: WeatherIcon;
   smallWidth: boolean;

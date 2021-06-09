@@ -19,7 +19,7 @@ describe("WeatherCard", () => {
   it("Should convert the given temperature from Kelvin to Celsius and Fahrenheit", () => {
     const givenTemperature = 282.58;
 
-    render(<WeatherCard color="#FF" temperature={givenTemperature} />);
+    render(<WeatherCard color="#FF" temperature={givenTemperature} smallWidth={true} />);
 
     expect(screen.getByText("9° C")).toBeInTheDocument();
     expect(screen.getByText("49° F")).toBeInTheDocument();
@@ -30,8 +30,9 @@ describe("WeatherCard", () => {
       <WeatherCard
         color="#FF"
         date="Blue Monday"
-        time="After Dinner"
+        text="After Dinner"
         location="Chemnitz"
+        smallWidth={true}
       />
     );
 

@@ -59,7 +59,7 @@ const factory: BlockFactory = (BaseBlockClass, _widgetApi) => {
      */
     public static get observedAttributes(): string[] {
       const defaults = baseAttributes;
-      return [...defaults, "location", "date", "time", "apikey"];
+      return [...defaults, "location", "date", "text", "apikey"];
     }
 
     /**
@@ -82,7 +82,7 @@ const blockDefinition: BlockDefinition = {
   factory: factory,
   attributes: [
     ...baseAttributes,
-    "location", "date", "time", "apikey"
+    "location", "date", "text", "apikey"
   ],
   blockLevel: "block",
   configurationSchema: configurationSchema,
