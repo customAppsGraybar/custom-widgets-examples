@@ -22,7 +22,6 @@ import {
 } from "widget-sdk";
 import { WeatherForecastProps, WeatherForecast } from "./weather-forecast";
 import { configurationSchema, uiSchema } from "./configuration-schema";
-import { baseAttributes } from '../dev/constants'
 import pkg from "../package.json";
 
 /**
@@ -58,8 +57,7 @@ const factory: BlockFactory = (BaseBlockClass, _widgetApi) => {
      * attributes "content-language", "widget-title", "on-card" have to be kept!
      */
     public static get observedAttributes(): string[] {
-      const defaults = baseAttributes;
-      return [...defaults, "location", "date", "text", "apikey"];
+      return ["location", "date", "text", "apikey"];
     }
 
     /**
@@ -80,10 +78,7 @@ const factory: BlockFactory = (BaseBlockClass, _widgetApi) => {
 const blockDefinition: BlockDefinition = {
   name: "weather-forecast",
   factory: factory,
-  attributes: [
-    ...baseAttributes,
-    "location", "date", "text", "apikey"
-  ],
+  attributes: ["location", "date", "text", "apikey"],
   blockLevel: "block",
   configurationSchema: configurationSchema,
   uiSchema: uiSchema,
