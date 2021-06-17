@@ -67,6 +67,7 @@ const factory: BlockFactory = (BaseBlockClass, _widgetApi) => {
     public attributeChangedCallback(
       ...args: [string, string | undefined, string | undefined]
     ): void {
+      console.log('Weather Widget: attributeChangedCallback', args, WeatherForecastBlock.observedAttributes)
       super.attributeChangedCallback.apply(this, args);
     }
   };
