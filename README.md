@@ -21,7 +21,7 @@ Please adjust the year(s) at the copyright statement following [this section at 
 
 ```
 /*
-Copyright 2020, Staffbase GmbH and contributors.
+Copyright 2021, Staffbase GmbH and contributors.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
