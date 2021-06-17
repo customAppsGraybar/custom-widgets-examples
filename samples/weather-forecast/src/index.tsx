@@ -56,6 +56,7 @@ const factory: BlockFactory = (BaseBlockClass, _widgetApi) => {
      * attributes "content-language", "widget-title", "on-card" have to be kept!
      */
     public static get observedAttributes(): string[] {
+      console.log('Weather Widget: observedAttributes')
       return ["location", "date", "text", "apikey", "fahrenheit"];
     }
 
