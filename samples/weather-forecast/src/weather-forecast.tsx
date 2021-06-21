@@ -44,7 +44,6 @@ export const WeatherForecast = ({
   contentLanguage,
 }: WeatherForecastProps): ReactElement => {
 
-  console.log('weatherWidget language:', contentLanguage)
   const preferFahrenheit = typeof fahrenheit == 'string' ? fahrenheit === 'true' : !!fahrenheit
 
   return (

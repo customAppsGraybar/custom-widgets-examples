@@ -39,8 +39,10 @@ export const WeatherView: FunctionComponent<WeatherForecastProps> = ({
   text,
   location,
   fahrenheit,
-  contentLanguage: lang,
+  contentLanguage,
 }: WeatherForecastProps) => {
+
+  const lang = contentLanguage.length >= 2 ? contentLanguage.substr(0, 2) : 'en'
 
   const smallWidthBreakpoint = 616;
   const [smallWidth, setSmallWidth] = useState(true);

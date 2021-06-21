@@ -90,7 +90,7 @@ const getWeather = async ({
   queryKey: [, options],
 }: QueryFunctionContext<[string, ForecastOptions]>) => {
   const endpoint = "//api.openweathermap.org/data/2.5/onecall";
-  const { units = "standard", lang = "en", key: appid, lon, lat } = options;
+  const { units = "standard", lang = options.lang ?? 'en', key: appid, lon, lat } = options;
   const params = { appid, lang, units, lat, lon };
 
   if (typeof lat === undefined || typeof lon === undefined) {
