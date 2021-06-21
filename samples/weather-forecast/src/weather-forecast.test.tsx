@@ -43,6 +43,7 @@ describe("WeatherForecast", () => {
         date={date}
         text={text}
         location={"Chemnitz"}
+        fahrenheit={false}
       />
     );
 

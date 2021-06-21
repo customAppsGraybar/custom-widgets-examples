@@ -47,7 +47,6 @@ const factory: BlockFactory = (BaseBlockClass, _widgetApi) => {
     }
 
     public renderBlock(container: HTMLElement): void {
-      console.log('Weather Widget', WeatherForecastBlock.observedAttributes)
       ReactDOM.render(<WeatherForecast {...this.props} />, container);
     }
 
@@ -56,7 +55,6 @@ const factory: BlockFactory = (BaseBlockClass, _widgetApi) => {
      * attributes "content-language", "widget-title", "on-card" have to be kept!
      */
     public static get observedAttributes(): string[] {
-      console.log('Weather Widget: observedAttributes')
       return ["location", "date", "text", "apikey", "fahrenheit"];
     }
 
@@ -67,7 +65,6 @@ const factory: BlockFactory = (BaseBlockClass, _widgetApi) => {
     public attributeChangedCallback(
       ...args: [string, string | undefined, string | undefined]
     ): void {
-      console.log('Weather Widget: attributeChangedCallback', args, WeatherForecastBlock.observedAttributes)
       super.attributeChangedCallback.apply(this, args);
     }
   };

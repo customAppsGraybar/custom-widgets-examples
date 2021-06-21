@@ -36,6 +36,10 @@ export const configurationSchema: JSONSchema7 = {
       type: "string",
       title: "openweathermap.org API Key",
     },
+    fahrenheit: {
+      type: "boolean",
+      title: "Prefer Fahrenheit",
+    },
   },
 };
 

@@ -30,6 +30,7 @@ export interface WeatherForecastProps extends BlockAttributes {
   date: string;
   text: string;
   location: string;
+  fahrenheit: boolean;
 }
 
 export const WeatherView: FunctionComponent<WeatherForecastProps> = ({
@@ -37,6 +38,7 @@ export const WeatherView: FunctionComponent<WeatherForecastProps> = ({
   date: eventDate,
   text,
   location,
+  fahrenheit,
   contentLanguage: lang,
 }: WeatherForecastProps) => {
 
@@ -60,13 +62,13 @@ export const WeatherView: FunctionComponent<WeatherForecastProps> = ({
     apiKey = key
   }
 
-  const { data: coordinates, isLoading: useCityLoading, error: useCityError, status: useCityStatus } = useCity({
+  const { data: coordinates, isLoading: useCityLoading, error: useCityError } = useCity({
     key: apiKey,
     location,
     lang: lang,
   });
 
-  const { data: weather, isLoading: useWeatherLoading, error: useWeatherError, status: useWeatherStatus } = useWeather({
+  const { data: weather, isLoading: useWeatherLoading, error: useWeatherError } = useWeather({
     key: apiKey,
     lang,
     ...coordinates,
@@ -110,6 +112,7 @@ export const WeatherView: FunctionComponent<WeatherForecastProps> = ({
         text={text !== 'undefined' ? text : undefined}
         icon={icon}
         smallWidth={smallWidth}
+        fahrenheit={fahrenheit}
       ></WeatherCard>
     )
   }

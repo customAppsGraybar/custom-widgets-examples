@@ -32,6 +32,7 @@ export interface WeatherForecastProps extends BlockAttributes {
   date: string;
   text: string;
   location: string;
+  fahrenheit: boolean;
 }
 
 export const WeatherForecast = ({
@@ -39,11 +40,15 @@ export const WeatherForecast = ({
   date,
   text,
   location,
+  fahrenheit,
   contentLanguage,
 }: WeatherForecastProps): ReactElement => {
+
+  const preferFahrenheit = typeof fahrenheit == 'string' ? fahrenheit === 'true' : !!fahrenheit
+
   return (
     <QueryClientProvider client={queryClient}>
-      <WeatherView {...{ apikey, date, text, location, contentLanguage }} />
+      <WeatherView {...{ apikey, date, text, location, contentLanguage, fahrenheit: preferFahrenheit }} />
     </QueryClientProvider>
   );
 };

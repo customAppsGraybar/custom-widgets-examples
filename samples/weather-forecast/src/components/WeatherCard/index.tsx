@@ -28,6 +28,7 @@ export interface WeatherCardProperties {
   temperature?: number;
   icon?: WeatherIcon;
   smallWidth: boolean;
+  fahrenheit: boolean;
 }
 
 export const WeatherCard: FunctionComponent<WeatherCardProperties> = (
@@ -42,9 +43,15 @@ export const WeatherCard: FunctionComponent<WeatherCardProperties> = (
 
   const offsetToKelvin = 273.15;
   const temp = props.temperature ?? offsetToKelvin;
-  const alternateTemperature =
+  let alternateTemperature =
     ((temp - offsetToKelvin) * (9 / 5) + 32).toFixed(0) + "° F";
-  const temperature = (temp - offsetToKelvin).toFixed(0) + "° C";
+  let temperature = (temp - offsetToKelvin).toFixed(0) + "° C";
+
+  if (props.fahrenheit) {
+    const value = temperature
+    temperature = alternateTemperature
+    alternateTemperature = value
+  }
 
   return (
     <Card color={props.color} smallWidth={props.smallWidth}>
