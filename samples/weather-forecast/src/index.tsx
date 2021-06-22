@@ -29,7 +29,6 @@ import pkg from "../package.json";
  * Gets the parental class and a set of helper utilities provided by the hosting application.
  */
 const factory: BlockFactory = (BaseBlockClass, _widgetApi) => {
-
   return class WeatherForecastBlock
     extends BaseBlockClass
     implements BaseBlock

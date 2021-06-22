@@ -12,7 +12,7 @@
  */
 
 import axios from "axios";
-import { useQuery } from "react-query";
+import { useQuery, UseQueryResult } from "react-query";
 import { CityReport } from "./openGeoApi";
 import { city } from "./mockData";
 
@@ -44,12 +44,13 @@ const getCoordinates = async (options: Options) => {
   return { lat, lon, name: cityName };
 };
 
-export default function useCity(options: Options) {
-
+export default function useCity(
+  options: Options
+): UseQueryResult<Coordinates, Error> {
   // Fallback if no location was specified
   options.location = options.location ?? city[0].name;
   const { location } = options;
-  
+
   return useQuery<Coordinates, Error>(
     ["coordinates", location],
     () => getCoordinates(options),

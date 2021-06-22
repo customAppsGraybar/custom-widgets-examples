@@ -41,36 +41,46 @@ export const WeatherView: FunctionComponent<WeatherForecastProps> = ({
   fahrenheit,
   contentLanguage,
 }: WeatherForecastProps) => {
-
-  const lang = contentLanguage.length >= 2 ? contentLanguage.substr(0, 2) : 'en'
+  const lang =
+    contentLanguage.length >= 2 ? contentLanguage.substr(0, 2) : "en";
 
   const smallWidthBreakpoint = 616;
   const [smallWidth, setSmallWidth] = useState(true);
 
   const { observe } = useDimensions<HTMLDivElement>({
     shouldUpdate: ({ width }) => {
-      const sizeChanged = (smallWidth && (width >= smallWidthBreakpoint)) || (!smallWidth && (width < smallWidthBreakpoint))
+      const sizeChanged =
+        (smallWidth && width >= smallWidthBreakpoint) ||
+        (!smallWidth && width < smallWidthBreakpoint);
 
       if (sizeChanged) {
-        setSmallWidth(!smallWidth)
+        setSmallWidth(!smallWidth);
       }
 
-      return sizeChanged
-    }
+      return sizeChanged;
+    },
   });
 
-  var apiKey = undefined;
-  if (key && key !== 'undefined' && key.trim() !== '') {
-    apiKey = key
+  let apiKey = undefined;
+  if (key && key !== "undefined" && key.trim() !== "") {
+    apiKey = key;
   }
 
-  const { data: coordinates, isLoading: useCityLoading, error: useCityError } = useCity({
+  const {
+    data: coordinates,
+    isLoading: useCityLoading,
+    error: useCityError,
+  } = useCity({
     key: apiKey,
     location,
     lang: lang,
   });
 
-  const { data: weather, isLoading: useWeatherLoading, error: useWeatherError } = useWeather({
+  const {
+    data: weather,
+    isLoading: useWeatherLoading,
+    error: useWeatherError,
+  } = useWeather({
     key: apiKey,
     lang,
     ...coordinates,
@@ -79,19 +89,19 @@ export const WeatherView: FunctionComponent<WeatherForecastProps> = ({
   const errorColor = "#E14124";
   const bgColor = "#24B5E1";
 
-  let displayElement: JSX.Element | undefined = undefined
+  let displayElement: JSX.Element | undefined = undefined;
 
   if (useCityLoading || useWeatherLoading) {
-   
-    displayElement = <LoadingBox color={bgColor} smallWidth={smallWidth}/>
-
+    displayElement = <LoadingBox color={bgColor} smallWidth={smallWidth} />;
   } else {
-   
-    if (useCityError || useWeatherError || !weather) {
-      const error = useCityError ? useCityError : useWeatherError ?? new Error("API key missing")
-      displayElement = <ErrorBox color={errorColor} error={error} smallWidth={smallWidth}/>
+    if (useCityError || useWeatherError || !weather) {
+      const error = useCityError
+        ? useCityError
+        : useWeatherError ?? new Error("API key missing");
+      displayElement = (
+        <ErrorBox color={errorColor} error={error} smallWidth={smallWidth} />
+      );
     }
-    
   }
 
   if (!displayElement) {
@@ -100,7 +110,10 @@ export const WeatherView: FunctionComponent<WeatherForecastProps> = ({
       isSameDay(new Date(weather.date * 1000), new Date(eventDate))
     );
 
-    const date = new Date((forecast?.date ?? weather?.current?.date)! * 1000);
+    const today = new Date().getTime() / 1000;
+    const date = new Date(
+      (forecast?.date ?? weather?.current?.date ?? today) * 1000
+    );
     const icon = forecast?.icon ?? weather?.current?.icon;
     const temperature =
       forecast?.temperature?.max ?? weather?.current?.temperature?.current;
@@ -111,17 +124,13 @@ export const WeatherView: FunctionComponent<WeatherForecastProps> = ({
         location={coordinates?.name ?? location}
         color={bgColor}
         date={dateFormat(date, lang)}
-        text={text !== 'undefined' ? text : undefined}
+        text={text !== "undefined" ? text : undefined}
         icon={icon}
         smallWidth={smallWidth}
         fahrenheit={fahrenheit}
       ></WeatherCard>
-    )
+    );
   }
 
-  return (
-    <div ref={observe}>
-      {displayElement}
-    </div>
-  )
+  return <div ref={observe}>{displayElement}</div>;
 };

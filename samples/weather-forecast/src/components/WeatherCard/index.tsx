@@ -48,9 +48,9 @@ export const WeatherCard: FunctionComponent<WeatherCardProperties> = (
   let temperature = (temp - offsetToKelvin).toFixed(0) + "° C";
 
   if (props.fahrenheit) {
-    const value = temperature
-    temperature = alternateTemperature
-    alternateTemperature = value
+    const value = temperature;
+    temperature = alternateTemperature;
+    alternateTemperature = value;
   }
 
   return (

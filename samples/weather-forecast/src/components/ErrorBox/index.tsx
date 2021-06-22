@@ -17,7 +17,7 @@ import CSS from "csstype";
 import { Card } from "../Card";
 
 export interface ErrorCardProperties {
-  error: Error
+  error: Error;
   color: string;
   smallWidth: boolean;
 }

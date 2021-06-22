@@ -25,7 +25,10 @@ const getLocale = (code?: string): Locale =>
  * @param {number|Date} dateInput
  * @param {Locale} userLocale
  */
-export function dateFormat(dateInput: number | Date, userLocale?: string) {
+export function dateFormat(
+  dateInput: number | Date,
+  userLocale?: string
+): string {
   return format(dateInput, "cccc, P", { locale: getLocale(userLocale) });
 }
 
@@ -35,7 +38,7 @@ export function dateFormat(dateInput: number | Date, userLocale?: string) {
  * @param {number} dateInput
  * @param {Locale} userLocale
  */
-export function timeFormat(dateInput: string, userLocale?: string) {
+export function timeFormat(dateInput: string, userLocale?: string): string {
   return format(parse(dateInput, "HH:mm", 0), "p", {
     locale: getLocale(userLocale),
   });

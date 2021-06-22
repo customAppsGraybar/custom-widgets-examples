@@ -35,7 +35,7 @@ export const InfoBox: React.FC<InfoBoxProperties> = (props) => {
     backdropFilter: "blur(10px)",
     WebkitBackdropFilter: "blur(10px)",
     ...infoBoxStyle,
-  }
+  };
 
   const infoBoxContent: CSS.Properties = {
     color: "black",

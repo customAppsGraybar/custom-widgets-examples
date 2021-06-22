@@ -30,22 +30,21 @@ export interface ContentBoxProperties {
 }
 
 export const ContentBox: FunctionComponent<ContentBoxProperties> = (props) => {
-
   const contentStyle: CSS.Properties = {
     display: "flex",
     flexDirection: props.smallWidth ? "column" : "row",
     ...(props.smallWidth && { padding: "2rem" }),
     height: "100%",
     ...(!props.smallWidth && {
-      paddingLeft: '4rem',
-      paddingRight: '4rem',
+      paddingLeft: "4rem",
+      paddingRight: "4rem",
       justifyContent: "space-between",
     }),
   };
 
   const temperatureValueStyle: CSS.Properties = {
     margin: "0",
-    padding: "0",    
+    padding: "0",
     fontSize: "2.6rem",
     fontWeight: "bold",
     marginRight: "1rem",
@@ -56,7 +55,7 @@ export const ContentBox: FunctionComponent<ContentBoxProperties> = (props) => {
 
   const alternateDateValueStyle: CSS.Properties = {
     margin: "0",
-    padding: "0",    
+    padding: "0",
     fontSize: "1.25rem",
     fontWeight: "lighter",
     whiteSpace: "nowrap",
@@ -69,14 +68,14 @@ export const ContentBox: FunctionComponent<ContentBoxProperties> = (props) => {
     flexDirection: "column",
     ...(!props.smallWidth && {
       justifyContent: "center",
-      alignItems: "center"
+      alignItems: "center",
     }),
-    ...(props.smallWidth && { marginTop: "auto" })
+    ...(props.smallWidth && { marginTop: "auto" }),
   };
 
   const infoLineValueStyle: CSS.Properties = {
     margin: "0",
-    padding: "0",    
+    padding: "0",
 
     fontSize: "1.125rem",
     fontWeight: "normal",
@@ -90,7 +89,7 @@ export const ContentBox: FunctionComponent<ContentBoxProperties> = (props) => {
 
   const infoLineValueBoldStyle: CSS.Properties = {
     margin: "0",
-    padding: "0",    
+    padding: "0",
 
     fontWeight: "600",
     fontSize: "1.5rem",
@@ -141,7 +140,13 @@ export const ContentBox: FunctionComponent<ContentBoxProperties> = (props) => {
               {props.alternateTemperature}
             </h2>
           </div>
-          {props.smallWidth && (<WeatherGraphic icon={props.icon} size={iconSize} marginLeft="auto" />)}
+          {props.smallWidth && (
+            <WeatherGraphic
+              icon={props.icon}
+              size={iconSize}
+              marginLeft="auto"
+            />
+          )}
         </div>
         <div style={bottomInfoStyle}>
           <div>
@@ -154,7 +159,13 @@ export const ContentBox: FunctionComponent<ContentBoxProperties> = (props) => {
             <p style={infoLineValueBoldStyle}>{props.date}</p>
           </div>
         </div>
-        {!props.smallWidth && (<WeatherGraphic icon={props.icon} size={iconSize} alignSelf="center" />)}
+        {!props.smallWidth && (
+          <WeatherGraphic
+            icon={props.icon}
+            size={iconSize}
+            alignSelf="center"
+          />
+        )}
       </div>
     </>
   );

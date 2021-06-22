@@ -53,7 +53,8 @@ export const uiSchema: UiSchema = {
       "Specify the displayed weather by city, state, or country. You might use a country identifier to narrow down the result (i.E. Chemnitz,DE).",
   },
   date: {
-    "ui:help": "Enter a date to get a weather forecast. Leave empty to show the current weather information.",
+    "ui:help":
+      "Enter a date to get a weather forecast. Leave empty to show the current weather information.",
     "ui:widget": "date",
   },
   text: {

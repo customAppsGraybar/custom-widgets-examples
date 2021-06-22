@@ -90,15 +90,21 @@ const getWeather = async ({
   queryKey: [, options],
 }: QueryFunctionContext<[string, ForecastOptions]>) => {
   const endpoint = "//api.openweathermap.org/data/2.5/onecall";
-  const { units = "standard", lang = options.lang ?? 'en', key: appid, lon, lat } = options;
+  const {
+    units = "standard",
+    lang = options.lang ?? "en",
+    key: appid,
+    lon,
+    lat,
+  } = options;
   const params = { appid, lang, units, lat, lon };
 
   if (typeof lat === undefined || typeof lon === undefined) {
-    return Promise.reject(new Error("Missing coordinates."))
+    return Promise.reject(new Error("Missing coordinates."));
   }
-  
-  const { data } = await axios.get<WeatherReport>(endpoint, { params })
-  return mapData(data)
+
+  const { data } = await axios.get<WeatherReport>(endpoint, { params });
+  return mapData(data);
 };
 
 export default function useWeather(
