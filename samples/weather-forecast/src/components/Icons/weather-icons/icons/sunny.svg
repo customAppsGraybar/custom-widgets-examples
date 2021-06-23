@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 48 48" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;">
+    <path d="M35,24C35,30.075 30.075,35 24,35C17.925,35 13,30.075 13,24C13,17.925 17.925,13 24,13C30.075,13 35,17.925 35,24Z" style="fill:none;stroke:rgb(35,24,21);stroke-width:2px;"/>
+    <path d="M43,24L39,24" style="fill:none;fill-rule:nonzero;stroke:rgb(242,80,34);stroke-width:2px;stroke-linecap:round;stroke-linejoin:round;"/>
+    <path d="M9,24L5,24" style="fill:none;fill-rule:nonzero;stroke:rgb(242,80,34);stroke-width:2px;stroke-linecap:round;stroke-linejoin:round;"/>
+    <path d="M43,24L39,24" style="fill:none;fill-rule:nonzero;stroke:rgb(35,24,21);stroke-width:2px;stroke-linecap:round;stroke-linejoin:round;"/>
+    <path d="M9,24L5,24" style="fill:none;fill-rule:nonzero;stroke:rgb(35,24,21);stroke-width:2px;stroke-linecap:round;stroke-linejoin:round;"/>
+    <g>
+        <path d="M40.455,33.5L36.991,31.5" style="fill:none;fill-rule:nonzero;stroke:rgb(35,24,21);stroke-width:2px;stroke-linecap:round;stroke-linejoin:round;"/>
+    </g>
+    <g>
+        <path d="M11.01,16.5L7.546,14.5" style="fill:none;fill-rule:nonzero;stroke:rgb(35,24,21);stroke-width:2px;stroke-linecap:round;stroke-linejoin:round;"/>
+    </g>
+    <g>
+        <path d="M33.5,40.455L31.5,36.99" style="fill:none;fill-rule:nonzero;stroke:rgb(35,24,21);stroke-width:2px;stroke-linecap:round;stroke-linejoin:round;"/>
+    </g>
+    <g>
+        <path d="M16.5,11.01L14.5,7.546" style="fill:none;fill-rule:nonzero;stroke:rgb(35,24,21);stroke-width:2px;stroke-linecap:round;stroke-linejoin:round;"/>
+    </g>
+    <g>
+        <path d="M24,43L24,39" style="fill:none;fill-rule:nonzero;stroke:rgb(35,24,21);stroke-width:2px;stroke-linecap:round;stroke-linejoin:round;"/>
+    </g>
+    <g>
+        <path d="M24,9L24,5" style="fill:none;fill-rule:nonzero;stroke:rgb(35,24,21);stroke-width:2px;stroke-linecap:round;stroke-linejoin:round;"/>
+    </g>
+    <g>
+        <path d="M14.5,40.455L16.5,36.99" style="fill:none;fill-rule:nonzero;stroke:rgb(35,24,21);stroke-width:2px;stroke-linecap:round;stroke-linejoin:round;"/>
+    </g>
+    <g>
+        <path d="M31.5,11.01L33.5,7.546" style="fill:none;fill-rule:nonzero;stroke:rgb(35,24,21);stroke-width:2px;stroke-linecap:round;stroke-linejoin:round;"/>
+    </g>
+    <g>
+        <path d="M7.545,33.5L11.009,31.5" style="fill:none;fill-rule:nonzero;stroke:rgb(35,24,21);stroke-width:2px;stroke-linecap:round;stroke-linejoin:round;"/>
+    </g>
+    <g>
+        <path d="M36.99,16.5L40.454,14.5" style="fill:none;fill-rule:nonzero;stroke:rgb(35,24,21);stroke-width:2px;stroke-linecap:round;stroke-linejoin:round;"/>
+    </g>
+    <path d="M34,24C34,29.523 29.523,34 24,34C18.477,34 14,29.523 14,24C14,18.477 18.477,14 24,14C29.523,14 34,18.477 34,24Z" style="fill:rgb(255,185,0);fill-rule:nonzero;"/>
+</svg>

@@ -1,0 +1,56 @@
+name: Deploy samples to Netlify
+env:
+  NODE_VERISON: 14
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [ labeled, opened ]
+#    paths:
+#      - samples/weatherforecast/
+
+jobs:
+  build-and-deploy:
+    if: github.event.label.name == 'dev' || github.base_ref == 'main'
+    runs-on: ubuntu-20.04
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Use Node JS
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Install Yarn Dependencies
+        run: yarn install --cwd samples/weather-forecast --frozen-lockfile
+
+      - name: Build widget
+        run: yarn --cwd samples/weather-forecast build
+
+      - name: Prepare Deployment
+        run: |
+          mkdir -p samples/deploy/icons
+          cp samples/netlify.toml samples/deploy/
+          cp samples/weather-forecast/dist/* samples/deploy/
+          cp samples/weather-forecast/resources/weather-forecast.svg samples/deploy/icons/
+
+      - name: Publish to Production
+        if: github.base_ref == 'main'
+        uses: netlify/actions/cli@master
+        with:
+          args: deploy --prod --dir=samples/deploy
+        env:
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+
+      - name: Publish to DevelopmentPreview
+        if: github.event.label.name == 'dev'
+        uses: netlify/actions/cli@master
+        with:
+          args: deploy --prod --dir=samples/deploy/
+        env:
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID_DEV }}
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN_DEV }}
