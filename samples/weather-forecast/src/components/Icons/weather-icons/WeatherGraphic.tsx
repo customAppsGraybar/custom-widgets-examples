@@ -29,24 +29,26 @@ import { WeatherIcon } from "api/weatherIcon";
 export interface WeatherGraphicProperties {
   size?: number;
   icon?: WeatherIcon;
+  marginLeft?: string;
+  alignSelf?: string;
 }
 
 export const WeatherGraphic: React.FC<WeatherGraphicProperties> = (props) => {
-
   const weatherIconStyle: CSS.Properties = {
-    marginLeft: "auto",
+    ...(props.marginLeft && { marginLeft: props.marginLeft }),
+    ...(props.alignSelf && { alignSelf: props.alignSelf }),
     height: "6rem",
     filter: "drop-shadow(0px 10px 10px rgba(0, 0, 0, 0.2))",
   };
 
-  var icon: JSX.Element;
-  var size = `${props.size ? props.size : 48 }px`;
+  let icon: JSX.Element;
+  const size = `${props.size ? props.size : 48}px`;
 
   const iconProps = {
     width: size,
     height: size,
     viewBox: "0 0 48 48",
-  }
+  };
 
   switch (props.icon) {
     case "rain":

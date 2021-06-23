@@ -16,7 +16,13 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { WeatherView } from "./views/weatherView";
 import { BlockAttributes } from "widget-sdk";
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: false,
+    },
+  },
+});
 
 /**
  * React Component
@@ -24,20 +30,34 @@ const queryClient = new QueryClient();
 export interface WeatherForecastProps extends BlockAttributes {
   apikey: string;
   date: string;
-  time: string;
+  text: string;
   location: string;
+  fahrenheit: boolean;
 }
 
 export const WeatherForecast = ({
   apikey,
   date,
-  time,
+  text,
   location,
+  fahrenheit,
   contentLanguage,
 }: WeatherForecastProps): ReactElement => {
+  const preferFahrenheit =
+    typeof fahrenheit == "string" ? fahrenheit === "true" : !!fahrenheit;
+
   return (
     <QueryClientProvider client={queryClient}>
-      <WeatherView {...{ apikey, date, time, location, contentLanguage }} />
+      <WeatherView
+        {...{
+          apikey,
+          date,
+          text,
+          location,
+          contentLanguage,
+          fahrenheit: preferFahrenheit,
+        }}
+      />
     </QueryClientProvider>
   );
 };

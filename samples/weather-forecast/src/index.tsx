@@ -29,9 +29,6 @@ import pkg from "../package.json";
  * Gets the parental class and a set of helper utilities provided by the hosting application.
  */
 const factory: BlockFactory = (BaseBlockClass, _widgetApi) => {
-  /**
-   *  <weather-forecast message="world!"></weather-forecast>
-   */
   return class WeatherForecastBlock
     extends BaseBlockClass
     implements BaseBlock
@@ -57,8 +54,7 @@ const factory: BlockFactory = (BaseBlockClass, _widgetApi) => {
      * attributes "content-language", "widget-title", "on-card" have to be kept!
      */
     public static get observedAttributes(): string[] {
-      const defaults = ["content-language", "widget-title", "on-card"];
-      return [...defaults, "location", "date", "time", "apikey"];
+      return ["location", "date", "text", "apikey", "fahrenheit"];
     }
 
     /**
@@ -79,7 +75,7 @@ const factory: BlockFactory = (BaseBlockClass, _widgetApi) => {
 const blockDefinition: BlockDefinition = {
   name: "weather-forecast",
   factory: factory,
-  attributes: ["content-language", "widget-title", "on-card", "location", "date", "time", "apikey"],
+  attributes: ["location", "date", "text", "apikey", "fahrenheit"],
   blockLevel: "block",
   configurationSchema: configurationSchema,
   uiSchema: uiSchema,
@@ -88,7 +84,7 @@ const blockDefinition: BlockDefinition = {
 };
 
 /**
- * Wrapping definition, which defines meta informations about the block.
+ * Wrapping definition, which defines meta information about the block.
  */
 const externalBlockDefinition: ExternalBlockDefinition = {
   blockDefinition,

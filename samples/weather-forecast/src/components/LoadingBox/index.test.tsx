@@ -17,7 +17,7 @@ import { LoadingBox } from ".";
 
 describe("LoadingBox", () => {
   it("Should display loading label", () => {
-    render(<LoadingBox color="#FF" />);
+    render(<LoadingBox smallWidth={true} color="#FF" />);
     expect(screen.getByText("Loading...")).toBeInTheDocument();
   });
 });

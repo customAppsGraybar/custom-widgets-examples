@@ -80,7 +80,7 @@ const mapData = ({ daily, current }: WeatherReport): MappedWeatherReport => ({
 
 type ForecastOptions = {
   units?: "standard" | "metric" | "imperial";
-  key: string;
+  key: string | undefined;
   lang?: string;
   lon?: number;
   lat?: number;
@@ -90,15 +90,21 @@ const getWeather = async ({
   queryKey: [, options],
 }: QueryFunctionContext<[string, ForecastOptions]>) => {
   const endpoint = "//api.openweathermap.org/data/2.5/onecall";
-  const { units = "standard", lang = "en", key: appid, lon, lat } = options;
+  const {
+    units = "standard",
+    lang = options.lang ?? "en",
+    key: appid,
+    lon,
+    lat,
+  } = options;
   const params = { appid, lang, units, lat, lon };
 
-  return typeof lat === undefined || typeof lon === undefined
-    ? Promise.reject(new Error("Missing coordinates."))
-    : axios
-        .get<WeatherReport>(endpoint, { params })
-        .then(({ data }) => data)
-        .then(mapData);
+  if (typeof lat === undefined || typeof lon === undefined) {
+    return Promise.reject(new Error("Missing coordinates."));
+  }
+
+  const { data } = await axios.get<WeatherReport>(endpoint, { params });
+  return mapData(data);
 };
 
 export default function useWeather(
@@ -107,6 +113,6 @@ export default function useWeather(
   const { lang, lat, lon, key } = options;
 
   return useQuery(["weather", { key, lat, lon, lang }], getWeather, {
-    enabled: !!(lat && lon),
+    enabled: !!(lat && lon) && !!options.key,
   });
 }

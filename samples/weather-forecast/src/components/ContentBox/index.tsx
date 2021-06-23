@@ -15,8 +15,6 @@ import React, { FunctionComponent } from "react";
 import CSS from "csstype";
 import Info from "../Icons/info.svg";
 
-
-import { useMediaQuery } from "../../hooks/MediaQueryHook";
 import { WeatherIcon } from "api/weatherIcon";
 import { WeatherGraphic } from "../Icons/weather-icons/WeatherGraphic";
 
@@ -26,45 +24,58 @@ export interface ContentBoxProperties {
   temperature: string;
   alternateTemperature: string;
   date?: string;
-  time?: string;
+  text?: string;
   location?: string;
+  smallWidth: boolean;
 }
 
 export const ContentBox: FunctionComponent<ContentBoxProperties> = (props) => {
-
-  const limitedDeviceSize = useMediaQuery('(max-width: 25rem)');
-
   const contentStyle: CSS.Properties = {
     display: "flex",
-    flexDirection: "column",
-    padding: "2rem",
+    flexDirection: props.smallWidth ? "column" : "row",
+    ...(props.smallWidth && { padding: "2rem" }),
     height: "100%",
+    ...(!props.smallWidth && {
+      paddingLeft: "4rem",
+      paddingRight: "4rem",
+      justifyContent: "space-between",
+    }),
   };
 
   const temperatureValueStyle: CSS.Properties = {
     margin: "0",
-    padding: "0",    
+    padding: "0",
     fontSize: "2.6rem",
     fontWeight: "bold",
     marginRight: "1rem",
+    whiteSpace: "nowrap",
+    overflow: "hidden",
+    textOverflow: "ellipsis",
   };
 
   const alternateDateValueStyle: CSS.Properties = {
     margin: "0",
-    padding: "0",    
+    padding: "0",
     fontSize: "1.25rem",
     fontWeight: "lighter",
+    whiteSpace: "nowrap",
+    overflow: "hidden",
+    textOverflow: "ellipsis",
   };
 
   const bottomInfoStyle: CSS.Properties = {
     display: "flex",
     flexDirection: "column",
-    marginTop: "auto",
+    ...(!props.smallWidth && {
+      justifyContent: "center",
+      alignItems: "center",
+    }),
+    ...(props.smallWidth && { marginTop: "auto" }),
   };
 
   const infoLineValueStyle: CSS.Properties = {
     margin: "0",
-    padding: "0",    
+    padding: "0",
 
     fontSize: "1.125rem",
     fontWeight: "normal",
@@ -73,21 +84,25 @@ export const ContentBox: FunctionComponent<ContentBoxProperties> = (props) => {
     whiteSpace: "nowrap",
     overflow: "hidden",
     textOverflow: "ellipsis",
+    maxWidth: "18rem",
   };
 
   const infoLineValueBoldStyle: CSS.Properties = {
     margin: "0",
-    padding: "0",    
+    padding: "0",
 
     fontWeight: "600",
     fontSize: "1.5rem",
     lineHeight: "2rem",
+    textOverflow: "ellipsis",
+    whiteSpace: "nowrap",
+    maxWidth: "18rem",
   };
 
   const topLineStyle: CSS.Properties = {
     display: "flex",
     flexDirection: "row",
-    alignItems: "flex-start",
+    alignItems: !props.smallWidth ? "center" : "flex-start",
   };
 
   const temperatureStyle: CSS.Properties = {
@@ -106,7 +121,7 @@ export const ContentBox: FunctionComponent<ContentBoxProperties> = (props) => {
     cursor: "pointer",
   };
 
-  const iconSize = limitedDeviceSize ? 64 : 88;
+  const iconSize = props.smallWidth ? 64 : 88;
 
   return (
     <>
@@ -125,12 +140,18 @@ export const ContentBox: FunctionComponent<ContentBoxProperties> = (props) => {
               {props.alternateTemperature}
             </h2>
           </div>
-          <WeatherGraphic icon={props.icon} size={iconSize} />
+          {props.smallWidth && (
+            <WeatherGraphic
+              icon={props.icon}
+              size={iconSize}
+              marginLeft="auto"
+            />
+          )}
         </div>
         <div style={bottomInfoStyle}>
           <div>
             <p style={infoLineValueStyle}>
-              {props.time && props.time + " · "}
+              {props.text && props.text + " · "}
               {props.location}
             </p>
           </div>
@@ -138,6 +159,13 @@ export const ContentBox: FunctionComponent<ContentBoxProperties> = (props) => {
             <p style={infoLineValueBoldStyle}>{props.date}</p>
           </div>
         </div>
+        {!props.smallWidth && (
+          <WeatherGraphic
+            icon={props.icon}
+            size={iconSize}
+            alignSelf="center"
+          />
+        )}
       </div>
     </>
   );

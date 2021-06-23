@@ -34,15 +34,16 @@ describe("WeatherForecast", () => {
     );
 
     const date = "2020-01-01";
-    const time = "01:00";
+    const text = "01:00";
 
     render(
       <WeatherForecast
         contentLanguage="en_US"
         apikey="000"
         date={date}
-        time={time}
+        text={text}
         location={"Chemnitz"}
+        fahrenheit={false}
       />
     );
 
