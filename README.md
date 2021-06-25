@@ -1,6 +1,6 @@
 # Custom Widget Examples
 
-This repository holds an example widget as showcase for the custom widget development. This example should help developers creating their own custom widget.
+This repository holds an example widget as showcase for the Staffbase custom widget development. This example should help developers creating their own custom widget.
 
 
 ## Weather Widget
@@ -9,5 +9,5 @@ This repository holds an example widget as showcase for the custom widget develo
 This widget can be used to display the weather at the current time or a fixed date in the future for an individual city. To show the weather the city (optional with country code) needs to be added in the widget configuration.
 
 
-More information about custom widgets can be found here:
+More information about Staffbase custom widgets can be found here:
 [Custom Widget Documentation](https://developers.staffbase.com/guide/customwidget-development)
