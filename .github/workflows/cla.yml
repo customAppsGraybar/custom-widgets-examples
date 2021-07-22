@@ -26,4 +26,4 @@ jobs:
           # branch should not be protected
           branch: 'signatures'
           # no allowlist currently
-          allowlist: Ninerian,m-seidel,cornelius-behrend,boehmmic,FenziRocks,staffbot,bot*
+          allowlist: Ninerian,m-seidel,cornelius-behrend,boehmmic,FenziRocks,staffbot,dependabot
