@@ -20,7 +20,7 @@
       "uniqueItems": true,
       "items": {
           "type": "object",
-          "required": ["bundle", "tagName", "attributes"],
+          "required": ["module", "tagName", "attributes"],
           "properties": {
               "bundle": { 
                 "type": "string",
