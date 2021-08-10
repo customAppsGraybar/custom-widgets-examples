@@ -17,15 +17,27 @@
     "bundles": {
       "type": "array",
       "minItems": 1,
+      "uniqueItems": true,
       "items": {
           "type": "object",
           "required": ["bundle", "tagName", "attributes"],
           "properties": {
-              "bundle": { "type": "string" },
-              "tagName": { "type": "string" },
+              "bundle": { 
+                "type": "string",
+                "description": "Relative path to bundle file"
+              },
+              "tagName": {
+                "type": "string",
+                "description": "The tag name of the web component",
+                "pattern": "^([a-zA-Z0-9]*-[a-zA-Z0-9]*)+$"
+              },
               "attributes": { 
                   "type": "array",
-                  "items": { "type": "string" }
+                  "items": {
+                    "type": "string",
+                    "description": "Web component attribute names of bundle",
+                    "pattern": "^[a-zA-Z]+$"
+                  }
               }
           }
         }

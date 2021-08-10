@@ -50,8 +50,7 @@ const factory: BlockFactory = (BaseBlockClass, _widgetApi) => {
     }
 
     /**
-     * The observed attributes, where the widgets reacts on. The default
-     * attributes "content-language", "widget-title", "on-card" have to be kept!
+     * The observed attributes, where the widgets reacts on.
      */
     public static get observedAttributes(): string[] {
       return ["location", "date", "text", "apikey", "fahrenheit"];
