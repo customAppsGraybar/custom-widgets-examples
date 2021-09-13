@@ -63,6 +63,7 @@
     "eslint-plugin-prettier": "4.0.0",
     "file-loader": "^6.2.0",
     "jest": "27.1.0",
+    "jest-json-schema": "^5.0.0",
     "js-base64": "3.6.1",
     "minimal-polyfills": "2.2.1",
     "prettier": "2.3.2",
