@@ -8,7 +8,7 @@
     "bundles": [
         {
             "module": "staffbase.weather-forecast.js",
-            "tagName": "weather-forecast",
+            "tagNames": ["weather-forecast"],
             "attributes": ["location", "date", "text", "apikey", "fahrenheit"]
         }
     ]

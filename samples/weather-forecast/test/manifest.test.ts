@@ -13,7 +13,7 @@
 
 import { matchers } from 'jest-json-schema';
 
-const manifest = require('./manifest.json');
+const manifest = require('./../manifest.json');
 const manifestSchema = require('./manifest.schema.json');
 
 expect.extend(matchers);

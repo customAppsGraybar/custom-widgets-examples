@@ -3,15 +3,14 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "description": "Staffbase Widget Manifest Schema",
   "type": "object",
-  "required": ["bundles", "flag"],
+  "required": ["bundles"],
   "properties": {
     "flag": {
       "type": "object",
-      "required": ["protected", "description", "title"],
+      "required": ["protected", "description"],
       "properties": {
           "protected": { "type": "boolean" },
-          "description": { "type": "string" },
-          "title": { "type": "string" }
+          "description": { "type": "string" }
       }
     },
     "bundles": {
@@ -20,16 +19,19 @@
       "uniqueItems": true,
       "items": {
           "type": "object",
-          "required": ["module", "tagName", "attributes"],
+          "required": ["module", "tagNames", "attributes"],
           "properties": {
               "bundle": { 
                 "type": "string",
                 "description": "Relative path to bundle file"
               },
-              "tagName": {
-                "type": "string",
-                "description": "The tag name of the web component",
-                "pattern": "^([a-zA-Z0-9]*-[a-zA-Z0-9]*)+$"
+              "tagNames": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "description": "The tag name of the web component",
+                  "pattern": "^([a-zA-Z0-9]*-[a-zA-Z0-9]*)+$"
+                }
               },
               "attributes": { 
                   "type": "array",
