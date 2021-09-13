@@ -91,7 +91,7 @@ export const ContentBox: FunctionComponent<ContentBoxProperties> = (props) => {
     margin: "0",
     padding: "0",
 
-    fontWeight: "600",
+    fontWeight: 600,
     fontSize: "1.5rem",
     lineHeight: "2rem",
     textOverflow: "ellipsis",

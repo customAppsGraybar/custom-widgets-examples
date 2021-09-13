@@ -11,16 +11,15 @@
  * limitations under the License.
  */
 
-import { matchers } from 'jest-json-schema';
+import { matchers } from "jest-json-schema";
 
-const manifest = require('./../manifest.json');
-const manifestSchema = require('./manifest.schema.json');
+import manifest from "./../manifest.json";
+import manifestSchema from "./manifest.schema.json";
 
 expect.extend(matchers);
 
-
-describe('Manifest.json', () => {
-    test('manifest.json conforms to schema', () => {
-        expect(manifest).toMatchSchema(manifestSchema);
-    });
+describe("Manifest.json", () => {
+  test("manifest.json conforms to schema", () => {
+    expect(manifest).toMatchSchema(manifestSchema);
+  });
 });

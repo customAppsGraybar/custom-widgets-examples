@@ -12,6 +12,7 @@
  */
 
 import * as webpack from "webpack";
+// eslint-disable-next-line
 const CopyPlugin = require("copy-webpack-plugin");
 
 const config: webpack.Configuration = {
@@ -46,10 +47,8 @@ const config: webpack.Configuration = {
   },
   plugins: [
     new CopyPlugin({
-      patterns: [
-        { from: "manifest.json" },
-      ]
-    })
+      patterns: [{ from: "manifest.json" }],
+    }),
   ],
   output: {
     filename: "[name].js",
