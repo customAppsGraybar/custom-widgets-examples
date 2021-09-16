@@ -1,0 +1,15 @@
+{
+    "flag": {
+        "protected": true,
+        "description": "Staffbase Demo Widgets: Weather Widget",
+        "title": "Weather Widget"
+    },
+
+    "bundles": [
+        {
+            "module": "staffbase.weather-forecast.js",
+            "tagNames": ["weather-forecast"],
+            "attributes": ["location", "date", "text", "apikey", "fahrenheit"]
+        }
+    ]
+}

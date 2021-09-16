@@ -20,7 +20,21 @@ jobs:
           node-version: ${{ env.NODE_VERSION }}
 
       - name: Install Yarn Dependencies
-        run: yarn install --cwd samples/weather-forecast --frozen-lockfile
+        working-directory:  samples/weather-forecast
+        run: yarn install --frozen-lockfile
+
+      - name: Run Build
+        working-directory: samples/weather-forecast
+        run: yarn build
+
+      - name: Run Lint
+        working-directory: samples/weather-forecast
+        run: yarn lint
+
+      - name: Run Type check
+        working-directory: samples/weather-forecast
+        run: yarn type-check
 
       - name: Run Tests
-        run: yarn --cwd samples/weather-forecast test
+        working-directory: samples/weather-forecast
+        run: yarn test
