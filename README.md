@@ -11,3 +11,6 @@ This widget can be used to display the weather at the current time or a fixed da
 
 More information about Staffbase custom widgets can be found here:
 [Custom Widget Documentation](https://developers.staffbase.com/guide/customwidget-development)
+
+## Disclaimer
+For Staffbase Customers, please note that the Apache License 2.0 solely applies and that in relation to the Staffbase Services, Custom Widgets based on this software are considered Third-Party Services. When Staffbase Customers distribute this software to Staffbase in relation to the Staffbase Services, they do not have to acknowledge the use of this software.
