@@ -44,7 +44,7 @@ jobs:
           persist-credentials: false
           repository: Staffbase/S3-deployment-action
           ref: 1.0.1
-          token: ${{ secrets.STAFFBOT_NPM_READ }}
+          token: ${{ secrets.GITOPS_TOKEN }}
           path: .github/gitops
 
       - name: Publish to S3 DE Prod
