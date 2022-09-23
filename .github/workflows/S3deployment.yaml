@@ -22,7 +22,7 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'yarn'
-          cache-dependency-path: yarn.lock
+          cache-dependency-path: samples/weather-forecast/yarn.lock
           registry-url: 'https://npm.pkg.github.com/'
           scope: '@staffbase'
 
