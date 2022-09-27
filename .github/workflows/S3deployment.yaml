@@ -11,7 +11,7 @@ env:
 
 jobs:
   build-and-deploy:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
 
     steps:
       - name: Checkout repository
@@ -105,7 +105,7 @@ jobs:
         if: github.ref == 'refs/heads/dev'
         uses: ./.github/gitops
         with:
-          source: dist/
+          source: samples/weather-forecast/dist
           destination: widgets/weather
 
           # Varnish settings
