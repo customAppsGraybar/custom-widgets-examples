@@ -1,6 +1,6 @@
 name: CI Tests
 env:
-  NODE_VERISON: 14
+  NODE_VERSION: 14
 on:
   push:
     paths-ignore:
@@ -12,10 +12,10 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Use Node JS
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: ${{ env.NODE_VERSION }}
 
@@ -37,6 +37,4 @@ jobs:
 
       - name: Run Tests
         working-directory: samples/weather-forecast
-        run: |
-          node --version
-          yarn test
+        run: yarn test
