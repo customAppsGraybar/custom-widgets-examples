@@ -37,4 +37,6 @@ jobs:
 
       - name: Run Tests
         working-directory: samples/weather-forecast
-        run: yarn test
+        run: |
+          pwd
+          yarn test
