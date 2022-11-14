@@ -6,6 +6,7 @@
 - [ ] Enhancement / new feature
 - [ ] Refactoring
 - [ ] Documentation
+- [ ] Dependency
 
 ### Description
 
