@@ -25,7 +25,7 @@ type Options = {
 };
 
 const getCoordinates = async (options: Options) => {
-  const endpoint = "//api.openweathermap.org/geo/1.0/direct";
+  const endpoint = "https://api.openweathermap.org/geo/1.0/direct";
 
   const { key: appid, location: q } = options;
 

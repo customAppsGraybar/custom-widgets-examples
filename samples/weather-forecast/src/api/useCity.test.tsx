@@ -38,7 +38,7 @@ setLogger({
 });
 
 describe("useCity", () => {
-  const endpoint = "//api.openweathermap.org/geo/1.0/direct";
+  const endpoint = "https://api.openweathermap.org/geo/1.0/direct";
 
   afterEach(() => {
     queryClient.clear();
