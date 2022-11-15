@@ -31,7 +31,7 @@ export const WeatherGraphic: React.FC<WeatherGraphicProperties> = (props) => {
     filter: "drop-shadow(0px 10px 10px rgba(0, 0, 0, 0.2))",
   };
 
-    /* let icon: JSX.Element; */
+  /* let icon: JSX.Element; */
   const size = `${props.size ? props.size : 48}px`;
 
   const iconProps = {
@@ -40,7 +40,13 @@ export const WeatherGraphic: React.FC<WeatherGraphicProperties> = (props) => {
     viewBox: "0 0 48 48",
   };
 
-  const Icon = React.lazy(() => import(`./icons/${props.icon}.svg`))
+  const Icon = React.lazy(() => import(`./icons/${props.icon}.svg`));
 
-  return <Suspense fallback={<>{}</>}><div style={weatherIconStyle}><Icon {...iconProps}/></div></Suspense>;
+  return (
+    <Suspense fallback={<>{}</>}>
+      <div style={weatherIconStyle}>
+        <Icon {...iconProps} />
+      </div>
+    </Suspense>
+  );
 };
