@@ -3,9 +3,8 @@
     [
       "@babel/preset-env",
       {
-        "useBuiltIns": "usage",
-        "corejs": 3,
-        "targets": "> 0.25%, not dead, not ie < 11"
+        "useBuiltIns": "entry",
+        "corejs": 3
       }
     ],
     "@babel/preset-react",

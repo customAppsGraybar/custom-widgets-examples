@@ -28,7 +28,7 @@ const config: webpack.Configuration = {
       },
       {
         test: /\.svg$/i,
-        type: "asset/inline",
+        use: ['@svgr/webpack'],
       },
     ],
   },
