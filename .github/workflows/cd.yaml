@@ -55,7 +55,8 @@ jobs:
           destination: widgets/weather
 
           # Varnish settings
-          static_file: manifest.json
+          static_files: |
+            manifest.json
           frontend_host: frontend-cache-main-de1.staffbase.com
           frontend_cache_password: ${{ secrets.FRONTEND_CACHE_PROD_DE1_PASSWORD }}
 
@@ -73,7 +74,8 @@ jobs:
           destination: widgets/weather
 
           # Varnish settings
-          static_file: manifest.json
+          static_files: |
+            manifest.json
           frontend_host: frontend-cache-us1.staffbase.com
           frontend_cache_password: ${{ secrets.FRONTEND_CACHE_PROD_US1_PASSWORD }}
 
@@ -91,7 +93,8 @@ jobs:
           destination: widgets/weather
 
           # Varnish settings
-          static_file: manifest.json
+          static_files: |
+            manifest.json
           frontend_host: frontend-cache-de1.staffbase.rocks
           frontend_cache_password: ${{ secrets.FRONTEND_CACHE_STAGE_DE1_PASSWORD }}
 
@@ -109,7 +112,8 @@ jobs:
           destination: widgets/weather
 
           # Varnish settings
-          static_file: manifest.json
+          static_files: |
+            manifest.json
           frontend_host: frontend-cache-de1.staffbase.dev
           frontend_cache_password: ${{ secrets.FRONTEND_CACHE_DEV_DE1_PASSWORD }}
 
