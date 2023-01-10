@@ -26,7 +26,7 @@ jobs:
           registry-url: 'https://npm.pkg.github.com/'
           scope: '@staffbase'
 
-      - run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.STAFFBOT_NPM_READ }}" >> .npmrc
+      - run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.STAFFBOT_NPM_READ }}" >> samples/weather-forecast/.npmrc
 
       - name: Yarn install
         run: yarn install --cwd samples/weather-forecast --frozen-lockfile
