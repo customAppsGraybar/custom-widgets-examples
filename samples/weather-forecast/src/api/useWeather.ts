@@ -89,7 +89,7 @@ type ForecastOptions = {
 const getWeather = async ({
   queryKey: [, options],
 }: QueryFunctionContext<[string, ForecastOptions]>) => {
-  const endpoint = "//api.openweathermap.org/data/2.5/onecall";
+  const endpoint = "https://api.openweathermap.org/data/2.5/onecall";
   const {
     units = "standard",
     lang = options.lang ?? "en",

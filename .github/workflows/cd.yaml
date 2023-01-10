@@ -1,26 +1,34 @@
-name: Deploy samples to Netlify
-env:
-  NODE_VERISON: 14
+name: Deploy to AWS S3
+
 on:
   push:
-    paths-ignore:
-      - '**.md'
+    branches: ['main', 'dev']
+  release:
+    types: [published]
+
+env:
+  NODE_VERSION: 16
 
 jobs:
   build-and-deploy:
-    if: github.ref == 'refs/heads/dev' || github.ref == 'refs/heads/main'
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Use Node JS
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: ${{ env.NODE_VERSION }}
+          cache: 'yarn'
+          cache-dependency-path: samples/weather-forecast/yarn.lock
+          registry-url: 'https://npm.pkg.github.com/'
+          scope: '@staffbase'
 
-      - name: Install Yarn Dependencies
+      - run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.STAFFBOT_NPM_READ }}" >> samples/weather-forecast/.npmrc
+
+      - name: Yarn install
         run: yarn install --cwd samples/weather-forecast --frozen-lockfile
 
       - name: Build widget
@@ -28,25 +36,89 @@ jobs:
 
       - name: Prepare Deployment
         run: |
-          mkdir -p samples/deploy/icons
-          cp samples/netlify.toml samples/deploy/
-          cp samples/weather-forecast/dist/* samples/deploy/
-          cp samples/weather-forecast/resources/weather-forecast.svg samples/deploy/icons/
+          mkdir samples/weather-forecast/icons
+          cp samples/weather-forecast/resources/weather-forecast.svg samples/weather-forecast/dist/icons
 
-      - name: Publish to Production
-        if: github.ref == 'main'
-        uses: netlify/actions/cli@master
+      - uses: actions/checkout@v3
         with:
-          args: deploy --prod --dir=samples/deploy
-        env:
-          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          persist-credentials: false
+          repository: Staffbase/S3-deployment-action
+          ref: 1.0.1
+          token: ${{ secrets.GITOPS_TOKEN }}
+          path: .github/gitops
 
-      - name: Publish to DevelopmentPreview
+      - name: Publish to S3 DE Prod
+        if: github.event.release.tag_name != null
+        uses: ./.github/gitops
+        with:
+          source: samples/weather-forecast/dist
+          destination: widgets/weather
+
+          # Varnish settings
+          static_files: |
+            manifest.json
+          frontend_host: frontend-cache-main-de1.staffbase.com
+          frontend_cache_password: ${{ secrets.FRONTEND_CACHE_PROD_DE1_PASSWORD }}
+
+          # AWS specific settings
+          aws_bucket: staffbasestatic-prod-de1
+          aws_region: eu-central-1
+          aws_access_key: ${{ secrets.PROD_DE1_AWS_ACCESS_KEY_ID }}
+          aws_secret_key: ${{ secrets.PROD_DE1_AWS_ACCESS_KEY_SECRET }}
+
+      - name: Deploy to S3 US Prod
+        if: github.event.release.tag_name != null
+        uses: ./.github/gitops
+        with:
+          source: samples/weather-forecast/dist
+          destination: widgets/weather
+
+          # Varnish settings
+          static_files: |
+            manifest.json
+          frontend_host: frontend-cache-us1.staffbase.com
+          frontend_cache_password: ${{ secrets.FRONTEND_CACHE_PROD_US1_PASSWORD }}
+
+          # AWS specific settings
+          aws_bucket: staffbasestatic-prod-us1
+          aws_region: us-east-1
+          aws_access_key: ${{ secrets.PROD_US1_AWS_ACCESS_KEY_ID }}
+          aws_secret_key: ${{ secrets.PROD_US1_AWS_ACCESS_KEY_SECRET }}
+
+      - name: Publish to S3 DE stage
+        if: github.ref == 'refs/heads/main'
+        uses: ./.github/gitops
+        with:
+          source: samples/weather-forecast/dist
+          destination: widgets/weather
+
+          # Varnish settings
+          static_files: |
+            manifest.json
+          frontend_host: frontend-cache-de1.staffbase.rocks
+          frontend_cache_password: ${{ secrets.FRONTEND_CACHE_STAGE_DE1_PASSWORD }}
+
+          # AWS specific settings
+          aws_bucket: staffbasestatic-stage-de1
+          aws_region: eu-central-1
+          aws_access_key: ${{ secrets.STAGE_DE1_AWS_ACCESS_KEY_ID }}
+          aws_secret_key: ${{ secrets.STAGE_DE1_AWS_ACCESS_KEY_SECRET }}
+
+      - name: Publish to S3 DE dev
         if: github.ref == 'refs/heads/dev'
-        uses: netlify/actions/cli@master
+        uses: ./.github/gitops
         with:
-          args: deploy --prod --dir=samples/deploy/
-        env:
-          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID_DEV }}
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN_DEV }}
+          source: samples/weather-forecast/dist
+          destination: widgets/weather
+
+          # Varnish settings
+          static_files: |
+            manifest.json
+          frontend_host: frontend-cache-de1.staffbase.dev
+          frontend_cache_password: ${{ secrets.FRONTEND_CACHE_DEV_DE1_PASSWORD }}
+
+          # AWS specific settings
+          aws_bucket: staffbasestatic-dev-de1
+          aws_region: eu-central-1
+          aws_access_key: ${{ secrets.DEV_DE1_AWS_ACCESS_KEY_ID }}
+          aws_secret_key: ${{ secrets.DEV_DE1_AWS_ACCESS_KEY_SECRET }}

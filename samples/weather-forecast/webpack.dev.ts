@@ -31,7 +31,7 @@ const config: Configuration = {
     static: {
       directory: path.join(__dirname, "resources"),
     },
-    port: 9000,
+    port: 9001,
   },
   mode: "development",
   devtool: "inline-source-map",

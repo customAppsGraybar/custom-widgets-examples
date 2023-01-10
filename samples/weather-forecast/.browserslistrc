@@ -1,0 +1,5 @@
+[production]
+extends @staffbase/browserslist-config
+
+[development]
+extends @staffbase/browserslist-config

@@ -25,7 +25,7 @@ describe("WeatherForecast", () => {
   it("should render the component", async () => {
     mockAxios.mockImplementation(
       (url: string, _config?: AxiosRequestConfig): Promise<unknown> => {
-        if (url.match("//api.openweathermap.org/geo/1.0/direct")) {
+        if (url.match("https://api.openweathermap.org/geo/1.0/direct")) {
           return Promise.resolve({ data: city });
         } else {
           return Promise.resolve({ data: weather });
