@@ -10,7 +10,7 @@ jobs:
   autodev:
     uses: Staffbase/gha-workflows/.github/workflows/template_autodev.yml@v1.14.0
     with:
-      base: master
+      base: main
       comments: true
     secrets:
       token: ${{ secrets.DEV_PUSH_TOKEN }}
