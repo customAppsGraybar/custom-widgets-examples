@@ -1,5 +1,4 @@
 name: Autodev
-
 on:
   push:
     branches-ignore:
@@ -8,78 +7,10 @@ on:
     types: [labeled, unlabeled, closed]
 
 jobs:
-  dev:
-    env:
-      GITHUB_TOKEN: ${{ secrets.DEV_PUSH_TOKEN }}
-      GITHUB_USER: ${{ secrets.DEV_PUSH_USER }}
-      BRANCH: dev
-    runs-on: ubuntu-20.04
-    steps:
-      - name: do-checkout
-        uses: actions/checkout@v1
-        with:
-          ref: main
-      - name: build branch
-        id: build_branch
-        run: |
-          touch successful_merges failed_merges
-          git checkout -B new-${BRANCH}
-          git config --global user.email "staffbot@staffbase.com"
-          git config --global user.name "Merge Bot"
-          # with both dates set to the last main commit, we get reproducible builds: Whenever the CI Job would produce
-          # the exact same result as the existing branch (as in, nothing on the staged branches or main changed)
-          # the new branch ref will have the same commit sha than the old one.
-          export GIT_COMMITTER_DATE=$(git show -s --format='%ci' HEAD)
-          export GIT_AUTHOR_DATE=$GIT_COMMITTER_DATE
-          ghcurl() {  curl -s -H "Authorization: token ${GITHUB_TOKEN}"  "$@"; }
-          ghcurl "https://api.github.com/repos/${GITHUB_REPOSITORY}/issues?labels=${BRANCH}" |
-          jq -r '.[] | (.url + " " + .pull_request.url)' |
-          while read -r iss pr; do
-            ref=$(ghcurl "$pr" | jq -r '.head.ref')
-            echo "merge: $ref"
-            if git merge -q --no-ff origin/$ref -m "$ref"; then
-              echo "$iss" >> successful_merges
-            else
-              echo "$ref could not be merged. Ignoring"
-              git merge --abort
-              echo "$iss" >> failed_merges
-            fi
-          done
-          branch_old=$(git rev-parse origin/${BRANCH} || echo "NONE")
-          branch_new=$(git rev-parse new-${BRANCH})
-          echo "${BRANCH}_old: $branch_old"
-          echo "${BRANCH}_new: $branch_new"
-          if [[ $branch_old != $branch_new ]]; then
-            echo "::set-output name=dopush,::true"
-          else
-            echo "${BRANCH} unchanged. Nothing to push"
-          fi
-      - name: push branch
-        id: push_branch
-        if: steps.build_branch.outputs.dopush
-        # push may fail if multiple invocations of the auto stage workflow run in parallel.
-        # Github may work on preventing parallel runs of workflows in some future
-        # (see https://github.community/t5/GitHub-Actions/Prevent-parallel-workflows/td-p/32889)
-        # however until then we have to do it this way to not mark PRs as failed or something
-        continue-on-error: true
-        run: |
-          : ${GITHUB_USER:=$GITHUB_ACTOR}
-          echo "::debug::Github user ${GITHUB_USER}"
-          remote_repo="https://${GITHUB_USER}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
-          git push "$remote_repo" HEAD:${BRANCH} -f &&
-          echo "::set-output name=success,::true"
-      - name: label PRs
-        if: steps.push_branch.outputs.success
-        run: |
-          ghcurl() {  curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}"  "$@"; }
-          cat failed_merges | while read iss; do
-             ghcurl -d '{"labels":["'$BRANCH' Failed"]}' -X POST "$iss/labels"
-             ghcurl -X DELETE "$iss/labels/$BRANCH%20Successful"
-             echo "label $iss as failed..."
-          done
-          echo --
-          cat successful_merges | while read iss; do
-             echo "label $iss as successful..."
-             ghcurl -d '{"labels":["'$BRANCH' Successful"]}' -X POST "$iss/labels"
-             ghcurl -X DELETE "$iss/labels/$BRANCH%20Failed"
-          done
+  autodev:
+    uses: Staffbase/gha-workflows/.github/workflows/template_autodev.yml@v1.14.0
+    with:
+      base: main
+      comments: true
+    secrets:
+      token: ${{ secrets.DEV_PUSH_TOKEN }}
