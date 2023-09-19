@@ -8,9 +8,9 @@ on:
 
 jobs:
   autodev:
-    uses: Staffbase/gha-workflows/.github/workflows/template_autodev.yml@v1.14.0
+    uses: Staffbase/gha-workflows/.github/workflows/template_autodev.yml@v2.8.0
     with:
-      base: main
       comments: true
     secrets:
-      token: ${{ secrets.DEV_PUSH_TOKEN }}
+      app_id: ${{ vars.STAFFBASE_ACTIONS_APP_ID }}
+      private_key: ${{ secrets.STAFFBASE_ACTIONS_PRIVATE_KEY }}
