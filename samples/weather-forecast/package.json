@@ -41,7 +41,6 @@
     "@material-ui/icons": "^4.11.2",
     "@rjsf/core": "^3.0.0",
     "@rjsf/material-ui": "^3.0.0",
-    "@staffbase/browserslist-config": "1.0.0",
     "@svgr/webpack": "6.5.1",
     "@testing-library/dom": "8.2.0",
     "@testing-library/jest-dom": "5.14.1",
