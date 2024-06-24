@@ -2485,11 +2485,6 @@
   dependencies:
     "@sinonjs/commons" "^1.7.0"
 
-"@staffbase/browserslist-config@1.0.0":
-  version "1.0.0"
-  resolved "https://npm.pkg.github.com/download/@Staffbase/browserslist-config/1.0.0/57ddcbc99a2509ba6a58e37ec6c2730dccc875de#57ddcbc99a2509ba6a58e37ec6c2730dccc875de"
-  integrity sha512-IvzkYFUaeH/BIrg097Lw3L/pO2XRIEJEcPmmnhORrZrbnpoWknx836sm6te8fad9qRjQwY+y0UzuWX2VcEtFhg==
-
 "@staffbase/widget-sdk@^3.3.3":
   version "3.3.3"
   resolved "https://registry.yarnpkg.com/@staffbase/widget-sdk/-/widget-sdk-3.3.3.tgz#79da379765dddedd76d50dbf955f01a9e3a4907f"
@@ -8304,6 +8299,15 @@ uri-js@^4.2.2:
   integrity sha512-7rKUyy33Q1yc98pQ1DAmLtwX109F7TIfWlW1Ydo8Wl1ii1SeHieeh0HHfPeL2fMXK6z0s8ecKs9frCuLJvndBg==
   dependencies:
     punycode "^2.1.0"
+
+url-loader@^4.1.1:
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/url-loader/-/url-loader-4.1.1.tgz#28505e905cae158cf07c92ca622d7f237e70a4e2"
+  integrity sha512-3BTV812+AVHHOJQO8O5MkWgZ5aosP7GnROJwvzLS9hWDj00lZ6Z0wNak423Lp9PBZN05N+Jk/N5Si8jRAlGyWA==
+  dependencies:
+    loader-utils "^2.0.0"
+    mime-types "^2.1.27"
+    schema-utils "^3.0.0"
 
 url@^0.11.0:
   version "0.11.0"
