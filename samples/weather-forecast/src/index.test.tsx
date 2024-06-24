@@ -15,13 +15,19 @@ import { screen } from "@testing-library/dom";
 import axios, { AxiosRequestConfig } from "axios";
 
 import "../dev/bootstrap";
-import "./index";
 
 import { weather, city } from "./api/mockData";
 
 const mockAxios = jest.spyOn(axios, "get");
 
 describe("Widget test", () => {
+  beforeAll(() => {
+    document.body.innerHTML = `
+        <div id="preview"></div>
+        <div id="config"></div>
+        `;
+  });
+
   it("should render the widget", async () => {
     mockAxios.mockImplementation(
       (url: string, _config?: AxiosRequestConfig): Promise<unknown> => {
@@ -33,6 +39,8 @@ describe("Widget test", () => {
       }
     );
 
+    await import("./index");
+
     const widget = document.createElement("weather-forecast");
 
     widget.setAttribute("apikey", "123");
@@ -42,5 +50,7 @@ describe("Widget test", () => {
     document.body.appendChild(widget);
 
     expect(await screen.findByText(/Chemnitz/)).toBeInTheDocument();
+    expect(screen.getByLabelText(/Weather/)).toBeInTheDocument();
+    expect(screen.getByText(/Weather/)).toBeInTheDocument();
   });
 });
