@@ -1,0 +1,14 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: custom-widget examples
+  description: Some examples how to use the third party widget framework
+  annotations:
+    github.com/project-slug: Staffbase/custom-widget-examples
+  tags:
+    - widgets
+    - typescript
+spec:
+  type: library
+  lifecycle: production
+  owner: need-for-speed-devs
