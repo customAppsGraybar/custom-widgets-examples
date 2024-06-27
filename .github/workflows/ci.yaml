@@ -28,6 +28,8 @@ jobs:
       - name: Install Yarn Dependencies
         working-directory:  samples/weather-forecast
         run: yarn install --frozen-lockfile
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.STAFFBOT_NPM_READ }}
 
       - name: Run Build
         working-directory: samples/weather-forecast
