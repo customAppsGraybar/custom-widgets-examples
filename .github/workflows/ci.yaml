@@ -31,8 +31,6 @@ jobs:
 
       - name: Run Build
         working-directory: samples/weather-forecast
-        env:
-          NODE_OPTIONS: --openssl-legacy-provider
         run: yarn build
 
       - name: Run Lint
