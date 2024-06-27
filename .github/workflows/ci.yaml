@@ -1,6 +1,6 @@
 name: CI Tests
 env:
-  NODE_VERSION: 14
+  NODE_VERSION: 20
 on:
   push:
     paths-ignore:
@@ -8,7 +8,7 @@ on:
 
 jobs:
   executing-tests:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
 
     steps:
       - name: Checkout repository
@@ -17,20 +17,22 @@ jobs:
           persist-credentials: false
 
       - name: Use Node.js Version
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
           registry-url: 'https://npm.pkg.github.com/'
           scope: '@staffbase'
 
+      - run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.STAFFBOT_NPM_READ }}" >> .npmrc
+
       - name: Install Yarn Dependencies
         working-directory:  samples/weather-forecast
         run: yarn install --frozen-lockfile
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.STAFFBOT_NPM_READ }}
 
       - name: Run Build
         working-directory: samples/weather-forecast
+        env:
+          NODE_OPTIONS: --openssl-legacy-provider
         run: yarn build
 
       - name: Run Lint
