@@ -7,7 +7,7 @@ on:
     types: [published]
 
 env:
-  NODE_VERSION: 16
+  NODE_VERSION: 20
   DEPLOYMENT_KIND: widget
   DEPLOYMENT_TARGET: weather
   DEPLOYMENT_STATIC_FILES: staffbase.user-profile-client.min.js
@@ -23,7 +23,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Use Node JS
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'yarn'
