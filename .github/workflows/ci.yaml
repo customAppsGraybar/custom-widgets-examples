@@ -1,6 +1,6 @@
 name: CI Tests
 env:
-  NODE_VERSION: 20
+  NODE_VERSION: 14
 on:
   push:
     paths-ignore:
@@ -8,7 +8,7 @@ on:
 
 jobs:
   executing-tests:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-20.04
 
     steps:
       - name: Checkout repository
@@ -17,7 +17,7 @@ jobs:
           persist-credentials: false
 
       - name: Use Node.js Version
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v3
         with:
           node-version: ${{ env.NODE_VERSION }}
           registry-url: 'https://npm.pkg.github.com/'
