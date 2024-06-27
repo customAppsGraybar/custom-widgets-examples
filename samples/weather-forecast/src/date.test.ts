@@ -1,5 +1,5 @@
 /*!
- * Copyright 2021, Staffbase GmbH and contributors.
+ * Copyright 2024, Staffbase GmbH and contributors.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,19 +15,19 @@ import { dateFormat, timeFormat } from "./date";
 
 const deLocale = "de";
 const frLocale = "fr";
-const date = new Date(2021, 3, 22, 0, 0);
+const date = new Date(2024, 3, 22, 0, 0);
 
 describe("dateFormat()", () => {
   it("should format the date for DE", () => {
-    expect(dateFormat(date, deLocale)).toBe("Donnerstag, 22.04.2021");
+    expect(dateFormat(date, deLocale)).toBe("Montag, 22.04.2024");
   });
 
   it("should format the date for fallback as US", () => {
-    expect(dateFormat(date)).toBe("Thursday, 04/22/2021");
+    expect(dateFormat(date)).toBe("Monday, 04/22/2024");
   });
 
   it("should format the date for US when the lang is not supported", () => {
-    expect(dateFormat(date, frLocale)).toBe("Thursday, 04/22/2021");
+    expect(dateFormat(date, frLocale)).toBe("Monday, 04/22/2024");
   });
 });
 

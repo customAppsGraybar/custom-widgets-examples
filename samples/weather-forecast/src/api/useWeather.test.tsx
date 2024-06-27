@@ -1,5 +1,5 @@
 /*!
- * Copyright 2021, Staffbase GmbH and contributors.
+ * Copyright 2024, Staffbase GmbH and contributors.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -38,7 +38,7 @@ setLogger({
 });
 
 describe("useWeather", () => {
-  const endpoint = "https://api.openweathermap.org/data/2.5/onecall";
+  const endpoint = "https://api.openweathermap.org/data/3.0/onecall";
   afterEach(() => {
     queryClient.clear();
   });
@@ -104,7 +104,7 @@ describe("useWeather", () => {
     });
 
     expect(result.current.error).toEqual(
-      new TypeError("Cannot read property 'map' of undefined")
+      new TypeError("Cannot read properties of undefined (reading 'map')")
     );
     expect(log).toHaveBeenCalledTimes(1);
   });

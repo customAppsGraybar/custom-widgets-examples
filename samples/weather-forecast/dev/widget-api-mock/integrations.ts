@@ -11,22 +11,22 @@
  * limitations under the License.
  */
 
-import { WidgetApi } from "@staffbase/widget-sdk";
-import getLegacyAppTheme from "./legacyTheme";
-import {
-  getUserInformation,
-  getUserList,
-  getUserInformationByExternalId,
-} from "./user";
+import {IntegrationInformation, IntegrationStates, IntegrationType} from '@staffbase/widget-sdk'
 
-import getIntegration from "./integrations"
+export default async (_type: IntegrationType): Promise<IntegrationInformation> => {
+    const date = new Date();
+    const expireDate = new Date();
 
-const apiMock: WidgetApi = {
-  getLegacyAppTheme,
-  getUserInformation,
-  getUserList,
-  getUserInformationByExternalId,
-  getIntegration
-};
+    expireDate.setDate(date.getDate() + 1);
 
-export default apiMock;
+    return {
+        status: IntegrationStates.AVAILABLE,
+        enabledFeatures: ['foo'],
+        supportedFeatures: ['foo'],
+        token: {
+            accessToken: "fooToken",
+            accessTokenExpiresAt: expireDate
+        },
+        signIn: () => { console.log('Sign in') }
+    }
+}
