@@ -33,7 +33,7 @@ const widgetAttributes: string[] = [
   "date",
   "text",
   "apikey",
-  "fahrenheit"
+  "fahrenheit",
 ];
 
 /**
@@ -72,7 +72,9 @@ const factory: BlockFactory = (BaseBlockClass, _widgetApi) => {
      * Callback invoked on every change of an observed attribute. Call the parental method before
      * applying own logic.
      */
-    public attributeChangedCallback(...args: [string, string | undefined, string | undefined]): void {
+    public attributeChangedCallback(
+      ...args: [string, string | undefined, string | undefined]
+    ): void {
       super.attributeChangedCallback.apply(this, args);
     }
   };
