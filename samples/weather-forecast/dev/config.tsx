@@ -11,9 +11,9 @@
  * limitations under the License.
  */
 
-import ReactDOM from "react-dom";
+import { ExternalBlockDefinition } from "widget-sdk";
 import { configurationSchema, uiSchema } from "../src/configuration-schema";
-import React from "react";
+import React, { FC } from "react";
 import Form from "@rjsf/material-ui";
 
 const updateWidget = (data: Record<string, string>) => {
@@ -24,14 +24,69 @@ const updateWidget = (data: Record<string, string>) => {
   }
 };
 
-ReactDOM.render(
-  <Form
-    schema={configurationSchema}
-    uiSchema={uiSchema}
-    onSubmit={(e) => {
-      updateWidget(e.formData);
-    }}
-    autoComplete={"off"}
-  />,
-  document.getElementById("config")
-);
+type BlockDefinition = ExternalBlockDefinition["blockDefinition"];
+
+type Props = {
+  blockDefinition: BlockDefinition;
+};
+
+const Config: FC<Props> = ({ blockDefinition }) => {
+  return (
+    <div className="display: flex; flex-direction: column; justify-content: space-evenly">
+      <div className="box">
+        <h3>Icon preview:</h3>
+        <section id="icon">
+          <div
+            aria-label={blockDefinition.label}
+            style={{
+              background: "rgb(247, 247, 247)",
+              cursor: "pointer",
+              height: "96px",
+              flex: "0 0 20%",
+              borderRadius: "3px",
+              padding: "0px",
+              margin: "0px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              flexDirection: "column",
+            }}
+          >
+            <img
+              height="28"
+              src={blockDefinition.iconUrl}
+              style={{ maxWidth: "80px" }}
+            />
+            <div
+              aria-hidden="true"
+              style={{
+                textAlign: "center",
+                fontSize: "14px",
+                color: "rgb(120, 120, 120)",
+                marginTop: "8px",
+                width: "100%",
+              }}
+            >
+              {blockDefinition.label}
+            </div>
+          </div>
+        </section>
+      </div>
+      <div className="box">
+        <h3>Configuration preview:</h3>
+        <section id="config">
+          <Form
+            schema={configurationSchema}
+            uiSchema={uiSchema}
+            onSubmit={(e) => {
+              updateWidget(e.formData);
+            }}
+            autoComplete={"off"}
+          />
+        </section>
+      </div>
+    </div>
+  );
+};
+
+export default Config;
