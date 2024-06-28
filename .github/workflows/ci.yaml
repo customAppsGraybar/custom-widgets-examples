@@ -17,7 +17,7 @@ jobs:
           persist-credentials: false
 
       - name: Use Node.js Version
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
           registry-url: 'https://npm.pkg.github.com/'
