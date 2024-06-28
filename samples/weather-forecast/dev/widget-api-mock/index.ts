@@ -26,7 +26,7 @@ const apiMock: WidgetApi = {
   getLegacyAppTheme,
   getUserInformation,
   getUserList,
-  getUserInformationByExternalId
+  getUserInformationByExternalId,
 };
 
 export default apiMock;
