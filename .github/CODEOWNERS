@@ -5,5 +5,5 @@
 *                       @Staffbase/cc-tech @maximizeIT
 
 # Misc
-package.json            @maximizeIT @Staffbase/cc-tech @Staffbot
-yarn.lock               @maximizeIT @Staffbase/cc-tech @Staffbot
+package.json            @maximizeIT @Staffbase/cc-tech
+yarn.lock               @maximizeIT @Staffbase/cc-tech
