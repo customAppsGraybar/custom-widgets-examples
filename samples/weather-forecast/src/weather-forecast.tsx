@@ -14,7 +14,7 @@
 import React, { ReactElement } from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { WeatherView } from "./views/weatherView";
-import { BlockAttributes } from "widget-sdk";
+import { BlockAttributes } from "@staffbase/widget-sdk";
 
 const queryClient = new QueryClient({
   defaultOptions: {

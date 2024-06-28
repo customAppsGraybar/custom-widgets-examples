@@ -11,10 +11,11 @@
  * limitations under the License.
  */
 
-import { ExternalBlockDefinition } from "widget-sdk";
+import { ExternalBlockDefinition } from "@staffbase/widget-sdk";
 import { configurationSchema, uiSchema } from "../src/configuration-schema";
 import React, { FC } from "react";
 import Form from "@rjsf/material-ui";
+import validator from "@rjsf/validator-ajv8";
 
 const updateWidget = (data: Record<string, string>) => {
   const el = document.querySelector("#preview > :first-child");
@@ -78,6 +79,7 @@ const Config: FC<Props> = ({ blockDefinition }) => {
           <Form
             schema={configurationSchema}
             uiSchema={uiSchema}
+            validator={validator}
             onSubmit={(e) => {
               updateWidget(e.formData);
             }}
