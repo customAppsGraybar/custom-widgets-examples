@@ -1,9 +1,9 @@
 # Shared
-.github/CODEOWNERS      @Staffbase/cc-tech
+.github/CODEOWNERS      @Staffbase/cc-tech @maximizeIT
 
 # Global
-*                       @maximizeIT
+*                       @Staffbase/cc-tech @maximizeIT
 
 # Misc
-package.json            @maximizeIT @Staffbot
-yarn.lock               @maximizeIT @Staffbot
+package.json            @maximizeIT @Staffbase/cc-tech @Staffbot
+yarn.lock               @maximizeIT @Staffbase/cc-tech @Staffbot
