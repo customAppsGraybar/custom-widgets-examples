@@ -19,9 +19,10 @@ import {
   getUserInformationByExternalId,
 } from "./user";
 
-import getIntegration from "./integrations"
+import getIntegration from "./integrations";
 
 const apiMock: WidgetApi = {
+  getIntegration,
   getLegacyAppTheme,
   getUserInformation,
   getUserList,

@@ -11,7 +11,7 @@
  * limitations under the License.
  */
 
-import { UiSchema } from "@rjsf/core";
+import { UiSchema } from "@rjsf/utils";
 import { JSONSchema7 } from "json-schema";
 
 /**

@@ -13,7 +13,7 @@
 
 import { isSameDay } from "date-fns";
 import React, { FunctionComponent, useState } from "react";
-import { BlockAttributes } from "widget-sdk";
+import { BlockAttributes } from "@staffbase/widget-sdk";
 import useCity from "../api/useCity";
 import useWeather from "../api/useWeather";
 import { ErrorBox } from "../components/ErrorBox";

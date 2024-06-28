@@ -19,7 +19,7 @@ import {
   BlockDefinition,
   ExternalBlockDefinition,
   BaseBlock,
-} from "widget-sdk";
+} from "@staffbase/widget-sdk";
 import { WeatherForecastProps, WeatherForecast } from "./weather-forecast";
 import { configurationSchema, uiSchema } from "./configuration-schema";
 import pkg from "../package.json";
