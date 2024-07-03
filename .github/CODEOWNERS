@@ -1,1 +1,9 @@
-*       @Staffbase/need-for-speed-devs
+# Shared
+.github/CODEOWNERS      @Staffbase/cc-tech @maximizeIT
+
+# Global
+*                       @Staffbase/cc-tech @maximizeIT
+
+# Misc
+package.json            @maximizeIT @Staffbase/cc-tech
+yarn.lock               @maximizeIT @Staffbase/cc-tech
