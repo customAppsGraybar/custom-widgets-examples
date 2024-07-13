@@ -55,7 +55,7 @@ class FakeBaseClass extends window.HTMLElement implements BaseBlock {
   }
 
   public parseConfig<T extends Record<string, unknown>>(
-    attributes: T
+    attributes: T,
   ): Record<string, string> {
     return prepareAttributes(attributes);
   }
@@ -69,14 +69,14 @@ window.defineBlock = function (externalBlockDefinition) {
   const customElementName = externalBlockDefinition.blockDefinition.name;
   const CustomElementClass = externalBlockDefinition.blockDefinition.factory(
     FakeBaseClass,
-    WidgetApiMock
+    WidgetApiMock,
   );
-  window.customElements.define(customElementName, CustomElementClass);
 
   ReactDOM.render(
     React.createElement(Config, {
       blockDefinition: externalBlockDefinition.blockDefinition,
     }),
-    document.getElementById("config")
+    document.getElementById("config"),
   );
+  window.customElements.define(customElementName, CustomElementClass);
 };

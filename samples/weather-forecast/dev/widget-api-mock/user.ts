@@ -42,10 +42,7 @@ export const getUserInformationByExternalId = async (
 export const getUserList = async (
   _query: UserListRequestQuery
 ): Promise<UserListResponse> => ({
-  data: [
-    user,
-    { id: "5e43c6feca2d15e6afa8231d", firstName: "Tony", lastName: "Stark" },
-  ],
+  data: [user, {id: "5e43c6feca2d15e6afa8231d", firstName: "Tony", lastName: "Stark"}],
   offset: 0,
   limit: 1,
   total: 1,
