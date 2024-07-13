@@ -17,6 +17,7 @@ import CSS from "csstype";
 export interface CardProperties {
   color: string;
   smallWidth: boolean;
+  children: any;
 }
 
 export const Card: FunctionComponent<CardProperties> = (props) => {
