@@ -1,5 +1,5 @@
 /*!
- * Copyright 2021, Staffbase GmbH and contributors.
+ * Copyright 2024, Staffbase GmbH and contributors.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -41,12 +41,11 @@ const Config: FC<Props> = ({ blockDefinition }) => {
             aria-label={blockDefinition.label}
             style={{
               background: "rgb(247, 247, 247)",
-              cursor: "pointer",
               height: "96px",
               flex: "0 0 20%",
               borderRadius: "3px",
               padding: "0px",
-              margin: "0px",
+              margin: "5px 0px 0px 0px",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
@@ -57,6 +56,7 @@ const Config: FC<Props> = ({ blockDefinition }) => {
               height="28"
               src={blockDefinition.iconUrl}
               style={{ maxWidth: "80px" }}
+              alt={blockDefinition.label}
             />
             <div
               aria-hidden="true"

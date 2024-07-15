@@ -1,5 +1,5 @@
 /*!
- * Copyright 2021, Staffbase GmbH and contributors.
+ * Copyright 2024, Staffbase GmbH and contributors.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -55,7 +55,7 @@ class FakeBaseClass extends window.HTMLElement implements BaseBlock {
   }
 
   public parseConfig<T extends Record<string, unknown>>(
-    attributes: T
+    attributes: T,
   ): Record<string, string> {
     return prepareAttributes(attributes);
   }
@@ -69,14 +69,14 @@ window.defineBlock = function (externalBlockDefinition) {
   const customElementName = externalBlockDefinition.blockDefinition.name;
   const CustomElementClass = externalBlockDefinition.blockDefinition.factory(
     FakeBaseClass,
-    WidgetApiMock
+    WidgetApiMock,
   );
-  window.customElements.define(customElementName, CustomElementClass);
 
   ReactDOM.render(
     React.createElement(Config, {
       blockDefinition: externalBlockDefinition.blockDefinition,
     }),
-    document.getElementById("config")
+    document.getElementById("config"),
   );
+  window.customElements.define(customElementName, CustomElementClass);
 };

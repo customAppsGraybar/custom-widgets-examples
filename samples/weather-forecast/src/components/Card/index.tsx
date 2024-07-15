@@ -1,5 +1,5 @@
 /*!
- * Copyright 2021, Staffbase GmbH and contributors.
+ * Copyright 2024, Staffbase GmbH and contributors.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -17,6 +17,7 @@ import CSS from "csstype";
 export interface CardProperties {
   color: string;
   smallWidth: boolean;
+  children: any;
 }
 
 export const Card: FunctionComponent<CardProperties> = (props) => {

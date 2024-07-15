@@ -1,5 +1,5 @@
 /*!
- * Copyright 2021, Staffbase GmbH and contributors.
+ * Copyright 2024, Staffbase GmbH and contributors.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -24,6 +24,17 @@ import { WeatherForecastProps, WeatherForecast } from "./weather-forecast";
 import { configurationSchema, uiSchema } from "./configuration-schema";
 import pkg from "../package.json";
 import icon from "../resources/weather-forecast.svg";
+
+/**
+ * Define wich attributes are handled by the widget. This should be also reflected in configuration schema
+ */
+const widgetAttributes: string[] = [
+  "location",
+  "date",
+  "text",
+  "apikey",
+  "fahrenheit",
+];
 
 /**
  * This factory creates the class which is registered with the tagname in the `custom element registry`
@@ -54,7 +65,7 @@ const factory: BlockFactory = (BaseBlockClass, _widgetApi) => {
      * The observed attributes, where the widgets reacts on.
      */
     public static get observedAttributes(): string[] {
-      return ["location", "date", "text", "apikey", "fahrenheit"];
+      return widgetAttributes;
     }
 
     /**
@@ -75,7 +86,7 @@ const factory: BlockFactory = (BaseBlockClass, _widgetApi) => {
 const blockDefinition: BlockDefinition = {
   name: "weather-forecast",
   factory: factory,
-  attributes: ["location", "date", "text", "apikey", "fahrenheit"],
+  attributes: widgetAttributes,
   blockLevel: "block",
   configurationSchema: configurationSchema,
   uiSchema: uiSchema,

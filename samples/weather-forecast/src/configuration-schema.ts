@@ -1,5 +1,5 @@
 /*!
- * Copyright 2021, Staffbase GmbH and contributors.
+ * Copyright 2024, Staffbase GmbH and contributors.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -16,7 +16,7 @@ import { JSONSchema7 } from "json-schema";
 
 /**
  * schema used for generation of the configuration dialog
- * see https://react-jsonschema-form.readthedocs.io/en/latest/ for documentation
+ * see https://rjsf-team.github.io/react-jsonschema-form/docs/ for documentation
  */
 export const configurationSchema: JSONSchema7 = {
   properties: {
@@ -45,7 +45,7 @@ export const configurationSchema: JSONSchema7 = {
 
 /**
  * schema to add more customization to the form's look and feel
- * @see https://react-jsonschema-form.readthedocs.io/en/latest/api-reference/uiSchema/
+ * @see https://rjsf-team.github.io/react-jsonschema-form/docs/api-reference/uiSchema
  */
 export const uiSchema: UiSchema = {
   location: {

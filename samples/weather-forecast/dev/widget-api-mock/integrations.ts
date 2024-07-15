@@ -11,30 +11,22 @@
  * limitations under the License.
  */
 
-import {
-  IntegrationInformation,
-  IntegrationStates,
-  IntegrationType,
-} from "@staffbase/widget-sdk";
+import {IntegrationInformation, IntegrationStates, IntegrationType} from '@staffbase/widget-sdk'
 
-export default async (
-  _type: IntegrationType
-): Promise<IntegrationInformation> => {
-  const date = new Date();
-  const expireDate = new Date();
+export default async (_type: IntegrationType): Promise<IntegrationInformation> => {
+    const date = new Date();
+    const expireDate = new Date();
 
-  expireDate.setDate(date.getDate() + 1);
+    expireDate.setDate(date.getDate() + 1);
 
-  return {
-    status: IntegrationStates.AVAILABLE,
-    enabledFeatures: ["foo"],
-    supportedFeatures: ["foo"],
-    token: {
-      accessToken: "fooToken",
-      accessTokenExpiresAt: expireDate,
-    },
-    signIn: () => {
-      console.log("Sign in");
-    },
-  };
-};
+    return {
+        status: IntegrationStates.AVAILABLE,
+        enabledFeatures: ['foo'],
+        supportedFeatures: ['foo'],
+        token: {
+            accessToken: "fooToken",
+            accessTokenExpiresAt: expireDate
+        },
+        signIn: () => { console.log('Sign in') }
+    }
+}

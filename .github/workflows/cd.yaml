@@ -7,7 +7,7 @@ on:
     types: [published]
 
 env:
-  NODE_VERSION: 16
+  NODE_VERSION: 20
   DEPLOYMENT_KIND: widget
   DEPLOYMENT_TARGET: weather
   DEPLOYMENT_STATIC_FILES: staffbase.user-profile-client.min.js
