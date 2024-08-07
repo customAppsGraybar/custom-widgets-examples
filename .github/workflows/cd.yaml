@@ -2,7 +2,7 @@ name: Deploy to AWS S3
 
 on:
   push:
-    branches: ['main', 'dev']
+    branches: ["main", "dev"]
   release:
     types: [published]
 
@@ -12,7 +12,6 @@ env:
   DEPLOYMENT_TARGET: weather
   DEPLOYMENT_STATIC_FILES: staffbase.user-profile-client.min.js
   DEPLOYMENT_SOURCE: samples/weather-forecast/dist
-  
 
 jobs:
   build-and-deploy:
@@ -26,10 +25,10 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: 'yarn'
+          cache: "yarn"
           cache-dependency-path: samples/weather-forecast/yarn.lock
-          registry-url: 'https://npm.pkg.github.com/'
-          scope: '@staffbase'
+          registry-url: "https://npm.pkg.github.com/"
+          scope: "@staffbase"
 
       - run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.STAFFBOT_NPM_READ }}" >> samples/weather-forecast/.npmrc
 
@@ -45,8 +44,8 @@ jobs:
           cp samples/weather-forecast/resources/weather-forecast.svg samples/weather-forecast/dist/icons
 
       - name: Publish to S3 DE Prod
-        if:  startsWith(github.ref, 'refs/tags/')
-        uses: Staffbase/deploy-web-assets@0.1.0
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: Staffbase/deploy-web-assets@0.2.0
         with:
           source: ${{ env.DEPLOYMENT_SOURCE }}
           target: ${{ env.DEPLOYMENT_TARGET }}
@@ -59,12 +58,12 @@ jobs:
           # AWS specific settings
           aws_bucket: staffbasestatic-prod-de1
           aws_region: eu-central-1
-          aws_access_key_id: ${{ secrets.PROD_DE1_aws_access_key_id_ID }}
-          aws_access_key_secret: ${{ secrets.PROD_DE1_aws_access_key_id_SECRET }}
+          aws_access_key_id: ${{ vars.WEB_ASSETS_PROD_DE1_AWS_ACCESS_KEY_ID }}
+          aws_access_key_secret: ${{ secrets.WEB_ASSETS_PROD_DE1_AWS_SECRET_ACCESS_KEY }}
 
       - name: Deploy to S3 US Prod
         if: startsWith(github.ref, 'refs/tags/')
-        uses: Staffbase/deploy-web-assets@0.1.0
+        uses: Staffbase/deploy-web-assets@0.2.0
         with:
           source: ${{ env.DEPLOYMENT_SOURCE }}
           target: ${{ env.DEPLOYMENT_TARGET }}
@@ -77,12 +76,12 @@ jobs:
           # AWS specific settings
           aws_bucket: staffbasestatic-prod-us1
           aws_region: us-east-1
-          aws_access_key_id: ${{ secrets.PROD_US1_aws_access_key_id_ID }}
-          aws_access_key_secret: ${{ secrets.PROD_US1_aws_access_key_id_SECRET }}
+          aws_access_key_id: ${{ vars.WEB_ASSETS_PROD_US1_AWS_ACCESS_KEY_ID }}
+          aws_access_key_secret: ${{ secrets.WEB_ASSETS_PROD_US1_AWS_SECRET_ACCESS_KEY }}
 
       - name: Publish to S3 DE stage
         if: github.ref == 'refs/heads/main'
-        uses: Staffbase/deploy-web-assets@0.1.0
+        uses: Staffbase/deploy-web-assets@0.2.0
         with:
           source: ${{ env.DEPLOYMENT_SOURCE }}
           target: ${{ env.DEPLOYMENT_TARGET }}
@@ -95,12 +94,12 @@ jobs:
           # AWS specific settings
           aws_bucket: staffbasestatic-stage-de1
           aws_region: eu-central-1
-          aws_access_key_id: ${{ secrets.STAGE_DE1_aws_access_key_id_ID }}
-          aws_access_key_secret: ${{ secrets.STAGE_DE1_aws_access_key_id_SECRET }}
+          aws_access_key_id: ${{ vars.WEB_ASSETS_STAGE_DE1_AWS_ACCESS_KEY_ID }}
+          aws_access_key_secret: ${{ secrets.WEB_ASSETS_STAGE_DE1_AWS_SECRET_ACCESS_KEY }}
 
       - name: Publish to S3 DE dev
         if: github.ref == 'refs/heads/dev'
-        uses: Staffbase/deploy-web-assets@0.1.0
+        uses: Staffbase/deploy-web-assets@0.2.0
         with:
           source: ${{ env.DEPLOYMENT_SOURCE }}
           target: ${{ env.DEPLOYMENT_TARGET }}
@@ -113,5 +112,5 @@ jobs:
           # AWS specific settings
           aws_bucket: staffbasestatic-dev-de1
           aws_region: eu-central-1
-          aws_access_key_id: ${{ secrets.DEV_DE1_aws_access_key_id_ID }}
-          aws_access_key_secret: ${{ secrets.DEV_DE1_aws_access_key_id_SECRET }}
+          aws_access_key_id: ${{ vars.WEB_ASSETS_DEV_DE1_AWS_ACCESS_KEY_ID }}
+          aws_access_key_secret: ${{ secrets.WEB_ASSETS_DEV_DE1_AWS_SECRET_ACCESS_KEY }}
