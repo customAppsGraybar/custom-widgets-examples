@@ -1,6 +1,6 @@
 # This version of the CLA Assistant uses a GitHub action and local
 # storage of the signatures.
-# https://github.com/cla-assistant/github-action/
+# https://github.com/contributor-assistant/github-action/
 
 name: "CLA Assistant"
 on:
@@ -15,7 +15,7 @@ jobs:
     steps:
       - name: "CLA Assistant"
         if: (github.event.comment.body == 'recheck' || github.event.comment.body == 'I have read the CLA Document and I hereby sign the CLA') || github.event_name == 'pull_request'
-        uses: cla-assistant/github-action@v2.4.0
+        uses: contributor-assistant/github-action@v2.4.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PERSONAL_ACCESS_TOKEN: ${{ secrets.OSS_CONTRIBUTOR_LICENSE_AGREEMENT }}
