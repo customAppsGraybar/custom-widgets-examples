@@ -10,7 +10,7 @@ env:
   NODE_VERSION: 20
   DEPLOYMENT_KIND: widget
   DEPLOYMENT_TARGET: weather
-  DEPLOYMENT_STATIC_FILES: staffbase.user-profile-client.min.js
+  DEPLOYMENT_STATIC_FILES: staffbase.weather-forecast.js
   DEPLOYMENT_SOURCE: samples/weather-forecast/dist
 
 jobs:
