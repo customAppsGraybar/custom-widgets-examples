@@ -19,7 +19,7 @@
   "dependencies": {
     "@staffbase/widget-sdk": "^3.12.8",
     "acorn": "^8.12.0",
-    "axios": "1.7.2",
+    "axios": "1.7.4",
     "date-fns": "^2.23.0",
     "dayjs": "1.11.11",
     "openweather-apis": "4.5.0",
