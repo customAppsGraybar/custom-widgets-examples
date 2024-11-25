@@ -12,7 +12,7 @@
  */
 
 import React from "react";
-import ReactDOM from "react-dom";
+import { createRoot } from "react-dom/client";
 
 import {
   BlockFactory,
@@ -58,7 +58,9 @@ const factory: BlockFactory = (BaseBlockClass, _widgetApi) => {
     }
 
     public renderBlock(container: HTMLElement): void {
-      ReactDOM.render(<WeatherForecast {...this.props} />, container);
+      createRoot(container).render(
+        <WeatherForecast {...this.props} />
+      );
     }
 
     /**
