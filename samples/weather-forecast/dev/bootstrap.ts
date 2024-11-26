@@ -16,8 +16,8 @@ import WidgetApiMock from "./widget-api-mock";
 import { fromDataUri, prepareAttributes } from "./utils/DataUtil";
 import { baseAttributes } from "./constants";
 import Config from "./config";
-import ReactDOM from "react-dom";
 import React from "react";
+import { createRoot } from "react-dom/client";
 
 /**
  * Simulated hosting class to run the widget
@@ -72,11 +72,11 @@ window.defineBlock = function (externalBlockDefinition) {
     WidgetApiMock,
   );
 
-  ReactDOM.render(
-    React.createElement(Config, {
-      blockDefinition: externalBlockDefinition.blockDefinition,
-    }),
-    document.getElementById("config"),
-  );
+  const container = document.getElementById("config");
+  const root = createRoot(container!);
+  root.render(React.createElement(Config, {
+    blockDefinition: externalBlockDefinition.blockDefinition,
+  }));
+  
   window.customElements.define(customElementName, CustomElementClass);
 };

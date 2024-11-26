@@ -14,7 +14,7 @@
 import { ExternalBlockDefinition } from "@staffbase/widget-sdk";
 import { configurationSchema, uiSchema } from "../src/configuration-schema";
 import React, { FC } from "react";
-import Form from "@rjsf/material-ui";
+import Form from "@rjsf/mui";
 import validator from "@rjsf/validator-ajv8";
 
 const updateWidget = (data: Record<string, string>) => {
