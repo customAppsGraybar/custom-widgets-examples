@@ -50,8 +50,8 @@ export const WeatherView: FunctionComponent<WeatherForecastProps> = ({
   const { observe } = useDimensions<HTMLDivElement>({
     shouldUpdate: ({ width }) => {
       const sizeChanged =
-        (smallWidth && width >= smallWidthBreakpoint) ||
-        (!smallWidth && width < smallWidthBreakpoint);
+        (smallWidth && width !== null && width >= smallWidthBreakpoint) ||
+        (!smallWidth && width !== null && width < smallWidthBreakpoint);
 
       if (sizeChanged) {
         setSmallWidth(!smallWidth);
