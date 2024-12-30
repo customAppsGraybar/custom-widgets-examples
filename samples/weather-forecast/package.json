@@ -85,6 +85,6 @@
     "webpack-merge": "^6.0.1"
   },
   "resolutions": {
-    "svgo/nth-check": ">=2.0.2"
+    "nth-check": ">=2.0.1"
   }
 }
