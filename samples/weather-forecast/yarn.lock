@@ -1620,7 +1620,7 @@
 
 "@staffbase/widget-sdk@^3.14.7":
   version "3.14.7"
-  resolved "https://npm.pkg.github.com/download/@Staffbase/widget-sdk/3.14.7/12a4de612f332be2060891fe07d8cb666270417a#12a4de612f332be2060891fe07d8cb666270417a"
+  resolved "https://registry.yarnpkg.com/@staffbase/widget-sdk/-/widget-sdk-3.14.7.tgz#12a4de612f332be2060891fe07d8cb666270417a"
   integrity sha512-tfP0G3wk405A+ev+jYJUysuVDljnHSNcsyob8npLo6EeFT4zK6OoBYT6oJHrgBQ700aS8oLRzhDBthhuyj2ECA==
   dependencies:
     "@rjsf/core" "^5.23.1"
